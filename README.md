@@ -11,3 +11,5 @@
 # structure
 - public : contient les fichiers statiques comme style.css et main.js
 - views : contient les templates pour le moteur https://mustache.github.io/
+
+test
