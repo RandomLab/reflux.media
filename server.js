@@ -17,7 +17,7 @@ app.set('views', __dirname + '/views')
 const data = { pages: {} }
 
 const retourneToutesLesPages = () => {
-    
+
     const data_list = JSON.stringify({
         query: `{
             pages {
@@ -46,7 +46,7 @@ const retourneToutesLesPages = () => {
     }
 
     const req = https.request(options, (res) => {
-        
+
         let raw_data = ''
 
         console.log(`statusCode: ${res.statusCode}`)
@@ -54,11 +54,11 @@ const retourneToutesLesPages = () => {
         res.on('data', (data) => {
             raw_data = data
         })
-        
+
         res.on('end', () => {
             const renderData = JSON.parse(raw_data)
             data.pages = renderData.data.pages
-            
+
         })
 
     })
@@ -73,7 +73,7 @@ const retourneToutesLesPages = () => {
 
 const corsOptions = {
     origin: 'http://localhost:8080',
-    optionsSuccessStatus: 200 
+    optionsSuccessStatus: 200
 }
 
 app.get('/', cors(corsOptions), (req, res, next) => {
@@ -82,7 +82,7 @@ app.get('/', cors(corsOptions), (req, res, next) => {
 })
 
 
-app.listen(process.env.PORT || 8080, () => {
-   console.log('le serveur écoute sur le port 8080')
+app.listen(process.env.PORT || 9000, () => {
+   console.log('le serveur écoute sur le port 9000')
    retourneToutesLesPages()
 })
