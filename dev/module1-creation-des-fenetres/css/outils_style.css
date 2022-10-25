@@ -17,14 +17,17 @@ body {
   position: absolute;
   opacity: 0.8;
   cursor: pointer;
+  box-shadow: 0px 0px 10px 10px grey;
+  width: 10vw;
+  height: 10vw;
 }
 
-.titre{
+.titres{
   pointer-events: none;
   font-family: 'Quebec';
   font-size: 16pt;
 }
-.texte{
+.textes{
   pointer-events: none;
   font-family: 'NarrowBold';
   font-size: 13pt;
