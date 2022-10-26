@@ -1,3 +1,11 @@
+*.otf
+*.ttf
+*.woff
+*.woff2
+*.jpg
+*.png
+*.tiff
+*.gif
 note.txt
 deploy.yaml
 .env
