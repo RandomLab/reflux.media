@@ -27,6 +27,7 @@ const retourneToutesLesPages = () => {
                     createdAt
                     updatedAt
                     path
+                    
                 }
             }
         }`
