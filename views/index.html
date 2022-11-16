@@ -5,15 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reflux.media</title>
     <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
 </head>
 <body>
     {{#pages}}
-    <ul>
+    <div id="menu">
+      <div id="sommaire">Sommaire</div>
+      <div class="dossier" id="politique">
+        <div class="titreRubrique">politique</div>
+      </div>
+      <div class="dossier" id="culture">
+        <div class="titreRubrique">culture</div>
+      </div>
+      <div class="dossier" id="ressources">
+        <div class="titreRubrique">ressources</div>
+      </div>
+      <div class="dossier" id="exebition">
+        <div class="titreRubrique">exebition</div>
+      </div>
+      <div class="dossier" id="varia">
+        <div class="titreRubrique">varia</div>
+      </div>
+      <div class="dossier" id="tools">
+        <div class="titreRubrique">tools</div>
+      </div>
+    </div>
         {{#list}}
-            <li>{{ id }} {{ title }} {{ createdAt }} {{ path }}</li>
+
+        <div class="articles">
+          <div class ="croix">x</div>
+          <!-- <div class="titres {{ path }}" id="Titre{{ id }}">{{ title }}</div> -->
+          <div class="titres {{ path }}" id="Titre{{ id }}">{{ title }}</div>
+          <div class="dates">{{ createdAt }}</div>
+          <div class="textes" id="Texte{{ id }}">Insérer ici le contenu de l'article</div>
+        </div>
+
         {{/list}}
-    </ul>
     {{/pages}}
-    <script src="main.js"></script>
+
 </body>
 </html>

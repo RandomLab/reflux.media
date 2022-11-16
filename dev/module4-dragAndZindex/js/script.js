@@ -7,15 +7,17 @@ var posY;
 var departOK = false;
 var articles;
 var tableauCouleurs = ["mediumslateblue", "magenta", "paleturquoise", "lime", "aquamarine", "lavender"]
-var clickMenu = false;
+
 window.addEventListener("load", setup);
 
 function setup() {
 
   //----------------------------- Première étape: Récuperer les titres et les textes dans le HTML
+  var tableauTitre = [];
+  var tableauTexte = [];
   var titres = document.getElementsByClassName("titres");
   var textes = document.getElementsByClassName("textes");
-  //----------------------------- Couleur des titres des dossiers dans le menu
+  //----------------------------- Couleur des titres des dossiers
   var titreRubrique = document.getElementsByClassName("titreRubrique");
   for (var i = 0; i < titreRubrique.length; i++) {
     if(titreRubrique[i].innerHTML == "politique"){
@@ -40,9 +42,21 @@ function setup() {
 
   articles = document.getElementsByClassName("articles");
 
-  //----------------------------- Appartition des 5 derniers articles
-  // Positionnement des articles aléatoire et application des couleurs
+  //----------------------------- Stockage des titres et des textes dans des tableaux?
+  for(i=0; i<titres.length; i++){
+    tableauTitre.push(document.getElementById('Titre' + i));
+  }
+  for(i=0; i<textes.length; i++){
+    tableauTexte.push(document.getElementById('Texte' + i));
+  }
+
+  //----------------------------- Déplacement des articles aléatoirement et application des couleurs
   modifyArticles();
+
+  //----------------------------- Création du menu
+  for (var i = 0; i < titres.length; i++) {
+    creationMenu(tableauTitre[i]);
+  }
 
   //----------------------------- Interaction sur les fenêtres
   document.addEventListener("mousemove", onMouseMove);
@@ -57,32 +71,28 @@ function setup() {
     croix[i].customIndex = i;
   }
 
-  //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* CREATION DU MENU
-  for (var i = 0; i < titres.length; i++) {
-    creationMenu(titres[i]);
-  }
-  //----------------------------- Déployer les titres des articles au survol sur le titre du menu
-  var titreRubrique = document.getElementsByClassName("titreRubrique");
-  for (var i = 0; i < titreRubrique.length; i++) {
-    titreRubrique[i].addEventListener("mouseenter", displayTitres);
-    titreRubrique[i].addEventListener("mouseleave", hideTitres);
-    titreRubrique[i].addEventListener("click", stuckTitres);
-  }
   //----------------------------- Ouvrir les articles en cliquant sur les titres du menu
 
-
+  function ouvrirArticle(){
+    // récuperer le titre de l'article, la date, et le contenu
+    // création d'une fenêtre pour les contenus
+  }
 
 }
 
+function closeWindow(e){
+  activeDiv = e.target;
+  articles[activeDiv.customIndex].style.display = "none";
+}
 
 //----------------------------- LES FONCTIONS ICI !
 
 function creationMenu(titre){
+  //création de la  articles
   var menu = document.getElementById("menu");
   var createTitre = document.createElement("div");
   createTitre.classList = "boiteTitre";
-  if(titre.innerHTML.length > 10)createTitre.innerHTML = titre.innerHTML.substring(0,20) + "...";
-
+  createTitre.innerHTML = titre.innerHTML;
 
   var politique = document.getElementById("politique");
   var culture = document.getElementById("culture");
@@ -91,110 +101,54 @@ function creationMenu(titre){
   var tools = document.getElementById("tools");
   var varia = document.getElementById("varia");
 
-  if(titre.classList[1].includes("politique")){
+  if(titre.classList[1] == "politique"){
     politique.appendChild(createTitre);
   }
-  if(titre.classList[1].includes("culture")){
+  if(titre.classList[1] == "culture"){
     culture.appendChild(createTitre);
   }
-  if(titre.classList[1].includes("ressources")){
+  if(titre.classList[1] == "ressources"){
     ressources.appendChild(createTitre);
   }
-  if(titre.classList[1].includes("exebition")){
+  if(titre.classList[1] == "exebition"){
     exebition.appendChild(createTitre);
   }
-  if(titre.classList[1].includes("tools")){
+  if(titre.classList[1] == "tools"){
     tools.appendChild(createTitre);
   }
-  if(titre.classList[1].includes("varia")){
+  if(titre.classList[1] == "varia"){
     varia.appendChild(createTitre);
   }
 }
 
-function displayTitres(e){
-  const children = e.target.parentNode.children;
-  Array.from(children).forEach(div => {
-    div.style.display = "block";
-  });
-}
-var compteurMenu = 0;
-function hideTitres(e){
-  if (clickMenu != true){
-    const children = e.target.parentNode.children;
-    Array.from(children).forEach(div => {
-      if(div.classList != "titreRubrique"){
-          div.style.display = "none";
-      }
-    });
-  }
-
-}
-
-function stuckTitres(e){
-
-  compteurMenu++;
-const children = e.target.parentNode.children;
-  if ( compteurMenu == 1){
-    clickMenu = true;
-
-    Array.from(children).forEach(div => {
-      if(div.classList != "titreRubrique"){
-          div.style.display = "block";
-      }
-    });
-  } else if (compteurMenu == 2){
-    compteurMenu = 0;
-    clickMenu = false;
-    Array.from(children).forEach(div => {
-      if(div.classList != "titreRubrique"){
-          div.style.display = "none";
-      }
-    });
-  }
-
-}
-function ouvrirArticle(){
-  // récuperer le titre de l'article, la date, et le contenu
-  // création d'une fenêtre pour les contenus
-}
-
-function closeWindow(e){
-  activeDiv = e.target;
-  articles[activeDiv.customIndex].style.display = "none";
-}
 function modifyArticles(){
 
   var titres = document.getElementsByClassName("titres");
-  articles[articles.length-1].style.display = "block";
-  articles[articles.length-2].style.display = "block";
-  articles[articles.length-3].style.display = "block";
-  articles[articles.length-4].style.display = "block";
-  articles[articles.length-5].style.display = "block";
-  for (var i = 0; i < articles.length; i++) {
 
-    // "FooBar".includes("oo");
+  for (var i = 0; i < articles.length; i++) {
     compteurZindex++;
     articles[i].style.top = getRandomFromTo(0, 30)+"vh";
     articles[i].style.left =  getRandomFromTo(0, 50)+"vw";
     // articles[i].style.backgroundColor = GetRandomFromArray(tableauCouleurs);
-    if(titres[i].classList[1].includes("politique")){
+    if(titres[i].classList[1] == "politique"){
       articles[i].style.backgroundColor = tableauCouleurs[0];
     }
-    if(titres[i].classList[1].includes("culture")){
+    if(titres[i].classList[1] == "culture"){
       articles[i].style.backgroundColor = tableauCouleurs[1];
     }
-    if(titres[i].classList[1].includes("varia")){
+    if(titres[i].classList[1] == "ressources"){
       articles[i].style.backgroundColor = tableauCouleurs[2];
     }
-    if(titres[i].classList[1].includes("exebition")){
+    if(titres[i].classList[1] == "exebition"){
       articles[i].style.backgroundColor = tableauCouleurs[3];
     }
-    if(titres[i].classList[1].includes("tools")){
+    if(titres[i].classList[1] == "tools"){
       articles[i].style.backgroundColor = tableauCouleurs[4];
     }
-    if(titres[i].classList[1].includes("varia")){
+    if(titres[i].classList[1] == "varia"){
       articles[i].style.backgroundColor = tableauCouleurs[5];
     }
+
     articles[i].style.zIndex = compteurZindex;
   }
 }

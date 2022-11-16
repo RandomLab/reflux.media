@@ -5,10 +5,10 @@
 // 2 - Créer une fonction qui va générer des fenêtres - mettre les titres et les textes dedans
 
 // Écouteurs d'évènement, "chargement", lance la fonction "setup"
-window.addEventListener("load", setup);
+window.addEventListener("load", fonctionDeChargement);
 
 // La fonction setup
-function setup() {
+function fonctionDeChargement() {
 
   //----------------------------- Première étape
   // 1 - Récuperer les titres qui sont dans des balises <div></div> dans le html

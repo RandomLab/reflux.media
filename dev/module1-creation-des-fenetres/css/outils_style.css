@@ -32,3 +32,13 @@ body {
   font-family: 'NarrowBold';
   font-size: 13pt;
 }
+
+.bob{
+  border: groove 10px red;
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+  background-color: blue;
+  position: relative;
+  display: inline-block;
+}
