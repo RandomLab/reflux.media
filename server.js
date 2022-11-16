@@ -16,6 +16,7 @@ app.set('views', __dirname + '/views')
 
 const data = { pages: {} }
 
+
 const retourneLeContenu = (id) => {
 
     const page_content = JSON.stringify({
@@ -45,7 +46,7 @@ const retourneLeContenu = (id) => {
 
         let raw_data = ''
 
-        console.log(`statusCode: ${res.statusCode}`)
+        // console.log(`statusCode: ${res.statusCode}`)
 
         res.on('data', (data) => {
             raw_data = data
@@ -54,8 +55,9 @@ const retourneLeContenu = (id) => {
         res.on('end', () => {
             const renderData = JSON.parse(raw_data)
             data.pages = renderData.data.pages
-            console.log(data.pages.single.content)
-            
+
+            // console.log(data.pages.single.content)
+
         })
 
     })
@@ -80,7 +82,7 @@ const retourneToutesLesPages = () => {
                     createdAt
                     updatedAt
                     path
-                    
+
                 }
             }
         }`
@@ -103,7 +105,7 @@ const retourneToutesLesPages = () => {
 
         let raw_data = ''
 
-        console.log(`statusCode: ${res.statusCode}`)
+        // console.log(`statusCode: ${res.statusCode}`)
 
         res.on('data', (data) => {
             raw_data = data
@@ -111,10 +113,12 @@ const retourneToutesLesPages = () => {
 
         res.on('end', () => {
             const renderData = JSON.parse(raw_data)
+
             data.pages = renderData.data.pages
             data.pages.list.forEach(element => {
                 retourneLeContenu(element.id)
             });
+              console.log(data)
         })
 
     })
