@@ -14,14 +14,14 @@ app.engine('html', mustache())
 app.set('view engine', 'html')
 app.set('views', __dirname + '/views')
 
-const data = { pages: {} }
+const data = []
 
-const retourneLeContenu = (id) => {
+const retourneLeContenu = (page) => {
 
     const page_content = JSON.stringify({
         query: `{
             pages {
-                single(id:${id}) {
+                single(id:${page.id}) {
                     content
                 }
             }
@@ -54,7 +54,9 @@ const retourneLeContenu = (id) => {
         res.on('end', () => {
             const renderData = JSON.parse(raw_data)
             data.pages = renderData.data.pages
-            console.log(data.pages.single.content)
+            page['content'] = data.pages.single.content 
+            data.push(page)
+            // console.log(data.pages.single.content)
             
         })
 
@@ -112,7 +114,7 @@ const retourneToutesLesPages = () => {
             const renderData = JSON.parse(raw_data)
             data.pages = renderData.data.pages
             data.pages.list.forEach(element => {
-                retourneLeContenu(element.id)
+                retourneLeContenu(element)
             });
         })
 
@@ -133,7 +135,7 @@ const corsOptions = {
 
 app.get('/', cors(corsOptions), (req, res, next) => {
     // console.log(data.pages.list)
-    // console.log(data)
+    console.log(data)
     res.render('index.html', data)
 })
 
