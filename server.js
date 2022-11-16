@@ -113,12 +113,11 @@ const retourneToutesLesPages = () => {
 
         res.on('end', () => {
             const renderData = JSON.parse(raw_data)
-
             data.pages = renderData.data.pages
             data.pages.list.forEach(element => {
                 retourneLeContenu(element.id)
             });
-              console.log(data)
+              // console.log(data)
         })
 
     })
