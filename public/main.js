@@ -24,7 +24,7 @@ function setup() {
     if(titreRubrique[i].innerHTML == "culture"){
       titreRubrique[i].style.color = tableauCouleurs[1];
     }
-    if(titreRubrique[i].innerHTML == "ressources"){
+    if(titreRubrique[i].innerHTML == "varia"){
       titreRubrique[i].style.color = tableauCouleurs[2];
     }
     if(titreRubrique[i].innerHTML == "exebition"){
@@ -33,7 +33,7 @@ function setup() {
     if(titreRubrique[i].innerHTML == "tools"){
       titreRubrique[i].style.color = tableauCouleurs[4];
     }
-    if(titreRubrique[i].innerHTML == "varia"){
+    if(titreRubrique[i].innerHTML == "ressources"){
       titreRubrique[i].style.color =  tableauCouleurs[5];
     }
   }
@@ -192,7 +192,7 @@ function modifyArticles(){
     if(titres[i].classList[1].includes("tools")){
       articles[i].style.backgroundColor = tableauCouleurs[4];
     }
-    if(titres[i].classList[1].includes("varia")){
+    if(titres[i].classList[1].includes("ressources")){
       articles[i].style.backgroundColor = tableauCouleurs[5];
     }
     articles[i].style.zIndex = compteurZindex;

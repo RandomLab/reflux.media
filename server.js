@@ -57,10 +57,10 @@ const retourneLeContenu = (page) => {
             const renderData = JSON.parse(raw_data)
             const pages = renderData.data.pages
             data.pages = pages
-            page['content'] = pages.single.content 
+            page['content'] = pages.single.content
             data.list_pages.push(page)
             // console.log(data.pages.single.content)
-            
+
         })
 
     })
@@ -79,7 +79,7 @@ const retourneToutesLesPages = () => {
     const data_list = JSON.stringify({
         query: `{
             pages {
-                list(orderBy:ID) {
+                list(orderBy:UPDATED) {
                     id
                     title
                     createdAt
