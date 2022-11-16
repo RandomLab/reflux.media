@@ -30,7 +30,7 @@
         <div class="titreRubrique">tools</div>
       </div>
     </div>
-        
+
     {{/pages}}
     {{#list_pages}}
 
@@ -39,7 +39,7 @@
           <!-- <div class="titres {{ path }}" id="Titre{{ id }}">{{ title }}</div> -->
           <div class="titres {{ path }}" id="Titre{{ id }}">{{ title }}</div>
           <div class="dates">{{ createdAt }}</div>
-          <div class="textes" id="Texte{{ id }}">Insérer ici le contenu de l'article</div>
+          <div class="textes" id="Texte{{ id }}">{{content}}</div>
         </div>
 
     {{/list_pages}}
