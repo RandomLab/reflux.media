@@ -165,11 +165,11 @@ function closeWindow(e){
 function modifyArticles(){
 
   var titres = document.getElementsByClassName("titres");
-  // articles[articles.length-1].style.display = "block";
-  // articles[articles.length-2].style.display = "block";
-  // articles[articles.length-3].style.display = "block";
-  // articles[articles.length-4].style.display = "block";
-  // articles[articles.length-5].style.display = "block";
+  articles[articles.length-1].style.display = "block";
+  articles[articles.length-2].style.display = "block";
+  articles[articles.length-3].style.display = "block";
+  articles[articles.length-4].style.display = "block";
+  articles[articles.length-5].style.display = "block";
   for (var i = 0; i < articles.length; i++) {
 
     // "FooBar".includes("oo");

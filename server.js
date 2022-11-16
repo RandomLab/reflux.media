@@ -138,7 +138,7 @@ const corsOptions = {
 
 app.get('/', cors(corsOptions), (req, res, next) => {
     // console.log(data.pages.list)
-    console.log("data", data)
+    console.log("data", data.list_pages)
     res.render('index.html', data)
 })
 
