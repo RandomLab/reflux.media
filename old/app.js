@@ -8,7 +8,6 @@ import mustache from 'mustache-express'
 
 /* ------------------- 
 configuration générale 
-
 ----------------------*/ 
 dotenv.config()
 
@@ -17,7 +16,6 @@ const __dirname = path.dirname(__filename)
 
 /* ------------------- 
 configuration express + mustache
-
 ----------------------*/ 
 const app = express()
 app.use(express.static('public'))
@@ -27,7 +25,6 @@ app.set('views', __dirname + '/views')
 
 /* ------------------- 
 configuration graphql
-
 ----------------------*/ 
 const endpoint = 'https://wiki.reflux.media/graphql'
   
@@ -81,7 +78,7 @@ app.get('/article/:article_id', async (req, res, next) => {
                 content
             }
         }
-        }
+    }
     `
     const variables = {
         id: parseInt(req.params.article_id)
