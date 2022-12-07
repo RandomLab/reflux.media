@@ -6,8 +6,10 @@
 - installer les dépendances avec `npm install`
 
 # lancement
-- lancer le serveur avec `npm start` ou `node server.js`
+- npm run build : enregistre les articles depuis wiki.reflux.media en markdown
+- npm run generate : génère les fichiers statiques html  
 
 # structure
-- public : contient les fichiers statiques comme style.css et main.js
-- views : contient les templates pour le moteur https://mustache.github.io/
+- dist : contient les fichiers statiques comme index.html, style.css et main.js
+- src : contient les fichiers sources pour 
+

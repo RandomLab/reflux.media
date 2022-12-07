@@ -1,131 +1,113 @@
+import path from 'path'
+import { fileURLToPath } from 'url'
 import fs from 'fs'
 
-import { marked } from 'marked'
-import fm from 'front-matter'
-import { format, compareAsc } from 'date-fns'
+import dotenv from 'dotenv'
+import { GraphQLClient, gql } from 'graphql-request'
 
 import { config } from './config.js'
 
 
 
 /* ------------------- 
-configuration markdown 
+configuration générale 
 ----------------------*/ 
+dotenv.config()
 
-marked.setOptions({
-    renderer: new marked.Renderer(),
-    pedantic: false,
-    gfm: true,
-    breaks: false,
-    sanitize: false,
-    smartLists: true,
-    smartypants: false,
-    xhtml: false
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
+/* ------------------- 
+configuration graphql
+----------------------*/ 
+const endpoint = 'https://wiki.reflux.media/graphql'
+  
+const graphQLClient = new GraphQLClient(endpoint, {
+    headers: {
+        authorization: process.env.API_KEY,
+    },
+    method: 'GET',
+    jsonSerializer: {
+      parse: JSON.parse,
+      stringify: JSON.stringify,
+    },
 })
 
-/* ------------------- 
-articles vers html
-----------------------*/ 
 
-let articles = []
+// console.log(JSON.stringify(data.pages.list, undefined, 2))
 
-const articlesHtml = (data) => {
-    return (`<div class="articles">
-                <div class ="croix">x</div>
-                <div class="titres" id="Titre${ data.attributes.id }">${ data.attributes.title }</div>
-                <div class="dates">${ format(data.attributes.date, 'MM/dd/yyyy')  }</div>
-                <div class="textes" id="Texte${ data.id }">${ marked(data.body) }</div>
-            </div>`)
-}
+
 
 /* ------------------- 
-index
+    on recupère le contenu des articles 
+    et on l'ajoute à un objet 
 ----------------------*/ 
 
-const indexHtml = (articles) => { 
-    return `<!DOCTYPE html>
-    <html lang="fr">
-        <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <meta name="description" content="" />
-            <title>Reflux.media</title>
-            <link rel="stylesheet" href="style.css">
-            <script src="main.js"></script>
-        </head>
-        <body>
-        <div id="menu">
-        <div id="sommaire">Sommaire</div>
-        <div class="dossier" id="politique">
-            <div class="titreRubrique">politique</div>
-        </div>
-        <div class="dossier" id="culture">
-            <div class="titreRubrique">culture</div>
-        </div>
-        <div class="dossier" id="ressources">
-            <div class="titreRubrique">ressources</div>
-        </div>
-        <div class="dossier" id="exebition">
-            <div class="titreRubrique">exebition</div>
-        </div>
-        <div class="dossier" id="varia">
-            <div class="titreRubrique">varia</div>
-        </div>
-        <div class="dossier" id="tools">
-            <div class="titreRubrique">tools</div>
-        </div>
-        </div>
-         ${articles.join('')}   
-        </body>
-    </html>
-    `
-}
+const getSinglePageContent = async (obj) => {
+    const query = gql`
+            query getArticle($id: Int!){
+            pages {
+                single(id: $id) {
+                    content
+                }
+            }
+        }`
 
-/* ------------------- 
-on lit les .md et on fait l'html
-----------------------*/ 
+    const variables = {
+        id: parseInt(obj.id)
+    }
+    const data = await graphQLClient.request(query, variables)
+    const { pages } = data
+    const { single } = pages
 
-const createPost = postPath => {
-    const data = fs.readFileSync(`${config.dev.articlesdir}/${postPath}`, "utf8")
-    const content = fm(data)
-    const article = articlesHtml(content)
+    const md = 
+`---
+id: ${obj.id}
+title: "${obj.title}"
+date: ${obj.updatedAt}
+---
 
-    /* ------------------- 
-    on enregistre les articles
-    ----------------------*/ 
-    
-    if (!fs.existsSync(config.dev.pagesdir)) fs.mkdirSync(config.dev.pagesdir)
+${single.content}
+
+`
+
+    if (!fs.existsSync(config.dev.articlesdir)) fs.mkdirSync(config.dev.articlesdir)
     fs.writeFile(
-        `${config.dev.pagesdir}/${content.attributes.id}.html`,
-        article,
+        `${config.dev.articlesdir}/${obj.id}.md`,
+        md,
         (error) => {
           if (error) throw error;
-          console.log(`index was created successfully`);
+          console.log(`article ${obj.id} was created successfully`);
         }
     )
-
-    return article
 }
 
-const posts = fs
-  .readdirSync(config.dev.articlesdir)
-  .map((post) => {
-    const article = createPost(post)
-    articles.push(article)
-})
-
 /* ------------------- 
-on enregistre le fichier index
+    on recupère toutes les pages du wiki
 ----------------------*/ 
 
-const index = indexHtml(articles)
+const getListPages = async () => {
+    const query = gql`
+      {
+        pages {
+                list(orderBy:UPDATED) {
+                    id
+                    title
+                    createdAt
+                    updatedAt
+                    path
+                }
+            }
+      }
+    `
+    const data = await graphQLClient.request(query) 
 
-if (!fs.existsSync(config.dev.distdir)) fs.mkdirSync(config.dev.distdir)
-fs.writeFile(
-    `${config.dev.distdir}/index.html`,
-    index,
-    (error) => {
-      if (error) throw error;
-      console.log(`index was created successfully`);
-    }
-)
+    const { pages } = data
+    const { list } = pages
+          
+    list.forEach(element => {
+        const data = getSinglePageContent(element)
+    })
+}
+
+const articles = getListPages()
