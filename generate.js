@@ -51,7 +51,7 @@ const indexHtml = (articles) => {
             <meta name="description" content="" />
             <title>Reflux.media</title>
             <link rel="stylesheet" href="assets/style.css">
-            <script src="assets/main.js"></script>s
+            <script src="assets/main.js"></script>
         </head>
         <body>
         <div id="menu">

@@ -83,9 +83,9 @@ function creationMenu(titre){
 
     var menu = document.getElementById("menu");
     var createTitre = document.createElement("div");
-    
+
     createTitre.classList = "boiteTitre";
-    
+
     if(titre.innerHTML.length > 10)createTitre.innerHTML = titre.innerHTML.substring(0,20) + "...";
 
 
@@ -173,7 +173,7 @@ function closeWindow(e){
 function modifyArticles(){
 
     var titres = document.getElementsByClassName("titres");
-    
+
     articles[articles.length-1].style.display = "block";
     articles[articles.length-2].style.display = "block";
     articles[articles.length-3].style.display = "block";
@@ -186,13 +186,13 @@ function modifyArticles(){
         compteurZindex++;
         articles[i].style.top = getRandomFromTo(0, 30)+"vh";
         articles[i].style.left =  getRandomFromTo(0, 50)+"vw";
-        
+
         // articles[i].style.backgroundColor = GetRandomFromArray(tableauCouleurs);
 
         // if(titres[i].classList[1].includes("politique")){
         //     articles[i].style.backgroundColor = tableauCouleurs[0];
         // }
-        
+
         // if(titres[i].classList[1].includes("culture")){
         //     articles[i].style.backgroundColor = tableauCouleurs[1];
         // }
