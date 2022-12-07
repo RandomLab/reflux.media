@@ -30,9 +30,9 @@ articles vers html
 let articles = []
 
 const articlesHtml = (data) => {
-    return (`<div class="articles">
+    return (`<div class="articles politique">
                 <div class ="croix">x</div>
-                <div class="titres" id="Titre${ data.attributes.id }">${ data.attributes.title }</div>
+                <div class="titres politique" id="Titre${ data.attributes.id }">${ data.attributes.title }</div>
                 <div class="dates">${ format(data.attributes.date, 'MM/dd/yyyy')  }</div>
                 <div class="textes" id="Texte${ data.id }">${ marked(data.body) }</div>
             </div>`)
@@ -57,22 +57,22 @@ const indexHtml = (articles) => {
         <div id="menu">
             <div id="sommaire">Sommaire</div>
             <div class="dossier" id="politique">
-                <div class="titreRubrique">politique</div>
+                <div class="categoriesTitles">politique</div>
             </div>
             <div class="dossier" id="culture">
-                <div class="titreRubrique">culture</div>
+                <div class="categoriesTitles">culture</div>
             </div>
             <div class="dossier" id="ressources">
-                <div class="titreRubrique">ressources</div>
+                <div class="categoriesTitles">ressources</div>
             </div>
             <div class="dossier" id="exebition">
-                <div class="titreRubrique">exebition</div>
+                <div class="categoriesTitles">exebition</div>
             </div>
             <div class="dossier" id="varia">
-                <div class="titreRubrique">varia</div>
+                <div class="categoriesTitles">varia</div>
             </div>
             <div class="dossier" id="tools">
-                <div class="titreRubrique">tools</div>
+                <div class="categoriesTitles">tools</div>
             </div>
         </div>
          ${articles.join('')}

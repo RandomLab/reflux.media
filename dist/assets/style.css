@@ -76,10 +76,17 @@ body {
   cursor: pointer;
   display: none;
 }
+.hiddenTitle{
+  display: none;
+}
 
-.titreRubrique{
+.categoriesTitles{
   color: blue;
   cursor: pointer;
+  width: fit-content;
+}
+.categoriesTitles:hover{
+  background-color: black;
 }
 .dates{
   pointer-events: none;
