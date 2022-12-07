@@ -8,9 +8,9 @@ import { config } from './config.js'
 
 
 
-/* ------------------- 
-configuration markdown 
-----------------------*/ 
+/* -------------------
+configuration markdown
+----------------------*/
 
 marked.setOptions({
     renderer: new marked.Renderer(),
@@ -23,9 +23,9 @@ marked.setOptions({
     xhtml: false
 })
 
-/* ------------------- 
+/* -------------------
 articles vers html
-----------------------*/ 
+----------------------*/
 
 let articles = []
 
@@ -38,11 +38,11 @@ const articlesHtml = (data) => {
             </div>`)
 }
 
-/* ------------------- 
+/* -------------------
 index
-----------------------*/ 
+----------------------*/
 
-const indexHtml = (articles) => { 
+const indexHtml = (articles) => {
     return `<!DOCTYPE html>
     <html lang="fr">
         <head>
@@ -51,7 +51,7 @@ const indexHtml = (articles) => {
             <meta name="description" content="" />
             <title>Reflux.media</title>
             <link rel="stylesheet" href="assets/style.css">
-            <script src="main.js"></script>s
+            <script src="assets/main.js"></script>s
         </head>
         <body>
         <div id="menu">
@@ -75,25 +75,25 @@ const indexHtml = (articles) => {
                 <div class="titreRubrique">tools</div>
             </div>
         </div>
-         ${articles.join('')}   
+         ${articles.join('')}
         </body>
     </html>
     `
 }
 
-/* ------------------- 
+/* -------------------
 on lit les .md et on fait l'html
-----------------------*/ 
+----------------------*/
 
 const createPost = postPath => {
     const data = fs.readFileSync(`${config.dev.articlesdir}/${postPath}`, "utf8")
     const content = fm(data)
     const article = articlesHtml(content)
 
-    /* ------------------- 
+    /* -------------------
     on enregistre les articles
-    ----------------------*/ 
-    
+    ----------------------*/
+
     if (!fs.existsSync(config.dev.pagesdir)) fs.mkdirSync(config.dev.pagesdir)
     fs.writeFile(
         `${config.dev.pagesdir}/${content.attributes.id}.html`,
@@ -114,9 +114,9 @@ const posts = fs
     articles.push(article)
 })
 
-/* ------------------- 
+/* -------------------
 on enregistre le fichier index
-----------------------*/ 
+----------------------*/
 
 const index = indexHtml(articles)
 
