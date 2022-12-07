@@ -7,7 +7,7 @@ var posY;
 var departOK = false;
 var articles;
 var tableauCouleurs = ["mediumslateblue", "magenta", "paleturquoise", "lime", "aquamarine", "lavender"]
-var clickMenu = false;
+
 window.addEventListener("load", setup);
 
 function setup() {
@@ -64,25 +64,20 @@ function setup() {
   //----------------------------- Déployer les titres des articles au survol sur le titre du menu
   var titreRubrique = document.getElementsByClassName("titreRubrique");
   for (var i = 0; i < titreRubrique.length; i++) {
-    titreRubrique[i].addEventListener("mouseenter", displayTitres);
-    titreRubrique[i].addEventListener("mouseleave", hideTitres);
-    titreRubrique[i].addEventListener("click", stuckTitres);
+    titreRubrique[i].addEventListener("mouseenter", displaytitle);
+    titreRubrique[i].addEventListener("mouseleave", hidetitle);
+    titreRubrique[i].addEventListener("click", blocktitle);
   }
   //----------------------------- Ouvrir les articles en cliquant sur les titres du menu
-
-
-
 }
 
-
 //----------------------------- LES FONCTIONS ICI !
-
 function creationMenu(titre){
   var menu = document.getElementById("menu");
   var createTitre = document.createElement("div");
   createTitre.classList = "boiteTitre";
+  // réduire la taille du titre pour pas qu'il soit trop long
   if(titre.innerHTML.length > 10)createTitre.innerHTML = titre.innerHTML.substring(0,20) + "...";
-
 
   var politique = document.getElementById("politique");
   var culture = document.getElementById("culture");
@@ -111,47 +106,42 @@ function creationMenu(titre){
   }
 }
 
-function displayTitres(e){
+function displaytitle(e){
   const children = e.target.parentNode.children;
+  console.log(e.target)
+  console.log(e.target.parentNode)
+    console.log(e.target.parentNode.children)
   Array.from(children).forEach(div => {
     div.style.display = "block";
   });
 }
+
 var compteurMenu = 0;
-function hideTitres(e){
-  if (clickMenu != true){
+var clickMenu = false;
+
+function hidetitle(e){
+
     const children = e.target.parentNode.children;
     Array.from(children).forEach(div => {
-      if(div.classList != "titreRubrique"){
-          div.style.display = "none";
+      if(div.classList != "titreRubrique" && clickMenu == false){
+        div.style.display = "none";
       }
     });
-  }
-
 }
 
-function stuckTitres(e){
+function blocktitle(e){
 
-  compteurMenu++;
-const children = e.target.parentNode.children;
-  if ( compteurMenu == 1){
-    clickMenu = true;
-
+  const children = e.target.parentNode.children;
     Array.from(children).forEach(div => {
-      if(div.classList != "titreRubrique"){
-          div.style.display = "block";
+      if(div.classList != "titreRubrique" && div.style.display == "block"){
+        div.style.display = "none";
+          clickMenu = false;
+      }
+       if(div.classList != "titreRubrique" && div.style.display == "none"){
+        div.style.display = "block";
+          clickMenu = true;
       }
     });
-  } else if (compteurMenu == 2){
-    compteurMenu = 0;
-    clickMenu = false;
-    Array.from(children).forEach(div => {
-      if(div.classList != "titreRubrique"){
-          div.style.display = "none";
-      }
-    });
-  }
-
 }
 function ouvrirArticle(){
   // récuperer le titre de l'article, la date, et le contenu

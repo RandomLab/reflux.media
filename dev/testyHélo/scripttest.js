@@ -17,7 +17,7 @@ var departOK = false;
 
 
 
-var ZoneDeDragWidth = window.innerWidth  - 370; 
+var ZoneDeDragWidth = window.innerWidth  - 370;
 var ZoneDeDragHeight = window.innerHeight -(window.innerHeight -30);
 var reFluxImg = [ "1.gif", "2.gif", "3.gif", "4.gif","5.gif","6.gif"];
 
@@ -47,7 +47,7 @@ function setup() {
   document.addEventListener("mousemove", onMouseMove);
 
   var fenetres = document.getElementsByClassName("fenetre");
-  
+
   for (var i = 0; i < fenetres.length; i++) {
     fenetres[i].addEventListener("mousedown", departDuDrag);
     fenetres[i].addEventListener("mouseup", finDuMouvement);
@@ -58,9 +58,8 @@ function setup() {
     fenetres[i].addEventListener("click", premierPlan);
     fenetres[i].customIndex = i;
   }
- // reFlux();
+ reFlux();
  // backGround();
-	menu();
 
 
 }
@@ -100,24 +99,28 @@ function creationFenetre(titre, texte){
 	reflux.classList = "tiitre";
 	document.body.appendChild(reflux);
 	}
-	
-	
+
+
 	//why repeat marche pas?
 //function backGround(){
 //document.body.style.backgroundImage = reFlux();
 //document.html.style.backgroundRepeat = "repeat";
 //}
-//var categories = 
+//var categories =
 //function menu (){};
 
-function menu(){
-	categories = document.getElementsByClassName("categories");
-
-}
 
 
 function onMouseMove(event) {
   moveAt(event.pageX, event.pageY);
+}
+function moveAt(pageX, pageY){
+  if(departOK && pageX - posXbis < ZoneDeDragWidth && pageY - posY > ZoneDeDragHeight) {
+    fenetres[activeDiv.customIndex].style.left = pageX - posX + 'px';
+    fenetres[activeDiv.customIndex].style.top = pageY - posY + 'px';
+  } else {
+      departOK = false;
+  }
 }
 
 function departDuDrag(e){
@@ -130,13 +133,8 @@ function departDuDrag(e){
   posYbis = e.clientY - fenetres[activeDiv.customIndex].getBoundingClientRect().bottom;
 }
 
-function moveAt(pageX, pageY){
-  if(departOK && pageX - posXbis < ZoneDeDragWidth && pageY - posY > ZoneDeDragHeight) {
-    fenetres[activeDiv.customIndex].style.left = pageX - posX + 'px';
-    fenetres[activeDiv.customIndex].style.top = pageY - posY + 'px';
-  }
-}
-//pageX - posX < ZoneDeDragWidth && pageY - posY < ZoneDeDragWidth && 
+
+//pageX - posX < ZoneDeDragWidth && pageY - posY < ZoneDeDragWidth &&
 
 function finDuMouvement(){
   departOK = false;
@@ -174,13 +172,10 @@ for (i = 0; i < liste.length; i++)
 	tableauListe.push(document.getElementById('liste' + i));
 }
 
-var menu = [tableauCategorie[i], tableauListe[i]];
-
-
 for (i = 0; i < categorie.length; i++)
 {
-	tableauCategorie[i].addEventListener("click",ouvreFerme);
-	tableauCategorie[i].customIndex = i;
+	categorie[i].addEventListener("click",ouvreFerme);
+	categorie[i].customIndex = i;
 }
 
 function ouvreFerme(event){
@@ -196,8 +191,6 @@ else if (comment.display == "block"){
 	tableauListe[ouverte.customIndex].style.display = "none";
 		}
 	}
-
-
 
 // ----------------------------- LES UTILITAIRES ICI !
 

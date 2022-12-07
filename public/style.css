@@ -29,10 +29,8 @@ body {
 
 
 ::selection {
-  color: black;
-  background: transparent;
-  /* color: yellow;
-  background: green; */
+  color: white;
+  background: lime;
 }
 
 
