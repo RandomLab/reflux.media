@@ -1,0 +1,95 @@
+@font-face {
+    font-family: 'NarrowBold';
+    src: url('fonts/InputMonoNarrow-Bold.woff2');
+}
+@font-face {
+    font-family: 'Quebec';
+    src: url('fonts/Quebec-Bold.woff2');
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.articles{
+  display: none;
+  position: absolute;
+  opacity: 0.8;
+  cursor: pointer;
+  width: 30vw;
+  height: 30vw;
+  font-family: 'NarrowBold';
+  font-size: 13pt;
+  overflow: scroll;
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+
+
+::selection {
+  color: black;
+  background: transparent;
+  /* color: yellow;
+  background: green; */
+}
+
+
+.titres{
+  pointer-events: none;
+  font-family: 'Quebec';
+  font-size: 16pt;
+}
+.textes{
+  pointer-events: none;
+}
+.croix{
+  width: 1vw;
+  padding: 1px;
+  right: 0px;
+  height: auto;
+  font-family: 'NarrowBold';
+  border: black solid 1px;
+  position: absolute;
+  margin: 5px;
+  text-align: center;
+}
+#menu{
+  width: 10vw;
+  height: 15vh;
+  font-family: 'Quebec';
+  font-size: 12pt;
+  position: absolute;
+  right: 0px;
+  margin-right: 1vw;
+}
+
+.types{
+  font-family: 'NarrowBold';
+  font-size: 9pt;
+}
+
+.boiteTitre{
+  margin-bottom: 1vh;
+  margin-left: 10%;
+  cursor: pointer;
+  display: none;
+}
+
+.titreRubrique{
+  color: blue;
+  cursor: pointer;
+}
+.dates{
+  pointer-events: none;
+}
+#sommaire{
+  font-size: 15pt;
+}
+
+a{
+  text-decoration: underline;
+  color: blue;
+  pointer-events: all;
+}

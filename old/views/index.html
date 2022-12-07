@@ -8,7 +8,6 @@
     <script src="main.js"></script>
 </head>
 <body>
-    {{#pages}}
     <div id="menu">
       <div id="sommaire">Sommaire</div>
       <div class="dossier" id="politique">
@@ -32,9 +31,8 @@
         <div class="titreRubrique">tools</div>
       </div>
     </div>
-
-    {{/pages}}
-    {{#list_pages}}
+    
+    {{#list}}
 
         <div class="articles">
           <div class ="croix">x</div>
@@ -45,6 +43,6 @@
           <div class="textes" id="Texte{{ id }}">{{content}}</div>
         </div>
 
-    {{/list_pages}}
+    {{/list}}
 </body>
 </html>
