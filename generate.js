@@ -55,25 +55,25 @@ const indexHtml = (articles) => {
         </head>
         <body>
         <div id="menu">
-        <div id="sommaire">Sommaire</div>
-        <div class="dossier" id="politique">
-            <div class="titreRubrique">politique</div>
-        </div>
-        <div class="dossier" id="culture">
-            <div class="titreRubrique">culture</div>
-        </div>
-        <div class="dossier" id="ressources">
-            <div class="titreRubrique">ressources</div>
-        </div>
-        <div class="dossier" id="exebition">
-            <div class="titreRubrique">exebition</div>
-        </div>
-        <div class="dossier" id="varia">
-            <div class="titreRubrique">varia</div>
-        </div>
-        <div class="dossier" id="tools">
-            <div class="titreRubrique">tools</div>
-        </div>
+            <div id="sommaire">Sommaire</div>
+            <div class="dossier" id="politique">
+                <div class="titreRubrique">politique</div>
+            </div>
+            <div class="dossier" id="culture">
+                <div class="titreRubrique">culture</div>
+            </div>
+            <div class="dossier" id="ressources">
+                <div class="titreRubrique">ressources</div>
+            </div>
+            <div class="dossier" id="exebition">
+                <div class="titreRubrique">exebition</div>
+            </div>
+            <div class="dossier" id="varia">
+                <div class="titreRubrique">varia</div>
+            </div>
+            <div class="dossier" id="tools">
+                <div class="titreRubrique">tools</div>
+            </div>
         </div>
          ${articles.join('')}   
         </body>
