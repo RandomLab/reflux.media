@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'NarrowBold';
-    src: url('fonts/InputMonoNarrow-Bold.woff2');
+    src: url('InputMonoNarrow-Regular.ttf');
 }
 @font-face {
     font-family: 'Quebec';
-    src: url('fonts/Quebec-Bold.woff2');
+    src: url('Quebec-Bold.otf');
 }
 html,
 body {
