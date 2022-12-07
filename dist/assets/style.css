@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'NarrowBold';
-    src: url('InputMonoNarrow-Regular.ttf');
+    src: url('fonts/InputMonoNarrow-Bold.woff2');
 }
 @font-face {
     font-family: 'Quebec';
-    src: url('Quebec-Bold.otf');
+    src: url('fonts/Quebec-Bold.woff2');
 }
 html,
 body {
@@ -75,9 +75,6 @@ body {
   margin-left: 10%;
   cursor: pointer;
   display: none;
-}
-
-.dossier{
 }
 
 .titreRubrique{
