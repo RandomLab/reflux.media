@@ -37,13 +37,23 @@ const graphQLClient = new GraphQLClient(endpoint, {
 // console.log(JSON.stringify(data.pages.list, undefined, 2))
 
 
+// const cleanString = (str) => {
+
+// }
+
+// assets {
+//     list(folderId:1, kind:IMAGE) {
+//       id
+//     filename
+//     }
+
 
 /* ------------------- 
     on recupère le contenu des articles 
     et on l'ajoute à un objet 
 ----------------------*/ 
 
-const getSinglePageContent = async (obj) => {
+const getSinglePageContent = async (obj, tags) => {
     const query = gql`
             query getArticle($id: Int!){
             pages {
@@ -63,8 +73,9 @@ const getSinglePageContent = async (obj) => {
     const md = 
 `---
 id: ${obj.id}
-title: "${obj.title}"
+title: ${obj.title.trim()}
 date: ${obj.updatedAt}
+tags: ${tags.join('')}
 ---
 
 ${single.content}
@@ -96,6 +107,7 @@ const getListPages = async () => {
                     createdAt
                     updatedAt
                     path
+                    tags
                 }
             }
       }
@@ -106,7 +118,12 @@ const getListPages = async () => {
     const { list } = pages
           
     list.forEach(element => {
-        const data = getSinglePageContent(element)
+        const { tags } = element
+        if (Array.isArray(tags) && tags.length) {
+            const data = getSinglePageContent(element, tags)
+        } else {
+            console.log('pas de tag')
+        }
     })
 }
 
