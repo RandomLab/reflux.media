@@ -39,7 +39,7 @@ const articlesHtml = (data) => {
     
     return (`<div class="articles">
                 <div class ="croix">x</div>
-                <div class="titres-${ data.attributes.tags }" id="Titre-${ data.attributes.id }">${ data.attributes.title }</div>
+                <div class="titres" id="Titre${ data.attributes.id }">${ data.attributes.title }</div>
                 <div class="dates">${ format(data.attributes.date, 'MM/dd/yyyy')  }</div>
                 <div class="textes" id="Texte-${ data.attributes.id }">${ marked(data.body) }</div>
             </div>`)
@@ -64,22 +64,22 @@ const indexHtml = (articles) => {
         <div id="menu">
             <div id="sommaire">Sommaire</div>
             <div class="dossier" id="politique">
-                <div class="titreRubrique">politique</div>
+                <div class="categoriesTitles">politique</div>
             </div>
             <div class="dossier" id="culture">
-                <div class="titreRubrique">culture</div>
+                <div class="categoriesTitles">culture</div>
             </div>
             <div class="dossier" id="ressources">
-                <div class="titreRubrique">ressources</div>
+                <div class="categoriesTitles">ressources</div>
             </div>
             <div class="dossier" id="exebition">
-                <div class="titreRubrique">exebition</div>
+                <div class="categoriesTitles">exebition</div>
             </div>
             <div class="dossier" id="varia">
-                <div class="titreRubrique">varia</div>
+                <div class="categoriesTitles">varia</div>
             </div>
             <div class="dossier" id="tools">
-                <div class="titreRubrique">tools</div>
+                <div class="categoriesTitles">tools</div>
             </div>
         </div>
          ${articles.join('')}
@@ -94,7 +94,7 @@ async function downloadImage(url, name) {
     const filepath = resolve(__dirname, 'dist/assets/images', name)
     const writer = fs.createWriteStream(filepath)
 
-    axios.defaults.headers.common['Authorization'] = `Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGkiOjQsImdycCI6MSwiaWF0IjoxNjY4NTk0NDE1LCJleHAiOjE3MDAxNTIwMTUsImF1ZCI6InVybjp3aWtpLmpzIiwiaXNzIjoidXJuOndpa2kuanMifQ.p2rL60pOqY823fv4FnD1AMVQ8Hg8rkAQ8GryTPY1P5dZY0hej49xbqXFYjTdXiZf9AezyKT2c1lFl05WBf74ZrBiL7LTKOZUXKoCQVZWv1mFUa2YJKLVgCj0u1fqCCw6fPZEo2Bz80yazKqqvR0Z3wxK8Rxfg18vm4QOzjhxaQchc6plzk-7CIAdjLOx8tp95BG9AelNhuQbjV2GUkvRIrSWRLnn4UyKjUq7vLzUGKdExbWEMcoe-e8XZ4Pk2cQ-ymWduTnuQAcJzPGJT0WZASlJVdY4nAuuW77caU04IRUG-gUxb4jY7PdgHrhKv646VqR0Mi2ruhLjOwltu44njw`;
+    axios.defaults.headers.common['Authorization'] = ``;
     
     const response = await axios({
         url,

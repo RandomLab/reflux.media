@@ -13,67 +13,65 @@ window.addEventListener("load", setup);
 
 function setup() {
 
-    //----------------------------- Première étape: Récuperer les titres et les textes dans le HTML
-    var titres = document.getElementsByClassName("titres");
-    var textes = document.getElementsByClassName("textes");
-    //----------------------------- Couleur des titres des dossiers dans le menu
-    var titreRubrique = document.getElementsByClassName("titreRubrique");
+  //----------------------------- Première étape: Récuperer les titres et les textes dans le HTML
+  var titres = document.getElementsByClassName("titres");
+  var textes = document.getElementsByClassName("textes");
+  //----------------------------- Couleur des titres des dossiers dans le menu
+  var categoriesTitles = document.getElementsByClassName("categoriesTitles");
 
-    for (var i = 0; i < titreRubrique.length; i++) {
-        if(titreRubrique[i].innerHTML == "politique"){
-        titreRubrique[i].style.color = tableauCouleurs[0];
-        }
-        if(titreRubrique[i].innerHTML == "culture"){
-        titreRubrique[i].style.color = tableauCouleurs[1];
-        }
-        if(titreRubrique[i].innerHTML == "varia"){
-        titreRubrique[i].style.color = tableauCouleurs[2];
-        }
-        if(titreRubrique[i].innerHTML == "exebition"){
-        titreRubrique[i].style.color = tableauCouleurs[3];
-        }
-        if(titreRubrique[i].innerHTML == "tools"){
-        titreRubrique[i].style.color = tableauCouleurs[4];
-        }
-        if(titreRubrique[i].innerHTML == "ressources"){
-        titreRubrique[i].style.color =  tableauCouleurs[5];
-        }
+  for (var i = 0; i < categoriesTitles.length; i++) {
+    if(categoriesTitles[i].innerHTML == "politique"){
+      categoriesTitles[i].style.color = tableauCouleurs[0];
     }
-
-    articles = document.getElementsByClassName("articles");
-
-    //----------------------------- Appartition des 5 derniers articles
-    // Positionnement des articles aléatoire et application des couleurs
-    modifyArticles();
-
-    //----------------------------- Interaction sur les fenêtres
-    document.addEventListener("mousemove", onMouseMove);
-    for (var i = 0; i < articles.length; i++) {
-        articles[i].addEventListener("mousedown", departDuDrag);
-        articles[i].addEventListener("mouseup", finDuMouvement);
-        articles[i].customIndex = i;
+    if(categoriesTitles[i].innerHTML == "culture"){
+      categoriesTitles[i].style.color = tableauCouleurs[1];
     }
-    var croix = document.getElementsByClassName("croix");
-    for (var i = 0; i < croix.length; i++) {
-        croix[i].addEventListener("click", closeWindow);
-        croix[i].customIndex = i;
+    if(categoriesTitles[i].innerHTML == "varia"){
+      categoriesTitles[i].style.color = tableauCouleurs[2];
     }
-
-    //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* CREATION DU MENU
-    for (var i = 0; i < titres.length; i++) {
-        creationMenu(titres[i]);
+    if(categoriesTitles[i].innerHTML == "exebition"){
+      categoriesTitles[i].style.color = tableauCouleurs[3];
     }
-    //----------------------------- Déployer les titres des articles au survol sur le titre du menu
-    var titreRubrique = document.getElementsByClassName("titreRubrique");
-    for (var i = 0; i < titreRubrique.length; i++) {
-        titreRubrique[i].addEventListener("mouseenter", displayTitres);
-        titreRubrique[i].addEventListener("mouseleave", hideTitres);
-        titreRubrique[i].addEventListener("click", stuckTitres);
+    if(categoriesTitles[i].innerHTML == "tools"){
+      categoriesTitles[i].style.color = tableauCouleurs[4];
     }
-    //----------------------------- Ouvrir les articles en cliquant sur les titres du menu
+    if(categoriesTitles[i].innerHTML == "ressources"){
+      categoriesTitles[i].style.color =  tableauCouleurs[5];
+    }
+  }
 
+  articles = document.getElementsByClassName("articles");
 
+  //----------------------------- Appartition des 5 derniers articles
+  // Positionnement des articles aléatoire et application des couleurs
+  modifyArticles();
 
+  //----------------------------- Interaction sur les fenêtres
+  document.addEventListener("mousemove", onMouseMove);
+  for (var i = 0; i < articles.length; i++) {
+    articles[i].addEventListener("mousedown", departDuDrag);
+    articles[i].addEventListener("mouseup", finDuMouvement);
+    articles[i].customIndex = i;
+  }
+  var croix = document.getElementsByClassName("croix");
+  for (var i = 0; i < croix.length; i++) {
+    croix[i].addEventListener("click", closeWindow);
+    croix[i].customIndex = i;
+  }
+  //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*//
+  //-*-*-*-*-*-*-*-*-* CREATION DU MENU
+  //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*//
+  for (var i = 0; i < titres.length; i++) {
+    creationMenu(titres[i]);
+  }
+  //Déployer les titres des articles au survol sur le titre du menu
+  var categoriesTitles = document.getElementsByClassName("categoriesTitles");
+  for (var i = 0; i < categoriesTitles.length; i++) {
+    // categoriesTitles[i].addEventListener("mouseenter", displayTitles);
+    // categoriesTitles[i].addEventListener("mouseleave", hideTitles);
+    categoriesTitles[i].addEventListener("click", blockTitles);
+  }
+  //Ouvrir les articles en cliquant sur les titres du menu
 }
 
 
@@ -81,88 +79,95 @@ function setup() {
 
 function creationMenu(titre){
 
-    var menu = document.getElementById("menu");
-    var createTitre = document.createElement("div");
+  var menu = document.getElementById("menu");
+  var createTitre = document.createElement("div");
+  createTitre.classList = "boiteTitre";
 
-    createTitre.classList = "boiteTitre";
+  var hiddenTitle = document.createElement("div");
+  hiddenTitle.classList = "hiddenTitle";
+  hiddenTitle.innerHTML = titre.innerHTML;
 
-    if(titre.innerHTML.length > 10)createTitre.innerHTML = titre.innerHTML.substring(0,20) + "...";
+  if(titre.innerHTML.length > 10)createTitre.innerHTML = titre.innerHTML.substring(0,20) + "...";
 
+  var politique = document.getElementById("politique");
+  var culture = document.getElementById("culture");
+  var ressources = document.getElementById("ressources");
+  var exebition = document.getElementById("exebition");
+  var tools = document.getElementById("tools");
+  var varia = document.getElementById("varia");
 
-    var politique = document.getElementById("politique");
-    var culture = document.getElementById("culture");
-    var ressources = document.getElementById("ressources");
-    var exebition = document.getElementById("exebition");
-    var tools = document.getElementById("tools");
-    var varia = document.getElementById("varia");
-
-    // if(titre.classList[1].includes("politique")){
-    //     politique.appendChild(createTitre);
-    // }
-    // if(titre.classList[1].includes("culture")){
-    //     culture.appendChild(createTitre);
-    // }
-    // if(titre.classList[1].includes("ressources")){
-    //     ressources.appendChild(createTitre);
-    // }
-    // if(titre.classList[1].includes("exebition")){
-    //     exebition.appendChild(createTitre);
-    // }
-    // if(titre.classList[1].includes("tools")){
-    //     tools.appendChild(createTitre);
-    // }
-    // if(titre.classList[1].includes("varia")){
-    //     varia.appendChild(createTitre);
-    // }
-}
-
-function displayTitres(e){
-    const children = e.target.parentNode.children;
-    Array.from(children).forEach(div => {
-        div.style.display = "block";
-    });
-}
-
-var compteurMenu = 0;
-
-function hideTitres(e){
-  if (clickMenu != true){
-    const children = e.target.parentNode.children;
-    Array.from(children).forEach(div => {
-      if(div.classList != "titreRubrique"){
-          div.style.display = "none";
-      }
-    });
+  if(titre.classList[1].includes("politique")){
+    politique.appendChild(createTitre);
+    politique.appendChild(hiddenTitle);
   }
-
+  if(titre.classList[1].includes("culture")){
+    culture.appendChild(createTitre);
+    culture.appendChild(hiddenTitle);
+  }
+  if(titre.classList[1].includes("ressources")){
+    ressources.appendChild(createTitre);
+    ressources.appendChild(hiddenTitle);
+  }
+  if(titre.classList[1].includes("exebition")){
+    exebition.appendChild(createTitre);
+    exebition.appendChild(hiddenTitle);
+  }
+  if(titre.classList[1].includes("tools")){
+    tools.appendChild(createTitre);
+    tools.appendChild(hiddenTitle);
+  }
+  if(titre.classList[1].includes("varia")){
+    varia.appendChild(createTitre);
+    varia.appendChild(hiddenTitle);
+  }
 }
 
-function stuckTitres(e){
+// function displayTitles(e){
+//   if (clickMenu != true){
+//   const children = e.target.parentNode.children;
+//   Array.from(children).forEach(div => {
+//     div.style.display = "block";
+//   });
+// }
+// }
+//
+// function hideTitles(e){
+//   if (clickMenu != true){
+//     const children = e.target.parentNode.children;
+//     Array.from(children).forEach(div => {
+//       if(div.classList != "categoriesTitles"){
+//         div.style.display = "none";
+//       }
+//     });
+//   }
+// }
 
-  compteurMenu++;
-const children = e.target.parentNode.children;
-  if ( compteurMenu == 1){
+function blockTitles(e){
+  var title = e.target;
+  const children = title.parentNode.children;
+  var style = window.getComputedStyle(children[1], null).getPropertyValue("display");
+  if ( style == "none"){
     clickMenu = true;
-
     Array.from(children).forEach(div => {
-      if(div.classList != "titreRubrique"){
-          div.style.display = "block";
+      if(div.classList != "categoriesTitles"){
+        div.style.display = "block";
+        title.style.backgroundColor = "black";
       }
     });
-  } else if (compteurMenu == 2){
-    compteurMenu = 0;
+  } else if (style == "block"){
     clickMenu = false;
     Array.from(children).forEach(div => {
-      if(div.classList != "titreRubrique"){
-          div.style.display = "none";
+      if(div.classList != "categoriesTitles"){
+        div.style.display = "none";
+        title.style.backgroundColor = "black";
       }
     });
   }
-
 }
 function ouvrirArticle(){
   // récuperer le titre de l'article, la date, et le contenu
   // création d'une fenêtre pour les contenus
+
 }
 
 function closeWindow(e){
@@ -172,46 +177,42 @@ function closeWindow(e){
 
 function modifyArticles(){
 
-    var titres = document.getElementsByClassName("titres");
+  var titres = document.getElementsByClassName("titres");
 
-    articles[articles.length-1].style.display = "block";
-    articles[articles.length-2].style.display = "block";
-    articles[articles.length-3].style.display = "block";
-    articles[articles.length-4].style.display = "block";
-    articles[articles.length-5].style.display = "block";
+  articles[articles.length-1].style.display = "block";
+  articles[articles.length-2].style.display = "block";
+  articles[articles.length-3].style.display = "block";
+  articles[articles.length-4].style.display = "block";
+  articles[articles.length-5].style.display = "block";
 
-    for (var i = 0; i < articles.length; i++) {
+  for (var i = 0; i < articles.length; i++) {
 
-        // "FooBar".includes("oo");
-        compteurZindex++;
-        articles[i].style.top = getRandomFromTo(0, 30)+"vh";
-        articles[i].style.left =  getRandomFromTo(0, 50)+"vw";
+    compteurZindex++;
+    articles[i].style.top = getRandomFromTo(0, 30)+"vh";
+    articles[i].style.left =  getRandomFromTo(0, 50)+"vw";
 
-        // articles[i].style.backgroundColor = GetRandomFromArray(tableauCouleurs);
+    articles[i].style.backgroundColor = GetRandomFromArray(tableauCouleurs);
 
-        // if(titres[i].classList[1].includes("politique")){
-        //     articles[i].style.backgroundColor = tableauCouleurs[0];
-        // }
-
-        // if(titres[i].classList[1].includes("culture")){
-        //     articles[i].style.backgroundColor = tableauCouleurs[1];
-        // }
-
-        // if(titres[i].classList[1].includes("varia")){
-        //     articles[i].style.backgroundColor = tableauCouleurs[2];
-        // }
-
-        // if(titres[i].classList[1].includes("exebition")){
-        // articles[i].style.backgroundColor = tableauCouleurs[3];
-        // }
-        // if(titres[i].classList[1].includes("tools")){
-        // articles[i].style.backgroundColor = tableauCouleurs[4];
-        // }
-        // if(titres[i].classList[1].includes("ressources")){
-        // articles[i].style.backgroundColor = tableauCouleurs[5];
-        // }
-        articles[i].style.zIndex = compteurZindex;
+    if(articles[i].classList[1].includes("politique")){
+      articles[i].style.backgroundColor = tableauCouleurs[0];
     }
+    if(articles[i].classList[1].includes("culture")){
+      articles[i].style.backgroundColor = tableauCouleurs[1];
+    }
+    if(articles[i].classList[1].includes("varia")){
+      articles[i].style.backgroundColor = tableauCouleurs[2];
+    }
+    if(articles[i].classList[1].includes("exebition")){
+      articles[i].style.backgroundColor = tableauCouleurs[3];
+    }
+    if(articles[i].classList[1].includes("tools")){
+      articles[i].style.backgroundColor = tableauCouleurs[4];
+    }
+    if(articles[i].classList[1].includes("ressources")){
+      articles[i].style.backgroundColor = tableauCouleurs[5];
+    }
+    articles[i].style.zIndex = compteurZindex;
+  }
 }
 
 function onMouseMove(event) {

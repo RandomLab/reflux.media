@@ -8,8 +8,8 @@
 # lancement
 - npm run build : enregistre les articles depuis wiki.reflux.media en markdown
 - npm run generate : génère les fichiers statiques html  
+- npm run serve pour lancer le serveur
 
 # structure
 - dist : contient les fichiers statiques comme index.html, style.css et main.js
-- src : contient les fichiers sources pour 
-
+- src : contient les fichiers sources pour
