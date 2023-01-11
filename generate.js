@@ -8,8 +8,11 @@ import { format } from 'date-fns'
 
 import { config } from './config.js'
 
+import dotenv from 'dotenv'
+
 import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
+
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
@@ -36,6 +39,7 @@ articles vers html
 let articles = []
 
 const articlesHtml = (data) => {
+    // console.log(data.attributes.tags)
     
     return (`<div class="articles">
                 <div class ="croix">x</div>
@@ -94,13 +98,15 @@ async function downloadImage(url, name) {
     const filepath = resolve(__dirname, 'dist/assets/images', name)
     const writer = fs.createWriteStream(filepath)
 
-    axios.defaults.headers.common['Authorization'] = ``;
+    axios.defaults.headers.common['Authorization'] = `${process.env.API_KEY}`;
     
     const response = await axios({
         url,
         method: 'GET',
         responseType: 'stream'
     })
+
+    // console.log(response.data)
 
     response.data.pipe(writer)
 
@@ -110,15 +116,19 @@ async function downloadImage(url, name) {
     })
 }
 
-const parseURL = (link) => {
+async function parseURL (link) {
     const re = /\(([^)]+)\)/
     const result = re.exec(link)
     const url = result[1]
     const name = url.split('/').pop(-1)
     
-    console.log(url)
+    // console.log(url, name)
 
-    // downloadImage(url, name)
+    if (url.charAt(0) === '/') {
+        const finalUrl = 'https://wiki.reflux.media' + url
+        await downloadImage(finalUrl, name)
+    }
+
 }
 
 const getImages = (content) => {

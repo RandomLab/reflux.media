@@ -12,4 +12,4 @@
 
 # structure
 - dist : contient les fichiers statiques comme index.html, style.css et main.js
-- src : contient les fichiers sources pour
+- src : contient les fichiers sources pour la génération du site statique
