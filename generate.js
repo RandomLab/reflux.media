@@ -36,10 +36,10 @@ articles vers html
 let articles = []
 
 const articlesHtml = (data) => {
-    
-    return (`<div class="articles">
+
+    return (`<div class="articles ${ data.attributes.tags }">
                 <div class ="croix">x</div>
-                <div class="titres" id="Titre${ data.attributes.id }">${ data.attributes.title }</div>
+                <div class="titres ${ data.attributes.tags }" id="Titre${ data.attributes.id }">${ data.attributes.title }</div>
                 <div class="dates">${ format(data.attributes.date, 'MM/dd/yyyy')  }</div>
                 <div class="textes" id="Texte-${ data.attributes.id }">${ marked(data.body) }</div>
             </div>`)
@@ -95,7 +95,7 @@ async function downloadImage(url, name) {
     const writer = fs.createWriteStream(filepath)
 
     axios.defaults.headers.common['Authorization'] = ``;
-    
+
     const response = await axios({
         url,
         method: 'GET',
@@ -115,7 +115,7 @@ const parseURL = (link) => {
     const result = re.exec(link)
     const url = result[1]
     const name = url.split('/').pop(-1)
-    
+
     console.log(url)
 
     // downloadImage(url, name)
@@ -136,10 +136,10 @@ const createPost = postPath => {
     const content = fm(data)
     const images = getImages(content.body)
     const article = articlesHtml(content)
-    
+
     if (images !== null) {
         images.forEach(element => {
-            parseURL(element) 
+            parseURL(element)
         })
     }
 

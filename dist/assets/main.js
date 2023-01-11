@@ -149,7 +149,7 @@ function blockTitles(e){
   if ( style == "none"){
     clickMenu = true;
     Array.from(children).forEach(div => {
-      if(div.classList != "categoriesTitles"){
+      if(div.classList != "categoriesTitles" && div.classList != "hiddenTitle"){
         div.style.display = "block";
         title.style.backgroundColor = "black";
       }
@@ -157,7 +157,7 @@ function blockTitles(e){
   } else if (style == "block"){
     clickMenu = false;
     Array.from(children).forEach(div => {
-      if(div.classList != "categoriesTitles"){
+      if(div.classList != "categoriesTitles"&& div.classList != "hiddenTitle"){
         div.style.display = "none";
         title.style.backgroundColor = "black";
       }
@@ -165,6 +165,7 @@ function blockTitles(e){
   }
 }
 function ouvrirArticle(){
+  // var
   // récuperer le titre de l'article, la date, et le contenu
   // création d'une fenêtre pour les contenus
 
