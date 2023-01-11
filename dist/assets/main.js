@@ -1,6 +1,6 @@
 
 //----------------------------- Stockage des variables externes ici
-var compteurZindex = 0;
+var compteurZindex = 3;
 var activeDiv;
 var posX;
 var posY;
@@ -67,11 +67,14 @@ function setup() {
   //Déployer les titres des articles au survol sur le titre du menu
   var categoriesTitles = document.getElementsByClassName("categoriesTitles");
   for (var i = 0; i < categoriesTitles.length; i++) {
-    // categoriesTitles[i].addEventListener("mouseenter", displayTitles);
-    // categoriesTitles[i].addEventListener("mouseleave", hideTitles);
     categoriesTitles[i].addEventListener("click", blockTitles);
   }
   //Ouvrir les articles en cliquant sur les titres du menu
+  var boiteTitre = document.getElementsByClassName("boiteTitre");
+  for (var i = 0; i < boiteTitre.length; i++) {
+    boiteTitre[i].addEventListener("click", ouvrirArticle);
+  }
+
 }
 
 
@@ -86,8 +89,8 @@ function creationMenu(titre){
   var hiddenTitle = document.createElement("div");
   hiddenTitle.classList = "hiddenTitle";
   hiddenTitle.innerHTML = titre.innerHTML;
-
-  if(titre.innerHTML.length > 10)createTitre.innerHTML = titre.innerHTML.substring(0,20) + "...";
+  createTitre.innerHTML = titre.innerHTML
+  // if(titre.innerHTML.length > 10)createTitre.innerHTML = titre.innerHTML.substring(0,20) + "...";
 
   var politique = document.getElementById("politique");
   var culture = document.getElementById("culture");
@@ -122,26 +125,6 @@ function creationMenu(titre){
   }
 }
 
-// function displayTitles(e){
-//   if (clickMenu != true){
-//   const children = e.target.parentNode.children;
-//   Array.from(children).forEach(div => {
-//     div.style.display = "block";
-//   });
-// }
-// }
-//
-// function hideTitles(e){
-//   if (clickMenu != true){
-//     const children = e.target.parentNode.children;
-//     Array.from(children).forEach(div => {
-//       if(div.classList != "categoriesTitles"){
-//         div.style.display = "none";
-//       }
-//     });
-//   }
-// }
-
 function blockTitles(e){
   var title = e.target;
   const children = title.parentNode.children;
@@ -164,11 +147,29 @@ function blockTitles(e){
     });
   }
 }
-function ouvrirArticle(){
+function ouvrirArticle(e){
   // var
   // récuperer le titre de l'article, la date, et le contenu
   // création d'une fenêtre pour les contenus
 
+  var titres = document.getElementsByClassName("titres");
+
+  for (var i = 0; i < titres.length; i++) {
+    if(titres[i].innerHTML.includes(e.target.innerHTML)){
+      if(titres[i].style.display != "block"){
+        const div = titres[i].parentNode;
+
+        for (var i = 0; i < articles.length; i++) {
+          articles[i].style.zIndex = articles[i].style.zIndex - 1;
+          if(articles[i].style.zIndex < 0){
+            articles[i].style.display = "none";
+          }
+        }
+        div.style.zIndex = 4;
+        div.style.display = "block";
+      }
+    }
+  }
 }
 
 function closeWindow(e){
@@ -179,16 +180,20 @@ function closeWindow(e){
 function modifyArticles(){
 
   var titres = document.getElementsByClassName("titres");
-
+  compteurZindex++
   articles[articles.length-1].style.display = "block";
+  articles[articles.length-1].style.zIndex = 4;
   articles[articles.length-2].style.display = "block";
+  articles[articles.length-2].style.zIndex = 3;
   articles[articles.length-3].style.display = "block";
+  articles[articles.length-3].style.zIndex = 2;
   articles[articles.length-4].style.display = "block";
+  articles[articles.length-4].style.zIndex = 1;
   articles[articles.length-5].style.display = "block";
+  articles[articles.length-5].style.zIndex = 0;
 
   for (var i = 0; i < articles.length; i++) {
 
-    compteurZindex++;
     articles[i].style.top = getRandomFromTo(0, 30)+"vh";
     articles[i].style.left =  getRandomFromTo(0, 50)+"vw";
 
@@ -212,7 +217,6 @@ function modifyArticles(){
     if(articles[i].classList[1].includes("ressources")){
       articles[i].style.backgroundColor = tableauCouleurs[5];
     }
-    articles[i].style.zIndex = compteurZindex;
   }
 }
 
