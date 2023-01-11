@@ -16,6 +16,7 @@ import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
+dotenv.config()
 
 /* -------------------
 configuration markdown
@@ -39,14 +40,8 @@ articles vers html
 let articles = []
 
 const articlesHtml = (data) => {
-<<<<<<< HEAD
-    // console.log(data.attributes.tags)
-    
-    return (`<div class="articles">
-=======
 
     return (`<div class="articles ${ data.attributes.tags }">
->>>>>>> 88f88965d0fa40e6c19d734cf8f78c8a3284c38e
                 <div class ="croix">x</div>
                 <div class="titres ${ data.attributes.tags }" id="Titre${ data.attributes.id }">${ data.attributes.title }</div>
                 <div class="dates">${ format(data.attributes.date, 'MM/dd/yyyy')  }</div>
@@ -97,52 +92,78 @@ const indexHtml = (articles) => {
     `
 }
 
+
+
+
+
+
 /* on télécharge toutes les images */
 
-async function downloadImage(url, name) {
-    const filepath = resolve(__dirname, 'dist/assets/images', name)
-    const writer = fs.createWriteStream(filepath)
+async function downloadImage(url, name)  {
 
-<<<<<<< HEAD
+    const filepath = resolve(__dirname, 'dist/assets/images', name)
+
     axios.defaults.headers.common['Authorization'] = `${process.env.API_KEY}`;
     
-=======
-    axios.defaults.headers.common['Authorization'] = ``;
+    try {
+        const response = await axios({
+            url,
+            method: 'GET',
+            responseType: 'stream'
+        })
 
->>>>>>> 88f88965d0fa40e6c19d734cf8f78c8a3284c38e
-    const response = await axios({
-        url,
-        method: 'GET',
-        responseType: 'stream'
-    })
+        const w = response.data.pipe(fs.createWriteStream(filepath))
+        w.on('finish', () => {
+            console.log('Successfully downloaded file!')
+        })
+    } catch (err) {
+        console.log(err)
+    }
 
-    // console.log(response.data)
+    // console.log(response)
 
-    response.data.pipe(writer)
-
-    return new Promise((resolve, reject) => {
-        writer.on('finish', resolve)
-        writer.on('error', reject)
-    })
+    // const blob = await response.blob()
+    // const arrayBuffer = await blob.arrayBuffer()
+    // const buffer = Buffer.from(arrayBuffer)
+    // fs.writeFile(filepath, buffer)
 }
+
+
+// async function downloadImage(url, name) {
+//     const filepath = resolve(__dirname, 'dist/assets/images', name)
+//     const writer = fs.createWriteStream(filepath)
+
+//     axios.defaults.headers.common['Authorization'] = `${process.env.API_KEY}`;
+    
+//     const response = await axios({
+//         url,
+//         method: 'GET',
+//         responseType: 'stream'
+//     })
+
+//     // console.log(response.data)
+
+//     response.data.pipe(writer)
+
+//     return new Promise((resolve, reject) => {
+//         writer.on('finish', resolve)
+//         writer.on('error', reject)
+//     })
+// }
 
 async function parseURL (link) {
     const re = /\(([^)]+)\)/
     const result = re.exec(link)
     const url = result[1]
     const name = url.split('/').pop(-1)
-<<<<<<< HEAD
     
     // console.log(url, name)
 
     if (url.charAt(0) === '/') {
         const finalUrl = 'https://wiki.reflux.media' + url
-        await downloadImage(finalUrl, name)
+        console.log(name)
+        // await downloadImage(finalUrl, name)
     }
-=======
-
-    console.log(url)
->>>>>>> 88f88965d0fa40e6c19d734cf8f78c8a3284c38e
 
 }
 
