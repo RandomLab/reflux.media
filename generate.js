@@ -39,11 +39,16 @@ articles vers html
 let articles = []
 
 const articlesHtml = (data) => {
+<<<<<<< HEAD
     // console.log(data.attributes.tags)
     
     return (`<div class="articles">
+=======
+
+    return (`<div class="articles ${ data.attributes.tags }">
+>>>>>>> 88f88965d0fa40e6c19d734cf8f78c8a3284c38e
                 <div class ="croix">x</div>
-                <div class="titres" id="Titre${ data.attributes.id }">${ data.attributes.title }</div>
+                <div class="titres ${ data.attributes.tags }" id="Titre${ data.attributes.id }">${ data.attributes.title }</div>
                 <div class="dates">${ format(data.attributes.date, 'MM/dd/yyyy')  }</div>
                 <div class="textes" id="Texte-${ data.attributes.id }">${ marked(data.body) }</div>
             </div>`)
@@ -98,8 +103,13 @@ async function downloadImage(url, name) {
     const filepath = resolve(__dirname, 'dist/assets/images', name)
     const writer = fs.createWriteStream(filepath)
 
+<<<<<<< HEAD
     axios.defaults.headers.common['Authorization'] = `${process.env.API_KEY}`;
     
+=======
+    axios.defaults.headers.common['Authorization'] = ``;
+
+>>>>>>> 88f88965d0fa40e6c19d734cf8f78c8a3284c38e
     const response = await axios({
         url,
         method: 'GET',
@@ -121,6 +131,7 @@ async function parseURL (link) {
     const result = re.exec(link)
     const url = result[1]
     const name = url.split('/').pop(-1)
+<<<<<<< HEAD
     
     // console.log(url, name)
 
@@ -128,6 +139,10 @@ async function parseURL (link) {
         const finalUrl = 'https://wiki.reflux.media' + url
         await downloadImage(finalUrl, name)
     }
+=======
+
+    console.log(url)
+>>>>>>> 88f88965d0fa40e6c19d734cf8f78c8a3284c38e
 
 }
 
@@ -146,10 +161,10 @@ const createPost = postPath => {
     const content = fm(data)
     const images = getImages(content.body)
     const article = articlesHtml(content)
-    
+
     if (images !== null) {
         images.forEach(element => {
-            parseURL(element) 
+            parseURL(element)
         })
     }
 
