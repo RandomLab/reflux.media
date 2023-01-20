@@ -66,24 +66,24 @@ const indexHtml = (articles) => {
         </head>
         <body>
         <div id="menu">
-            <div id="sommaire">Sommaire</div>
+            <div id="rubriques">Rubriques</div>
             <div class="dossier" id="politique">
-                <div class="categoriesTitles">politique</div>
+                <div class="titres_rubriques">politique</div>
             </div>
             <div class="dossier" id="culture">
-                <div class="categoriesTitles">culture</div>
+                <div class="titres_rubriques">culture</div>
             </div>
             <div class="dossier" id="ressources">
-                <div class="categoriesTitles">ressources</div>
+                <div class="titres_rubriques">ressources</div>
             </div>
             <div class="dossier" id="exebition">
-                <div class="categoriesTitles">exebition</div>
+                <div class="titres_rubriques">exebition</div>
             </div>
             <div class="dossier" id="varia">
-                <div class="categoriesTitles">varia</div>
+                <div class="titres_rubriques">varia</div>
             </div>
             <div class="dossier" id="tools">
-                <div class="categoriesTitles">tools</div>
+                <div class="titres_rubriques">tools</div>
             </div>
         </div>
          ${articles.join('')}
@@ -104,7 +104,7 @@ async function downloadImage(url, name)  {
     const filepath = resolve(__dirname, 'dist/assets/images', name)
 
     axios.defaults.headers.common['Authorization'] = `${process.env.API_KEY}`;
-    
+
     try {
         const response = await axios({
             url,
@@ -134,7 +134,7 @@ async function downloadImage(url, name)  {
 //     const writer = fs.createWriteStream(filepath)
 
 //     axios.defaults.headers.common['Authorization'] = `${process.env.API_KEY}`;
-    
+
 //     const response = await axios({
 //         url,
 //         method: 'GET',
@@ -156,7 +156,7 @@ async function parseURL (link) {
     const result = re.exec(link)
     const url = result[1]
     const name = url.split('/').pop(-1)
-    
+
     // console.log(url, name)
 
     if (url.charAt(0) === '/') {

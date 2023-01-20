@@ -1,52 +1,37 @@
 
 //----------------------------- Stockage des variables externes ici
 var compteurZindex = 3;
+
 var activeDiv;
+var active_title;
+
 var posX;
 var posY;
+
 var departOK = false;
+var clickMenu = false;
+
 var articles;
 var tableauCouleurs = ["mediumslateblue", "magenta", "paleturquoise", "lime", "aquamarine", "lavender"]
-var clickMenu = false;
+
 
 window.addEventListener("load", setup);
 
 function setup() {
 
-  //----------------------------- Première étape: Récuperer les titres et les textes dans le HTML
+  //----------------------------- Récuperer les titres et les textes dans le HTML
   var titres = document.getElementsByClassName("titres");
   var textes = document.getElementsByClassName("textes");
-  //----------------------------- Couleur des titres des dossiers dans le menu
-  var categoriesTitles = document.getElementsByClassName("categoriesTitles");
 
-  for (var i = 0; i < categoriesTitles.length; i++) {
-    if(categoriesTitles[i].innerHTML == "politique"){
-      categoriesTitles[i].style.color = tableauCouleurs[0];
-    }
-    if(categoriesTitles[i].innerHTML == "culture"){
-      categoriesTitles[i].style.color = tableauCouleurs[1];
-    }
-    if(categoriesTitles[i].innerHTML == "varia"){
-      categoriesTitles[i].style.color = tableauCouleurs[2];
-    }
-    if(categoriesTitles[i].innerHTML == "exebition"){
-      categoriesTitles[i].style.color = tableauCouleurs[3];
-    }
-    if(categoriesTitles[i].innerHTML == "tools"){
-      categoriesTitles[i].style.color = tableauCouleurs[4];
-    }
-    if(categoriesTitles[i].innerHTML == "ressources"){
-      categoriesTitles[i].style.color =  tableauCouleurs[5];
-    }
-  }
+  var titres_rubriques = document.getElementsByClassName("titres_rubriques");
 
   articles = document.getElementsByClassName("articles");
 
-  //----------------------------- Appartition des 5 derniers articles
+  //----------------------------- Faire apparaître les 5 derniers articles
   // Positionnement des articles aléatoire et application des couleurs
   modifyArticles();
 
-  //----------------------------- Interaction sur les fenêtres
+  //----------------------------- DRAG N DROP sur les fenêtres
   document.addEventListener("mousemove", onMouseMove);
   for (var i = 0; i < articles.length; i++) {
     articles[i].addEventListener("mousedown", departDuDrag);
@@ -58,39 +43,32 @@ function setup() {
     croix[i].addEventListener("click", closeWindow);
     croix[i].customIndex = i;
   }
-  //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*//
-  //-*-*-*-*-*-*-*-*-* CREATION DU MENU
-  //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*//
+
+  //----------------------------- Création du menu
   for (var i = 0; i < titres.length; i++) {
     creationMenu(titres[i]);
   }
   //Déployer les titres des articles au survol sur le titre du menu
-  var categoriesTitles = document.getElementsByClassName("categoriesTitles");
-  for (var i = 0; i < categoriesTitles.length; i++) {
-    categoriesTitles[i].addEventListener("click", blockTitles);
+  var titres_rubriques = document.getElementsByClassName("titres_rubriques");
+  for (var i = 0; i < titres_rubriques.length; i++) {
+    titres_rubriques[i].addEventListener("mouseenter", montrer_titres);
+    titres_rubriques[i].addEventListener("mouseout", cacher_titres);
+    titres_rubriques[i].addEventListener("click", bloquer_titres);
   }
   //Ouvrir les articles en cliquant sur les titres du menu
-  var boiteTitre = document.getElementsByClassName("boiteTitre");
-  for (var i = 0; i < boiteTitre.length; i++) {
-    boiteTitre[i].addEventListener("click", ouvrirArticle);
+  var titre_article_menu = document.getElementsByClassName("titre_article_menu");
+  for (var i = 0; i < titre_article_menu.length; i++) {
+    titre_article_menu[i].addEventListener("click", ouvrirArticle);
   }
 
 }
 
-
-//----------------------------- LES FONCTIONS ICI !
-
 function creationMenu(titre){
 
   var menu = document.getElementById("menu");
-  var createTitre = document.createElement("div");
-  createTitre.classList = "boiteTitre";
-
-  var hiddenTitle = document.createElement("div");
-  hiddenTitle.classList = "hiddenTitle";
-  hiddenTitle.innerHTML = titre.innerHTML;
-  createTitre.innerHTML = titre.innerHTML
-  // if(titre.innerHTML.length > 10)createTitre.innerHTML = titre.innerHTML.substring(0,20) + "...";
+  var titre_article_menu = document.createElement("div");
+  titre_article_menu.classList = "titre_article_menu";
+  titre_article_menu.innerHTML = titre.innerHTML
 
   var politique = document.getElementById("politique");
   var culture = document.getElementById("culture");
@@ -100,53 +78,76 @@ function creationMenu(titre){
   var varia = document.getElementById("varia");
 
   if(titre.classList[1].includes("politique")){
-    politique.appendChild(createTitre);
-    politique.appendChild(hiddenTitle);
+    politique.appendChild(titre_article_menu);
   }
   if(titre.classList[1].includes("culture")){
-    culture.appendChild(createTitre);
-    culture.appendChild(hiddenTitle);
+    culture.appendChild(titre_article_menu);
   }
   if(titre.classList[1].includes("ressources")){
-    ressources.appendChild(createTitre);
-    ressources.appendChild(hiddenTitle);
+    ressources.appendChild(titre_article_menu);
   }
   if(titre.classList[1].includes("exebition")){
-    exebition.appendChild(createTitre);
-    exebition.appendChild(hiddenTitle);
+    exebition.appendChild(titre_article_menu);
   }
   if(titre.classList[1].includes("tools")){
-    tools.appendChild(createTitre);
-    tools.appendChild(hiddenTitle);
+    tools.appendChild(titre_article_menu);
   }
   if(titre.classList[1].includes("varia")){
-    varia.appendChild(createTitre);
-    varia.appendChild(hiddenTitle);
+    varia.appendChild(titre_article_menu);
   }
 }
 
-function blockTitles(e){
-  var title = e.target;
-  const children = title.parentNode.children;
+function montrer_titres(e){
+  active_title = e.target;
+  active_title.style.backgroundColor = "black";
+  const children = active_title.parentNode.children;
   var style = window.getComputedStyle(children[1], null).getPropertyValue("display");
-  if ( style == "none"){
-    clickMenu = true;
+
     Array.from(children).forEach(div => {
-      if(div.classList != "categoriesTitles" && div.classList != "hiddenTitle"){
+      if(div.classList != "titres_rubriques" && div.classList != "titre_article_menu bloquee"){
         div.style.display = "block";
-        title.style.backgroundColor = "black";
       }
     });
-  } else if (style == "block"){
-    clickMenu = false;
-    Array.from(children).forEach(div => {
-      if(div.classList != "categoriesTitles"&& div.classList != "hiddenTitle"){
-        div.style.display = "none";
-        title.style.backgroundColor = "black";
-      }
-    });
-  }
 }
+function cacher_titres(e){
+  active_title = e.target;
+  active_title.style.backgroundColor = "transparent";
+  const children = active_title.parentNode.children;
+  var style = window.getComputedStyle(children[1], null).getPropertyValue("display");
+
+    Array.from(children).forEach(div => {
+      console.log(div)
+      if(div.classList != "titres_rubriques"&& div.classList != "titre_article_menu bloquee"){
+        div.style.display = "none";
+      }
+    });
+
+}
+
+
+function bloquer_titres(e){
+  active_title = e.target;
+  const children = active_title.parentNode.children;
+  var style = window.getComputedStyle(children[1], null).getPropertyValue("display");
+  clickMenu = true;
+
+  var titre_article_menu = document.getElementsByClassName("titre_article_menu");
+  for (var i = 0; i < titre_article_menu.length; i++) {
+    titre_article_menu[i].style.display = "none";
+    titre_article_menu[i].classList = "titre_article_menu"
+  }
+
+  active_title.style.backgroundColor = "transparent";
+    Array.from(children).forEach(div => {
+    if(div.classList != "titres_rubriques"){
+      div.style.display = "block";
+      active_title.style.backgroundColor = "black";
+      div.classList.add("bloquee");
+    }
+  });
+
+}
+
 function ouvrirArticle(e){
   // var
   // récuperer le titre de l'article, la date, et le contenu
