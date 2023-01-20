@@ -93,11 +93,9 @@ const indexHtml = (articles) => {
 }
 
 
-
-
-
-
-/* on télécharge toutes les images */
+/* ------------------------- 
+on télécharge toutes les images 
+--------------------------- */
 
 async function downloadImage(url, name)  {
 
@@ -119,45 +117,17 @@ async function downloadImage(url, name)  {
     } catch (err) {
         console.log(err)
     }
-
-    // console.log(response)
-
-    // const blob = await response.blob()
-    // const arrayBuffer = await blob.arrayBuffer()
-    // const buffer = Buffer.from(arrayBuffer)
-    // fs.writeFile(filepath, buffer)
 }
 
-
-// async function downloadImage(url, name) {
-//     const filepath = resolve(__dirname, 'dist/assets/images', name)
-//     const writer = fs.createWriteStream(filepath)
-
-//     axios.defaults.headers.common['Authorization'] = `${process.env.API_KEY}`;
-    
-//     const response = await axios({
-//         url,
-//         method: 'GET',
-//         responseType: 'stream'
-//     })
-
-//     // console.log(response.data)
-
-//     response.data.pipe(writer)
-
-//     return new Promise((resolve, reject) => {
-//         writer.on('finish', resolve)
-//         writer.on('error', reject)
-//     })
-// }
+/* ------------------------------- 
+on parse l'url pour récupérer le lien vers les images 
+----------------------------------*/
 
 async function parseURL (link) {
     const re = /\(([^)]+)\)/
     const result = re.exec(link)
     const url = result[1]
     const name = url.split('/').pop(-1)
-    
-    // console.log(url, name)
 
     if (url.charAt(0) === '/') {
         const finalUrl = 'https://wiki.reflux.media' + url
@@ -188,20 +158,6 @@ const createPost = postPath => {
             parseURL(element)
         })
     }
-
-    /* -------------------
-    on enregistre les articles
-    ----------------------*/
-
-    // if (!fs.existsSync(config.dev.pagesdir)) fs.mkdirSync(config.dev.pagesdir)
-    // fs.writeFile(
-    //     `${config.dev.pagesdir}/${content.attributes.id}.html`,
-    //     article,
-    //     (error) => {
-    //       if (error) throw error;
-    //       console.log(`index was created successfully`);
-    //     }
-    // )
 
     return article
 }

@@ -33,21 +33,6 @@ const graphQLClient = new GraphQLClient(endpoint, {
     },
 })
 
-
-// console.log(JSON.stringify(data.pages.list, undefined, 2))
-
-
-// const cleanString = (str) => {
-
-// }
-
-// assets {
-//     list(folderId:1, kind:IMAGE) {
-//       id
-//     filename
-//     }
-
-
 /* ------------------- 
     on recupère le contenu des articles 
     et on l'ajoute à un objet 
