@@ -101,7 +101,7 @@ const indexHtml = (articles) => {
 
 async function downloadImage(url, name)  {
 
-    const filepath = resolve(__dirname, 'dist/images', name)
+    const filepath = resolve(__dirname, 'dist', name)
 
     axios.defaults.headers.common['Authorization'] = `${process.env.API_KEY}`;
     
