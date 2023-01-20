@@ -101,7 +101,7 @@ const indexHtml = (articles) => {
 
 async function downloadImage(url, name)  {
 
-    const filepath = resolve(__dirname, 'dist/assets/images', name)
+    const filepath = resolve(__dirname, 'dist/images', name)
 
     axios.defaults.headers.common['Authorization'] = `${process.env.API_KEY}`;
     
@@ -162,7 +162,7 @@ async function parseURL (link) {
     if (url.charAt(0) === '/') {
         const finalUrl = 'https://wiki.reflux.media' + url
         console.log(name)
-        // await downloadImage(finalUrl, name)
+        await downloadImage(finalUrl, name)
     }
 
 }
