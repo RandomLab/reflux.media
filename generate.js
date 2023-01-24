@@ -14,6 +14,9 @@ import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
 
 
+import interact from 'interactjs'
+
+
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 dotenv.config()
@@ -66,7 +69,7 @@ const indexHtml = (articles) => {
         </head>
         <body>
         <div id="menu">
-            <div id="rubriques">Rubriques</div>
+            <div id="rubriques">rubriques</div>
             <div class="dossier" id="politique">
                 <div class="titres_rubriques">politique</div>
             </div>

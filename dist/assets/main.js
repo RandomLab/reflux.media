@@ -18,6 +18,57 @@ var tableauCouleurs = ["mediumslateblue", "magenta", "paleturquoise", "lime", "a
 window.addEventListener("load", setup);
 
 function setup() {
+  //
+  // interact('.articles')
+  // .resizable({
+  //   // resize from all edges and corners
+  //   edges: { left: true, right: true, bottom: true, top: true },
+  //
+  //   listeners: {
+  //     move (event) {
+  //       var target = event.target
+  //       var x = (parseFloat(target.getAttribute('data-x')) || 0)
+  //       var y = (parseFloat(target.getAttribute('data-y')) || 0)
+  //
+  //       // update the element's style
+  //       target.style.width = event.rect.width + 'px'
+  //       target.style.height = event.rect.height + 'px'
+  //
+  //       // translate when resizing from top or left edges
+  //       x += event.deltaRect.left
+  //       y += event.deltaRect.top
+  //
+  //       target.style.transform = 'translate(' + x + 'px,' + y + 'px)'
+  //
+  //       target.setAttribute('data-x', x)
+  //       target.setAttribute('data-y', y)
+  //       target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
+  //     }
+  //   },
+  //   modifiers: [
+  //     // keep the edges inside the parent
+  //     interact.modifiers.restrictEdges({
+  //       outer: 'parent'
+  //     }),
+  //
+  //     // minimum size
+  //     interact.modifiers.restrictSize({
+  //       min: { width: 100, height: 50 }
+  //     })
+  //   ],
+  //
+  //   inertia: true
+  // })
+  // .draggable({
+  //   listeners: { move: window.dragMoveListener },
+  //   inertia: true,
+  //   modifiers: [
+  //     interact.modifiers.restrictRect({
+  //       restriction: 'parent',
+  //       endOnly: true
+  //     })
+  //   ]
+  // })
 
   //----------------------------- Récuperer les titres et les textes dans le HTML
   var titres = document.getElementsByClassName("titres");
@@ -32,12 +83,12 @@ function setup() {
   modifyArticles();
 
   //----------------------------- DRAG N DROP sur les fenêtres
-  document.addEventListener("mousemove", onMouseMove);
-  for (var i = 0; i < articles.length; i++) {
-    articles[i].addEventListener("mousedown", departDuDrag);
-    articles[i].addEventListener("mouseup", finDuMouvement);
-    articles[i].customIndex = i;
-  }
+  // document.addEventListener("mousemove", onMouseMove);
+  // for (var i = 0; i < articles.length; i++) {
+  //   articles[i].addEventListener("mousedown", departDuDrag);
+  //   articles[i].addEventListener("mouseup", finDuMouvement);
+  //   articles[i].customIndex = i;
+  // }
   var croix = document.getElementsByClassName("croix");
   for (var i = 0; i < croix.length; i++) {
     croix[i].addEventListener("click", closeWindow);
@@ -103,11 +154,11 @@ function montrer_titres(e){
   const children = active_title.parentNode.children;
   var style = window.getComputedStyle(children[1], null).getPropertyValue("display");
 
-    Array.from(children).forEach(div => {
-      if(div.classList != "titres_rubriques" && div.classList != "titre_article_menu bloquee"){
-        div.style.display = "block";
-      }
-    });
+  Array.from(children).forEach(div => {
+    if(div.classList != "titres_rubriques" && div.classList != "titre_article_menu bloquee"){
+      div.style.display = "block";
+    }
+  });
 }
 function cacher_titres(e){
   active_title = e.target;
@@ -115,12 +166,12 @@ function cacher_titres(e){
   const children = active_title.parentNode.children;
   var style = window.getComputedStyle(children[1], null).getPropertyValue("display");
 
-    Array.from(children).forEach(div => {
-      console.log(div)
-      if(div.classList != "titres_rubriques"&& div.classList != "titre_article_menu bloquee"){
-        div.style.display = "none";
-      }
-    });
+  Array.from(children).forEach(div => {
+    console.log(div)
+    if(div.classList != "titres_rubriques"&& div.classList != "titre_article_menu bloquee"){
+      div.style.display = "none";
+    }
+  });
 
 }
 
@@ -138,7 +189,7 @@ function bloquer_titres(e){
   }
 
   active_title.style.backgroundColor = "transparent";
-    Array.from(children).forEach(div => {
+  Array.from(children).forEach(div => {
     if(div.classList != "titres_rubriques"){
       div.style.display = "block";
       active_title.style.backgroundColor = "black";
