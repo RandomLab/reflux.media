@@ -21,66 +21,66 @@ function setup() {
 
   interact('.articles')
   .resizable({
-  // resize from all edges and corners
-  edges: { left: true, right: true, bottom: true, top: true },
+    // resize from all edges and corners
+    edges: { left: true, right: true, bottom: true, top: true },
 
-  listeners: {
-    move (event) {
-      var target = event.target
-      var x = (parseFloat(target.getAttribute('data-x')) || 0)
-      var y = (parseFloat(target.getAttribute('data-y')) || 0)
+    listeners: {
+      move (event) {
+        var target = event.target
+        var x = (parseFloat(target.getAttribute('data-x')) || 0)
+        var y = (parseFloat(target.getAttribute('data-y')) || 0)
 
-      // update the element's style
-      target.style.width = event.rect.width + 'px'
-      target.style.height = event.rect.height + 'px'
+        // update the element's style
+        target.style.width = event.rect.width + 'px'
+        target.style.height = event.rect.height + 'px'
 
-      // translate when resizing from top or left edges
-      x += event.deltaRect.left
-      y += event.deltaRect.top
+        // translate when resizing from top or left edges
+        x += event.deltaRect.left
+        y += event.deltaRect.top
 
-      target.style.transform = 'translate(' + x + 'px,' + y + 'px)'
+        target.style.transform = 'translate(' + x + 'px,' + y + 'px)'
 
-      target.setAttribute('data-x', x)
-      target.setAttribute('data-y', y)
-    }
-  },
-  modifiers: [
-    // keep the edges inside the parent
-    interact.modifiers.restrictEdges({
-      outer: 'parent'
-    }),
-
-    // minimum size
-    interact.modifiers.restrictSize({
-      min: { width: 100, height: 50 }
-    })
-  ],
-
-  inertia: true
-})
-    .draggable({
-      // enable inertial throwing
-      inertia: true,
-      // keep the element within the area of it's parent
-      modifiers: [
-        interact.modifiers.restrictRect({
-          restriction: 'parent',
-          endOnly: true
-        })
-      ],
-      // enable autoScroll
-      autoScroll: true,
-
-      listeners: {
-        // call this function on every dragmove event
-        move: dragMoveListener,
-
-        // call this function on every dragend event
-        end (event) {
-
-        }
+        target.setAttribute('data-x', x)
+        target.setAttribute('data-y', y)
       }
-    })
+    },
+    modifiers: [
+      // keep the edges inside the parent
+      interact.modifiers.restrictEdges({
+        outer: 'parent'
+      }),
+
+      // minimum size
+      interact.modifiers.restrictSize({
+        min: { width: 100, height: 50 }
+      })
+    ],
+
+    inertia: true
+  })
+  .draggable({
+    // enable inertial throwing
+    inertia: true,
+    // keep the element within the area of it's parent
+    modifiers: [
+      interact.modifiers.restrictRect({
+        restriction: 'parent',
+        endOnly: true
+      })
+    ],
+    // enable autoScroll
+    autoScroll: true,
+
+    listeners: {
+      // call this function on every dragmove event
+      move: dragMoveListener,
+
+      // call this function on every dragend event
+      end (event) {
+
+      }
+    }
+  })
 
   function dragMoveListener (event) {
     var target = event.target
@@ -118,6 +118,13 @@ function setup() {
   //   articles[i].addEventListener("mouseup", finDuMouvement);
   //   articles[i].customIndex = i;
   // }
+
+  for (var i = 0; i < articles.length; i++) {
+    articles[i].addEventListener("mousedown", zIndexChangement);
+    articles[i].customIndex = i;
+  }
+
+
   var croix = document.getElementsByClassName("croix");
   for (var i = 0; i < croix.length; i++) {
     croix[i].addEventListener("click", closeWindow);
@@ -305,11 +312,8 @@ function onMouseMove(event) {
   moveAt(event.pageX, event.pageY);
 }
 
-function departDuDrag(e){
-  departOK = true;
+function zIndexChangement(e){
   activeDiv = e.target;
-  posX = e.clientX - articles[activeDiv.customIndex].getBoundingClientRect().left;
-  posY = e.clientY - articles[activeDiv.customIndex].getBoundingClientRect().top;
   for (var i = 0; i < articles.length; i++) {
     if (articles[i].style.zIndex > articles[activeDiv.customIndex].style.zIndex){
       articles[i].style.zIndex = articles[i].style.zIndex - 1;
@@ -317,17 +321,30 @@ function departDuDrag(e){
   }
   articles[activeDiv.customIndex].style.zIndex = compteurZindex;
 }
-
-function moveAt(pageX, pageY){
-  if(departOK){
-    articles[activeDiv.customIndex].style.left = pageX - posX + 'px';
-    articles[activeDiv.customIndex].style.top = pageY - posY + 'px';
-  }
-}
-
-function finDuMouvement(){
-  departOK = false;
-}
+//
+// function departDuDrag(e){
+//   departOK = true;
+//   activeDiv = e.target;
+//   posX = e.clientX - articles[activeDiv.customIndex].getBoundingClientRect().left;
+//   posY = e.clientY - articles[activeDiv.customIndex].getBoundingClientRect().top;
+//   for (var i = 0; i < articles.length; i++) {
+//     if (articles[i].style.zIndex > articles[activeDiv.customIndex].style.zIndex){
+//       articles[i].style.zIndex = articles[i].style.zIndex - 1;
+//     }
+//   }
+//   articles[activeDiv.customIndex].style.zIndex = compteurZindex;
+// }
+//
+// function moveAt(pageX, pageY){
+//   if(departOK){
+//     articles[activeDiv.customIndex].style.left = pageX - posX + 'px';
+//     articles[activeDiv.customIndex].style.top = pageY - posY + 'px';
+//   }
+// }
+//
+// function finDuMouvement(){
+//   departOK = false;
+// }
 
 // ----------------------------- LES UTILITAIRES ICI !
 
