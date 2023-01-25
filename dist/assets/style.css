@@ -6,6 +6,20 @@
   font-family: 'Quebec';
   src: url('fonts/Quebec-Bold.woff2');
 }
+
+@font-face {
+  font-family: 'Steps';
+  src: url('fonts/Steps-Mono.otf');
+}
+@font-face {
+  font-family: 'StepsThin';
+  src: url('fonts/Steps-Mono-Thin.otf');
+}
+
+
+
+
+
 html,
 body {
   font-family: 'monospace';
@@ -17,7 +31,7 @@ body {
   background-color: black;
 }
 h1{
-  font-family: monospace;
+  font-family: 'Steps';
 }
 .articles{
   touch-action: none;
@@ -74,7 +88,7 @@ h1{
   position: absolute;
   right: 0px;
   margin-right: 1vw;
-  line-height: 1.3em;
+    font-family: 'Steps';
   display: flex;
   align-items: end;
   flex-flow: column;
@@ -88,7 +102,7 @@ h1{
   margin-bottom: 1vh;
   margin-right: 15px;
   padding: 5px;
-  font-size: 16pt;
+  font-size: 1.2em;
   cursor: pointer;
   display: none;
 }
@@ -103,7 +117,7 @@ h1{
   cursor: pointer;
   width: fit-content;
   padding: 5px;
-  font-size: 18pt;
+  font-size: 1.6em;
   font-variant-caps: all-small-caps;
   /*! position: relative; */
 }
@@ -167,8 +181,12 @@ img {
   width: 15px;
 }
 
-*::-webkit-scrollbar-track {
+.articles::-webkit-scrollbar-track {
   background: transparent;
+}
+
+#menu::-webkit-scrollbar-track {
+  background: grey;
 }
 
 *::-webkit-scrollbar-thumb {
