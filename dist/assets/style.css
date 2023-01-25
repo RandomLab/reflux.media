@@ -8,13 +8,17 @@
 }
 html,
 body {
+  font-family: 'monospace';
+  /* font-family: 'Quebec'; */
   width: 100%;
   height: 100%;
   margin: 0 auto;
   overflow: hidden;
   background-color: black;
 }
-
+h1{
+  font-family: monospace;
+}
 .articles{
   touch-action: none;
   box-sizing: border-box;
@@ -24,7 +28,6 @@ body {
   cursor: pointer;
   width: 30vw;
   height: 30vw;
-  font-family: 'NarrowBold';
   font-size: 13pt;
   overflow: hidden;
   padding : 1vw;
@@ -41,7 +44,6 @@ body {
 
 .titres{
   pointer-events: none;
-  font-family: 'Quebec';
   font-size: 16pt;
   max-width: 90%;
   display: none;
@@ -61,8 +63,6 @@ body {
   margin-right: 1vw;
   text-align: center;
   cursor: pointer;
-  /*! border-radius: 50px; */
-  font-family: monospace;
 }
 .croix:hover{
   background-color: black;
@@ -70,8 +70,6 @@ body {
 }
 #menu{
   width: 20vw;
-  /*! height: 100%; */
-  font-family: 'Quebec';
   font-size: 0.9em;
   position: absolute;
   right: 0px;
@@ -83,7 +81,6 @@ body {
 }
 
 .types{
-  font-family: 'NarrowBold';
   font-size: 9pt;
 }
 
@@ -91,6 +88,7 @@ body {
   margin-bottom: 1vh;
   margin-right: 15px;
   padding: 5px;
+  font-size: 16pt;
   cursor: pointer;
   display: none;
 }
@@ -105,12 +103,12 @@ body {
   cursor: pointer;
   width: fit-content;
   padding: 5px;
-  font-size: 1.2em;
+  font-size: 18pt;
   font-variant-caps: all-small-caps;
   /*! position: relative; */
 }
 /* .titres_rubriques:hover{
-  background-color: white;
+background-color: white;
 } */
 .dates{
   pointer-events: none;
