@@ -160,9 +160,8 @@ img {
 
 /* This will work on Firefox */
 * {
-  scrollbar-width: 15px;
+  scrollbar-width: thin;
   scrollbar-color: black transparent;
-  overflow-x: hidden;
 }
 
 /* Targtes on Chrome, Edge, and Safari */
