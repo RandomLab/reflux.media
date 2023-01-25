@@ -12,7 +12,7 @@ var departOK = false;
 var clickMenu = false;
 
 var articles;
-var tableauCouleurs = ["mediumslateblue", "magenta", "paleturquoise", "lime", "aquamarine", "lavender"]
+var tableauCouleurs = ["red", "magenta", "paleturquoise", "lime", "mediumslateblue", "blue"]
 
 
 window.addEventListener("load", setup);

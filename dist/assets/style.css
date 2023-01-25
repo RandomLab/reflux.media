@@ -131,7 +131,7 @@ body {
 }
 
 #politique{
-  color:mediumslateblue;
+  color:red;
 }
 #culture{
   color:magenta;
@@ -143,10 +143,10 @@ body {
   color:lime;
 }
 #tools{
-  color:aquamarine;
+  color:mediumslateblue;
 }
 #ressources{
-  color:lavender;
+  color:blue;
 }
 a{
   text-decoration: underline;
