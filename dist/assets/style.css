@@ -32,8 +32,8 @@ body {
 
 
 ::selection {
-  color: chartreuse;
-  background: transparent;
+  /* color: chartreuse; */
+  /* background: transparent; */
   /* color: yellow;
   background: green; */
 }
@@ -162,6 +162,7 @@ img {
 * {
   scrollbar-width: thin;
   scrollbar-color: black chartreuse;
+  overflow-x: hidden;
 }
 
 /* Targtes on Chrome, Edge, and Safari */
@@ -170,7 +171,7 @@ img {
 }
 
 *::-webkit-scrollbar-track {
-  background: chartreuse;
+  background: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
