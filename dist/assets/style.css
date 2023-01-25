@@ -160,8 +160,8 @@ img {
 
 /* This will work on Firefox */
 * {
-  scrollbar-width: thin;
-  scrollbar-color: black chartreuse;
+  scrollbar-width: 15px;
+  scrollbar-color: black transparent;
   overflow-x: hidden;
 }
 
