@@ -114,6 +114,7 @@ body {
 } */
 .dates{
   pointer-events: none;
+  margin-bottom: 10px;
 }
 #rubriques{
   font-size: 15pt;
@@ -157,25 +158,23 @@ img {
   width: 100%;
 }
 
-/* Designing for scroll-bar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 80%;
+/* This will work on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: black chartreuse;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: gainsboro;
-  border-radius: 5px;
+/* Targtes on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 15px;
 }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: black;
-  border-radius: 5px;
+*::-webkit-scrollbar-track {
+  background: chartreuse;
 }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+*::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 20px;
+  border: 3px solid black;
 }
