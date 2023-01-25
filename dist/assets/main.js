@@ -19,6 +19,7 @@ window.addEventListener("load", setup);
 
 function setup() {
 
+  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- DRAG N DROP SUR LES ARTICLES
   interact('.articles')
   .resizable({
     // resize from all edges and corners
@@ -81,7 +82,6 @@ function setup() {
       }
     }
   })
-
   function dragMoveListener (event) {
     var target = event.target
     // keep the dragged position in the data-x/data-y attributes
@@ -94,12 +94,12 @@ function setup() {
     // update the posiion attributes
     target.setAttribute('data-x', x)
     target.setAttribute('data-y', y)
-  }
 
+  }
   // this function is used later in the resizing and gesture demos
   window.dragMoveListener = dragMoveListener
 
-  //----------------------------- Récuperer les titres et les textes dans le HTML
+  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- Récuperer les titres et les textes dans le HTML
   var titres = document.getElementsByClassName("titres");
   var textes = document.getElementsByClassName("textes");
 
@@ -107,17 +107,11 @@ function setup() {
 
   articles = document.getElementsByClassName("articles");
 
-  //----------------------------- Faire apparaître les 5 derniers articles
+  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- Faire apparaître les 5 derniers articles
   // Positionnement des articles aléatoire et application des couleurs
   modifyArticles();
 
-  //----------------------------- DRAG N DROP sur les fenêtres
-  // document.addEventListener("mousemove", onMouseMove);
-  // for (var i = 0; i < articles.length; i++) {
-  //   articles[i].addEventListener("mousedown", departDuDrag);
-  //   articles[i].addEventListener("mouseup", finDuMouvement);
-  //   articles[i].customIndex = i;
-  // }
+  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- ZINDEX sur les fenêtres
 
   for (var i = 0; i < articles.length; i++) {
     articles[i].addEventListener("mousedown", zIndexChangement);
@@ -131,7 +125,7 @@ function setup() {
     croix[i].customIndex = i;
   }
 
-  //----------------------------- Création du menu
+  //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- Création du menu
   for (var i = 0; i < titres.length; i++) {
     creationMenu(titres[i]);
   }
@@ -203,15 +197,12 @@ function cacher_titres(e){
   var style = window.getComputedStyle(children[1], null).getPropertyValue("display");
 
   Array.from(children).forEach(div => {
-    console.log(div)
     if(div.classList != "titres_rubriques"&& div.classList != "titre_article_menu bloquee"){
       div.style.display = "none";
     }
   });
 
 }
-
-
 function bloquer_titres(e){
   active_title = e.target;
   const children = active_title.parentNode.children;
@@ -236,17 +227,13 @@ function bloquer_titres(e){
 }
 
 function ouvrirArticle(e){
-  // var
-  // récuperer le titre de l'article, la date, et le contenu
-  // création d'une fenêtre pour les contenus
-
+  //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- Récuperer le titre de l'article, la date, et le contenu
+  // + création d'une fenêtre pour les contenus
   var titres = document.getElementsByClassName("titres");
-
   for (var i = 0; i < titres.length; i++) {
     if(titres[i].innerHTML.includes(e.target.innerHTML)){
       if(titres[i].style.display != "block"){
         const div = titres[i].parentNode;
-
         for (var i = 0; i < articles.length; i++) {
           articles[i].style.zIndex = articles[i].style.zIndex - 1;
           if(articles[i].style.zIndex < 0){
@@ -313,38 +300,33 @@ function onMouseMove(event) {
 }
 
 function zIndexChangement(e){
+  //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- Récupérer sur quel div on clique, et en fonction remonter au parent "article"
   activeDiv = e.target;
-  for (var i = 0; i < articles.length; i++) {
-    if (articles[i].style.zIndex > articles[activeDiv.customIndex].style.zIndex){
-      articles[i].style.zIndex = articles[i].style.zIndex - 1;
+  if (!activeDiv.classList.contains('articles')) {
+    if(!activeDiv.parentNode.classList.contains('textes')){
+      for (var i = 0; i < articles.length; i++) {
+        if (articles[i].style.zIndex > articles[activeDiv.parentNode.customIndex].style.zIndex){
+          articles[i].style.zIndex = articles[i].style.zIndex - 1;
+        }
+      }
+      articles[activeDiv.parentNode.customIndex].style.zIndex = compteurZindex;
+    }else{
+      for (var i = 0; i < articles.length; i++) {
+        if (articles[i].style.zIndex > articles[activeDiv.parentNode.parentNode.customIndex].style.zIndex){
+          articles[i].style.zIndex = articles[i].style.zIndex - 1;
+        }
+      }
+      articles[activeDiv.parentNode.parentNode.customIndex].style.zIndex = compteurZindex;
     }
+  } else {
+    for (var i = 0; i < articles.length; i++) {
+      if (articles[i].style.zIndex > articles[activeDiv.customIndex].style.zIndex){
+        articles[i].style.zIndex = articles[i].style.zIndex - 1;
+      }
+    }
+    articles[activeDiv.customIndex].style.zIndex = compteurZindex;
   }
-  articles[activeDiv.customIndex].style.zIndex = compteurZindex;
 }
-//
-// function departDuDrag(e){
-//   departOK = true;
-//   activeDiv = e.target;
-//   posX = e.clientX - articles[activeDiv.customIndex].getBoundingClientRect().left;
-//   posY = e.clientY - articles[activeDiv.customIndex].getBoundingClientRect().top;
-//   for (var i = 0; i < articles.length; i++) {
-//     if (articles[i].style.zIndex > articles[activeDiv.customIndex].style.zIndex){
-//       articles[i].style.zIndex = articles[i].style.zIndex - 1;
-//     }
-//   }
-//   articles[activeDiv.customIndex].style.zIndex = compteurZindex;
-// }
-//
-// function moveAt(pageX, pageY){
-//   if(departOK){
-//     articles[activeDiv.customIndex].style.left = pageX - posX + 'px';
-//     articles[activeDiv.customIndex].style.top = pageY - posY + 'px';
-//   }
-// }
-//
-// function finDuMouvement(){
-//   departOK = false;
-// }
 
 // ----------------------------- LES UTILITAIRES ICI !
 
