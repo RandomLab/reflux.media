@@ -158,6 +158,13 @@ function creationMenu(titre){
   var tools = document.getElementById("tools");
   var varia = document.getElementById("varia");
 
+  var politique = document.getElementById("politique");
+  var culture = document.getElementById("culture");
+  var ressources = document.getElementById("ressources");
+  var exebition = document.getElementById("exebition");
+  var tools = document.getElementById("tools");
+  var varia = document.getElementById("varia");
+
   if(titre.classList[1].includes("politique")){
     politique.appendChild(titre_article_menu);
   }
@@ -176,11 +183,12 @@ function creationMenu(titre){
   if(titre.classList[1].includes("varia")){
     varia.appendChild(titre_article_menu);
   }
+
 }
 
 function montrer_titres(e){
   active_title = e.target;
-  active_title.style.backgroundColor = "black";
+  active_title.style.backgroundColor = "white";
   const children = active_title.parentNode.children;
   var style = window.getComputedStyle(children[1], null).getPropertyValue("display");
 
@@ -219,7 +227,7 @@ function bloquer_titres(e){
   Array.from(children).forEach(div => {
     if(div.classList != "titres_rubriques"){
       div.style.display = "block";
-      active_title.style.backgroundColor = "black";
+      active_title.style.backgroundColor = "white";
       div.classList.add("bloquee");
     }
   });
@@ -268,6 +276,9 @@ function modifyArticles(){
   articles[articles.length-5].style.zIndex = 0;
 
   for (var i = 0; i < articles.length; i++) {
+
+    articles[i].style.width = getRandomFromTo(20, 30)+"vw";
+    articles[i].style.height =  getRandomFromTo(20, 50)+"vw";
 
     articles[i].style.top = getRandomFromTo(0, 30)+"vh";
     articles[i].style.left =  getRandomFromTo(0, 50)+"vw";

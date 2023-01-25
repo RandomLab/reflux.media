@@ -11,6 +11,8 @@ body {
   width: 100%;
   height: 100%;
   margin: 0 auto;
+  overflow: hidden;
+  background-color: black;
 }
 
 .articles{
@@ -30,7 +32,7 @@ body {
 
 
 ::selection {
-  color: black;
+  color: chartreuse;
   background: transparent;
   /* color: yellow;
   background: green; */
@@ -42,6 +44,7 @@ body {
   font-family: 'Quebec';
   font-size: 16pt;
   max-width: 90%;
+  display: none;
 }
 .textes{
   /*! pointer-events: none; */
@@ -67,7 +70,7 @@ body {
 }
 #menu{
   width: 20vw;
-  height: 100%;
+  /*! height: 100%; */
   font-family: 'Quebec';
   font-size: 0.9em;
   position: absolute;
@@ -92,7 +95,7 @@ body {
   display: none;
 }
 .titre_article_menu:hover{
-  background-color: black;
+  background-color: white;
 }
 .hiddenTitle{
   display: none;
@@ -104,10 +107,11 @@ body {
   padding: 5px;
   font-size: 1.2em;
   font-variant-caps: all-small-caps;
+  /*! position: relative; */
 }
-.titres_rubriques:hover{
-  background-color: black;
-}
+/* .titres_rubriques:hover{
+  background-color: white;
+} */
 .dates{
   pointer-events: none;
 }
@@ -116,7 +120,7 @@ body {
 }
 
 .dossier{
-  max-height: 75%;
+  max-height: 30vh;
   overflow: scroll;
   display: flex;
   flex-flow: column;
@@ -151,4 +155,27 @@ a{
 
 img {
   width: 100%;
+}
+
+/* Designing for scroll-bar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 80%;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: gainsboro;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
