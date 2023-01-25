@@ -157,6 +157,7 @@ function setup() {
     titre_article_menu[i].addEventListener("click", ouvrirArticle);
   }
 
+
 }
 
 function creationMenu(titre){
@@ -215,6 +216,7 @@ function montrer_titres(e){
 }
 function cacher_titres(e){
   active_title = e.target;
+
   active_title.style.backgroundColor = "transparent";
   const children = active_title.parentNode.children;
   var style = window.getComputedStyle(children[1], null).getPropertyValue("display");
