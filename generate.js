@@ -46,8 +46,9 @@ const articlesHtml = (data) => {
 
   return (`<div class="articles ${ data.attributes.tags }">
   <div class ="croix">x</div>
+  <div class ="agrandir">⧉</div>
   <div class="titres ${ data.attributes.tags }" id="Titre${ data.attributes.id }">${ data.attributes.title }</div>
-  <div class="dates">${ format(data.attributes.date, 'MM/dd/yyyy')  }</div>
+  <div class="dates">${ format(data.attributes.date, 'MM/dd/yyyy')} <div class="titre_article">${ data.attributes.title }</div></div>
   <div class="textes" id="Texte-${ data.attributes.id }">${ marked(data.body) }</div>
   </div>`)
 }
@@ -69,6 +70,7 @@ const indexHtml = (articles) => {
   <script src="assets/main.js"></script>
   </head>
   <body>
+  <img src="" id="title_gifs">
   <div id="menu">
   <div id="rubriques">rubriques</div>
   <div class="dossier" id="politique">

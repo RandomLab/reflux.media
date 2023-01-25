@@ -12,20 +12,20 @@ var departOK = false;
 var clickMenu = false;
 
 var articles;
-var tableauCouleurs = ["red", "magenta", "paleturquoise", "lime", "mediumslateblue", "blue"]
+var tableauCouleurs = ["crimson", "magenta", "paleturquoise", "lime", "darkorchid", "steelblue"]
 
 
 window.addEventListener("load", setup);
 
 function setup() {
 
+  var title_gifs = document.getElementById("title_gifs");
+  title_gifs.src = "assets/imgs/" + getRandomFromTo(1,6) + ".gif";
+
   var a = document.getElementsByTagName('a');
   for (var i = 0; i < a.length; i++) {
   a[i].target = "_blank";
   }
-
-
-
 
   // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- DRAG N DROP SUR LES ARTICLES
   interact('.articles')
@@ -132,6 +132,13 @@ function setup() {
     croix[i].addEventListener("click", closeWindow);
     croix[i].customIndex = i;
   }
+
+  var agrandir = document.getElementsByClassName("agrandir");
+  for (var i = 0; i < agrandir.length; i++) {
+    agrandir[i].addEventListener("click", fullWindow);
+    agrandir[i].customIndex = i;
+  }
+
 
   //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- Création du menu
   for (var i = 0; i < titres.length; i++) {
@@ -263,6 +270,15 @@ function ouvrirArticle(e){
   }
 }
 
+function fullWindow(e){
+  activeDiv = e.target;
+  articles[activeDiv.customIndex].style.width = "80%";
+  articles[activeDiv.customIndex].style.height = "80%";
+  articles[activeDiv.customIndex].style.top = "20vh";
+  articles[activeDiv.customIndex].style.left = "2vw";
+  articles[activeDiv.customIndex].style.transform = "initial";
+}
+
 function closeWindow(e){
   activeDiv = e.target;
   articles[activeDiv.customIndex].style.display = "none";
@@ -288,7 +304,7 @@ function modifyArticles(){
     articles[i].style.width = getRandomFromTo(20, 30)+"vw";
     articles[i].style.height =  getRandomFromTo(20, 50)+"vw";
 
-    articles[i].style.top = getRandomFromTo(0, 30)+"vh";
+    articles[i].style.top = getRandomFromTo(20, 30)+"vh";
     articles[i].style.left =  getRandomFromTo(0, 50)+"vw";
 
     articles[i].style.backgroundColor = GetRandomFromArray(tableauCouleurs);
@@ -321,7 +337,9 @@ function onMouseMove(event) {
 function zIndexChangement(e){
   //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- Récupérer sur quel div on clique, et en fonction remonter au parent "article"
   activeDiv = e.target;
+
   if (!activeDiv.classList.contains('articles')) {
+    console.log(activeDiv)
     if(!activeDiv.parentNode.classList.contains('textes')){
       for (var i = 0; i < articles.length; i++) {
         if (articles[i].style.zIndex > articles[activeDiv.parentNode.customIndex].style.zIndex){

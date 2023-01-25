@@ -27,9 +27,17 @@ body {
   overflow: hidden;
   background-color: black;
 }
+
+.signature{
+  width: 100%;
+  padding-top: 10px;
+  border-top: 2px solid black;
+  display: block;
+  text-align: center;
+}
 h1{
   /* font-family: 'Steps'; */
-    font-family: monospace;
+  font-family: monospace;
   font-weight: normal;
 }
 a{
@@ -67,6 +75,14 @@ img {
   border: 3px solid black;
 }
 
+#title_gifs{
+  filter:invert();
+  position: absolute;
+  width: auto;
+  margin: 3vw;
+  height: 13vh;
+}
+
 .articles{
   touch-action: none;
   box-sizing: border-box;
@@ -98,14 +114,19 @@ img {
 }
 .textes{
   /*! pointer-events: none; */
-  height: 85%;
+  height: 95%;
   overflow: scroll;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -o-hyphens: auto;
+  hyphens: auto;
 }
 .croix{
-  width: 2vw;
-  padding: 2px;
-  right: 0px;
-  height: auto;
+  width: 20PX;
+  line-height: 4vh;
+  right: 0;
+  height: 4vh;
   border: black solid 1px;
   position: absolute;
   margin-right: 1vw;
@@ -116,13 +137,28 @@ img {
   background-color: black;
   color:white;
 }
+.agrandir{
+  width: 20PX;
+  line-height: 4vh;
+  right: 25px;
+  height: 4vh;
+  border: black solid 1px;
+  position: absolute;
+  margin-right: 1vw;
+  text-align: center;
+  cursor: pointer;
+}
+.agrandir:hover{
+  background-color: black;
+  color:white;
+}
 #menu{
-  width: 20vw;
+  width: 17vw;
   font-size: 0.9em;
   position: absolute;
   right: 0px;
   margin-right: 1vw;
-    font-family: monospace;
+  font-family: monospace;
   display: flex;
   align-items: end;
   flex-flow: column;
@@ -158,16 +194,25 @@ img {
 /* .titres_rubriques:hover{
 background-color: white;
 } */
+
+.titre_article{
+
+  display: inline;
+  font-size: 0.7em;
+}
 .dates{
   pointer-events: none;
   margin-bottom: 10px;
+  line-height: 4vh;
+  height: 4vh;
+  width: 80%;
 }
 #rubriques{
   font-size: 15pt;
 }
 
 .dossier{
-  max-height: 30vh;
+  /* max-height: 30vh; */
   overflow: scroll;
   display: flex;
   flex-flow: column;
@@ -177,7 +222,7 @@ background-color: white;
 }
 
 #politique{
-  color:red;
+  color:crimson;
 }
 #culture{
   color:magenta;
@@ -189,8 +234,8 @@ background-color: white;
   color:lime;
 }
 #tools{
-  color:mediumslateblue;
+  color:darkorchid;
 }
 #ressources{
-  color:blue;
+  color:steelblue;
 }
