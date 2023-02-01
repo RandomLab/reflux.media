@@ -79,7 +79,7 @@ const indexHtml = (articles) => {
   <div class="dossier" id="ressources">
   <div class="titres_rubriques">ressources</div>
   </div>
-  <div class="dossier" id="exposition">
+  <div class="dossier" id="exebition">
   <div class="titres_rubriques">exposition</div>
   </div>
   <div class="dossier" id="varia">
