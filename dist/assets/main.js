@@ -1,36 +1,41 @@
 
 //----------------------------- Stockage des variables externes ici
-var compteurZindex = 3;
+var compteurZindex = 3; // Sert à passer les articles au premier plan
 
-var activeDiv;
+var active_div;
 var active_title;
 
-var posX;
-var posY;
-
-var departOK = false;
-var clickMenu = false;
-
+var titres;
+var textes;
+var titres_rubriques
 var articles;
-var tableauCouleurs = ["crimson", "magenta", "paleturquoise", "lime", "darkorchid", "steelblue"]
+var tableauCouleurs = ["crimson", "magenta", "paleturquoise", "lime", "darkorchid", "steelblue"] // couleurs des articles en fonction de leurs rubriques
 
 
 window.addEventListener("load", setup);
 
 function setup() {
 
+  /* -*-*-*-*-*-*-*-*-*-*-*-*
+  Les gifs du titre reflux.media qui apparaissent random
+  -*-*-*-*-*-*-*-*-*-*-*-* */
   var title_gifs = document.getElementById("title_gifs");
   title_gifs.src = "assets/imgs/" + getRandomFromTo(1,6) + ".gif";
 
+  /* -*-*-*-*-*-*-*-*-*-*-*-*
+  Ouvrir dans un autre onglet tout les liens
+  -*-*-*-*-*-*-*-*-*-*-*-* */
   var a = document.getElementsByTagName('a');
   for (var i = 0; i < a.length; i++) {
-  a[i].target = "_blank";
+    a[i].target = "_blank";
   }
 
-  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- DRAG N DROP SUR LES ARTICLES
+  /* -*-*-*-*-*-*-*-*-*-*-*-*
+  Drag n drop avec la librairie interact.js et aussi redimensionnement des articles
+  -*-*-*-*-*-*-*-*-*-*-*-* */
+
   interact('.articles')
   .resizable({
-    // resize from all edges and corners
     edges: { left: true, right: true, bottom: true, top: true },
 
     listeners: {
@@ -39,11 +44,9 @@ function setup() {
         var x = (parseFloat(target.getAttribute('data-x')) || 0)
         var y = (parseFloat(target.getAttribute('data-y')) || 0)
 
-        // update the element's style
         target.style.width = event.rect.width + 'px'
         target.style.height = event.rect.height + 'px'
 
-        // translate when resizing from top or left edges
         x += event.deltaRect.left
         y += event.deltaRect.top
 
@@ -54,12 +57,9 @@ function setup() {
       }
     },
     modifiers: [
-      // keep the edges inside the parent
       interact.modifiers.restrictEdges({
         outer: 'parent'
       }),
-
-      // minimum size
       interact.modifiers.restrictSize({
         min: { width: 100, height: 50 }
       })
@@ -68,119 +68,135 @@ function setup() {
     inertia: true
   })
   .draggable({
-    // enable inertial throwing
     inertia: true,
-    // keep the element within the area of it's parent
     modifiers: [
       interact.modifiers.restrictRect({
         restriction: 'parent',
         endOnly: true
       })
     ],
-    // enable autoScroll
     autoScroll: true,
 
     listeners: {
-      // call this function on every dragmove event
       move: dragMoveListener,
-
-      // call this function on every dragend event
       end (event) {
-
       }
     }
   })
   function dragMoveListener (event) {
     var target = event.target
-    // keep the dragged position in the data-x/data-y attributes
+
     var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
     var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
 
-    // translate the element
     target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
 
-    // update the posiion attributes
     target.setAttribute('data-x', x)
     target.setAttribute('data-y', y)
 
   }
-  // this function is used later in the resizing and gesture demos
   window.dragMoveListener = dragMoveListener
 
-  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- Récuperer les titres et les textes dans le HTML
-  var titres = document.getElementsByClassName("titres");
-  var textes = document.getElementsByClassName("textes");
-
-  var titres_rubriques = document.getElementsByClassName("titres_rubriques");
-
+  /* -*-*-*-*-*-*-*-*-*-*-*-*
+  Récuperer les titres et les textes dans le HTML
+  -*-*-*-*-*-*-*-*-*-*-*-* */
+  titres = document.getElementsByClassName("titres");
+  textes = document.getElementsByClassName("textes");
+  titres_rubriques = document.getElementsByClassName("titres_rubriques");
   articles = document.getElementsByClassName("articles");
 
-  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- Faire apparaître les 5 derniers articles
-  // Positionnement des articles aléatoire et application des couleurs
-  modifyArticles();
+  /* -*-*-*-*-*-*-*-*-*-*-*-*
+  - ICI on fait apparaître les 5 derniers articles
+  - et positionnement des articles aléatoire et application des couleurs
+  -*-*-*-*-*-*-*-*-*-*-*-* */
+  chargement_et_style_article();
 
-  // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- ZINDEX sur les fenêtres
-
+  /* -*-*-*-*-*-*-*-*-*-*-*-*
+  Lorsqu'on clique sur les articles, le ZINDEX change pour passer au premier plan
+  -*-*-*-*-*-*-*-*-*-*-*-* */
   for (var i = 0; i < articles.length; i++) {
     articles[i].addEventListener("mousedown", zIndexChangement);
     articles[i].customIndex = i;
   }
 
-
+  /* -*-*-*-*-*-*-*-*-*-*-*-*
+  Les boutons croix et agrandir dans les articles
+  -*-*-*-*-*-*-*-*-*-*-*-* */
   var croix = document.getElementsByClassName("croix");
+  var agrandir = document.getElementsByClassName("agrandir");
   for (var i = 0; i < croix.length; i++) {
     croix[i].addEventListener("click", closeWindow);
     croix[i].customIndex = i;
   }
-
-  var agrandir = document.getElementsByClassName("agrandir");
   for (var i = 0; i < agrandir.length; i++) {
     agrandir[i].addEventListener("click", fullWindow);
     agrandir[i].customIndex = i;
   }
 
+  /* -*-*-*-*-*-*-*-*-*-*-*-*
+  Création du menu
 
-  //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- Création du menu
+  1 - les articles sont générés avec un titre qui contient la classe "titre" et la classe
+  correspondant à la rubrique soit:
+
+  <article>
+    <div class="titres (politique || ressources || exposition || varia || tools)" id="Titre (identifiant)">
+      (politique || ressources || exposition || varia || tools)
+    </div>
+    <contenu></contenu>
+  </article>
+
+  2 - Le menu, lui, à des boites nommées comme les rubriques.
+    <menu>
+      <boite politique></boite politique>
+      <boite ressources></boite ressources>
+      <etc.>
+    </menu>
+
+  3 - On va chercher tout les titres qui contiennent la classe "politique", et on les copie à l'intérieur
+  de la boite politique, dans des nouvelles divs.
+
+  <boite politique>
+    <div class="titre_article_menu"> copie du titre d'un article</div>
+  </boite politique>
+
+  -*-*-*-*-*-*-*-*-*-*-*-* */
   for (var i = 0; i < titres.length; i++) {
     creationMenu(titres[i]);
   }
-  //Déployer les titres des articles au survol sur le titre du menu
+
+  /* -*-*-*-*-*-*-*-*-*-*-*-*
+  Interaction sur les rubriques du menu - click, survol...
+  -*-*-*-*-*-*-*-*-*-*-*-* */
   var titres_rubriques = document.getElementsByClassName("titres_rubriques");
   for (var i = 0; i < titres_rubriques.length; i++) {
     titres_rubriques[i].addEventListener("mouseenter", montrer_titres);
     titres_rubriques[i].addEventListener("mouseout", cacher_titres);
     titres_rubriques[i].addEventListener("click", bloquer_titres);
   }
-  //Ouvrir les articles en cliquant sur les titres du menu
+  /* -*-*-*-*-*-*-*-*-*-*-*-*
+  Ouvrir les articles correspondant au titre en cliquant sur les titres du menu
+  -*-*-*-*-*-*-*-*-*-*-*-* */
   var titre_article_menu = document.getElementsByClassName("titre_article_menu");
   for (var i = 0; i < titre_article_menu.length; i++) {
     titre_article_menu[i].addEventListener("click", ouvrirArticle);
   }
-
-
 }
 
 function creationMenu(titre){
-
   var menu = document.getElementById("menu");
+  // création de la div copie du titre
   var titre_article_menu = document.createElement("div");
   titre_article_menu.classList = "titre_article_menu";
   titre_article_menu.innerHTML = titre.innerHTML
-
+  // récupération des boites rubrique du menu
   var politique = document.getElementById("politique");
   var culture = document.getElementById("culture");
   var ressources = document.getElementById("ressources");
-  var exebition = document.getElementById("exebition");
+  var exposition = document.getElementById("exposition");
   var tools = document.getElementById("tools");
   var varia = document.getElementById("varia");
-
-  var politique = document.getElementById("politique");
-  var culture = document.getElementById("culture");
-  var ressources = document.getElementById("ressources");
-  var exebition = document.getElementById("exebition");
-  var tools = document.getElementById("tools");
-  var varia = document.getElementById("varia");
-
+  // mettre nos nouvelles div dans les boites
   if(titre.classList[1].includes("politique")){
     politique.appendChild(titre_article_menu);
   }
@@ -190,8 +206,8 @@ function creationMenu(titre){
   if(titre.classList[1].includes("ressources")){
     ressources.appendChild(titre_article_menu);
   }
-  if(titre.classList[1].includes("exebition")){
-    exebition.appendChild(titre_article_menu);
+  if(titre.classList[1].includes("exposition")){
+    exposition.appendChild(titre_article_menu);
   }
   if(titre.classList[1].includes("tools")){
     tools.appendChild(titre_article_menu);
@@ -199,7 +215,6 @@ function creationMenu(titre){
   if(titre.classList[1].includes("varia")){
     varia.appendChild(titre_article_menu);
   }
-
 }
 
 function montrer_titres(e){
@@ -252,8 +267,12 @@ function bloquer_titres(e){
 }
 
 function ouvrirArticle(e){
-  //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- Récuperer le titre de l'article, la date, et le contenu
-  // + création d'une fenêtre pour les contenus
+  /* -*-*-*-*-*-*-*-*-*-*-*-*
+   Récuperer le titre de l'article.
+   Si le titre d'un article est égal au titre de la rubrique dans le menu,
+   on récupere l'article correspondant et on l'affiche.
+   Son Zindex devient le plus haut.
+  -*-*-*-*-*-*-*-*-*-*-*-* */
   var titres = document.getElementsByClassName("titres");
   for (var i = 0; i < titres.length; i++) {
     if(titres[i].innerHTML.includes(e.target.innerHTML)){
@@ -273,20 +292,20 @@ function ouvrirArticle(e){
 }
 
 function fullWindow(e){
-  activeDiv = e.target;
-  articles[activeDiv.customIndex].style.width = "80%";
-  articles[activeDiv.customIndex].style.height = "80%";
-  articles[activeDiv.customIndex].style.top = "20vh";
-  articles[activeDiv.customIndex].style.left = "2vw";
-  articles[activeDiv.customIndex].style.transform = "initial";
+  active_div = e.target;
+  articles[active_div.customIndex].style.width = "80%";
+  articles[active_div.customIndex].style.height = "80%";
+  articles[active_div.customIndex].style.top = "20vh";
+  articles[active_div.customIndex].style.left = "2vw";
+  articles[active_div.customIndex].style.transform = "initial";
 }
 
 function closeWindow(e){
-  activeDiv = e.target;
-  articles[activeDiv.customIndex].style.display = "none";
+  active_div = e.target;
+  articles[active_div.customIndex].style.display = "none";
 }
 
-function modifyArticles(){
+function chargement_et_style_article(){
 
   var titres = document.getElementsByClassName("titres");
   compteurZindex++
@@ -320,7 +339,7 @@ function modifyArticles(){
     if(articles[i].classList[1].includes("varia")){
       articles[i].style.backgroundColor = tableauCouleurs[2];
     }
-    if(articles[i].classList[1].includes("exebition")){
+    if(articles[i].classList[1].includes("exposition")){
       articles[i].style.backgroundColor = tableauCouleurs[3];
     }
     if(articles[i].classList[1].includes("tools")){
@@ -337,33 +356,35 @@ function onMouseMove(event) {
 }
 
 function zIndexChangement(e){
-  //-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- Récupérer sur quel div on clique, et en fonction remonter au parent "article"
-  activeDiv = e.target;
+  /* -*-*-*-*-*-*-*-*-*-*-*-*
+  Récupérer sur quel div on clique, et en fonction remonter au parent "article"
+  -*-*-*-*-*-*-*-*-*-*-*-* */
+  active_div = e.target;
 
-  if (!activeDiv.classList.contains('articles')) {
-    console.log(activeDiv)
-    if(!activeDiv.parentNode.classList.contains('textes')){
+  if (!active_div.classList.contains('articles')) {
+    console.log(active_div)
+    if(!active_div.parentNode.classList.contains('textes')){
       for (var i = 0; i < articles.length; i++) {
-        if (articles[i].style.zIndex > articles[activeDiv.parentNode.customIndex].style.zIndex){
+        if (articles[i].style.zIndex > articles[active_div.parentNode.customIndex].style.zIndex){
           articles[i].style.zIndex = articles[i].style.zIndex - 1;
         }
       }
-      articles[activeDiv.parentNode.customIndex].style.zIndex = compteurZindex;
+      articles[active_div.parentNode.customIndex].style.zIndex = compteurZindex;
     }else{
       for (var i = 0; i < articles.length; i++) {
-        if (articles[i].style.zIndex > articles[activeDiv.parentNode.parentNode.customIndex].style.zIndex){
+        if (articles[i].style.zIndex > articles[active_div.parentNode.parentNode.customIndex].style.zIndex){
           articles[i].style.zIndex = articles[i].style.zIndex - 1;
         }
       }
-      articles[activeDiv.parentNode.parentNode.customIndex].style.zIndex = compteurZindex;
+      articles[active_div.parentNode.parentNode.customIndex].style.zIndex = compteurZindex;
     }
   } else {
     for (var i = 0; i < articles.length; i++) {
-      if (articles[i].style.zIndex > articles[activeDiv.customIndex].style.zIndex){
+      if (articles[i].style.zIndex > articles[active_div.customIndex].style.zIndex){
         articles[i].style.zIndex = articles[i].style.zIndex - 1;
       }
     }
-    articles[activeDiv.customIndex].style.zIndex = compteurZindex;
+    articles[active_div.customIndex].style.zIndex = compteurZindex;
   }
 }
 
