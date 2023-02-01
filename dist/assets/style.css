@@ -57,15 +57,7 @@ img {
 
 /* Targtes on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 15px;
-}
-
-.articles::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-#menu::-webkit-scrollbar-track {
-  background: grey;
+  width: 10px;
 }
 
 *::-webkit-scrollbar-thumb {
@@ -73,6 +65,25 @@ img {
   border-radius: 20px;
   border: 3px solid black;
 }
+
+.articles::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dossier::-webkit-scrollbar-track {
+  background-color: transparent;
+  border: 3px solid transparent;
+  border-radius: 20px;
+  width: 10px;
+}
+
+.dossier::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 20px;
+  /* border: 1px solid white; */
+}
+
+
 
 #title_gifs{
   filter:invert();
@@ -104,7 +115,8 @@ img {
 }
 .textes{
   height: 95%;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   -ms-hyphens: auto;
@@ -188,7 +200,7 @@ img {
 .dates{
   pointer-events: none;
   margin-bottom: 10px;
-  line-height: 4vh;
+  /* line-height: 4vh; */
   height: 4vh;
   width: 80%;
 }
@@ -197,12 +209,13 @@ img {
 }
 
 .dossier{
-  overflow: scroll;
+  overflow-y: scroll;
   display: flex;
   flex-flow: column;
   align-items: end;
   text-align: end;
   margin-top: 10px;
+  max-height: 25vh;
 }
 
 ::selection{
@@ -218,7 +231,7 @@ img {
 #varia{
   color:paleturquoise;
 }
-#exposition{
+#exebition{
   color:lime;
 }
 #tools{

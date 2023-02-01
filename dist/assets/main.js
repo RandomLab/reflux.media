@@ -150,8 +150,8 @@ function setup() {
   correspondant à la rubrique soit:
 
   <article>
-    <div class="titres (politique || ressources || exposition || varia || tools)" id="Titre (identifiant)">
-      (politique || ressources || exposition || varia || tools)
+    <div class="titres (politique || ressources || exebition || varia || tools)" id="Titre (identifiant)">
+      (politique || ressources || exebition || varia || tools)
     </div>
     <contenu></contenu>
   </article>
@@ -198,12 +198,12 @@ function creationMenu(titre){
   // création de la div copie du titre
   var titre_article_menu = document.createElement("div");
   titre_article_menu.classList = "titre_article_menu";
-  titre_article_menu.innerHTML = titre.innerHTML
+  titre_article_menu.innerHTML = titre.innerHTML 
   // récupération des boites rubrique du menu
   var politique = document.getElementById("politique");
   var culture = document.getElementById("culture");
   var ressources = document.getElementById("ressources");
-  var exposition = document.getElementById("exposition");
+  var exebition = document.getElementById("exebition");
   var tools = document.getElementById("tools");
   var varia = document.getElementById("varia");
   // mettre nos nouvelles div dans les boites
@@ -216,8 +216,8 @@ function creationMenu(titre){
   if(titre.classList[1].includes("ressources")){
     ressources.appendChild(titre_article_menu);
   }
-  if(titre.classList[1].includes("exposition")){
-    exposition.appendChild(titre_article_menu);
+  if(titre.classList[1].includes("exebition")){
+    exebition.appendChild(titre_article_menu);
   }
   if(titre.classList[1].includes("tools")){
     tools.appendChild(titre_article_menu);
@@ -283,6 +283,7 @@ function ouvrirArticle(e){
    on récupere l'article correspondant et on l'affiche.
    Son Zindex devient le plus haut.
   -*-*-*-*-*-*-*-*-*-*-*-* */
+  console.log(e.target.innerHTML)
   var titres = document.getElementsByClassName("titres");
   for (var i = 0; i < titres.length; i++) {
     if(titres[i].innerHTML.includes(e.target.innerHTML)){
@@ -349,7 +350,7 @@ function chargement_et_style_article(){
     if(articles[i].classList[1].includes("varia")){
       articles[i].style.backgroundColor = tableauCouleurs[2];
     }
-    if(articles[i].classList[1].includes("exposition")){
+    if(articles[i].classList[1].includes("exebition")){
       articles[i].style.backgroundColor = tableauCouleurs[3];
     }
     if(articles[i].classList[1].includes("tools")){
