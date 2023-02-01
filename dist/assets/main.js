@@ -198,7 +198,7 @@ function creationMenu(titre){
   // création de la div copie du titre
   var titre_article_menu = document.createElement("div");
   titre_article_menu.classList = "titre_article_menu";
-  titre_article_menu.innerHTML = titre.innerHTML
+  titre_article_menu.innerHTML = titre.innerHTML 
   // récupération des boites rubrique du menu
   var politique = document.getElementById("politique");
   var culture = document.getElementById("culture");

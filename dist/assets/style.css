@@ -116,6 +116,7 @@ img {
 .textes{
   height: 95%;
   overflow-y: scroll;
+  overflow-x: hidden;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   -ms-hyphens: auto;
@@ -199,7 +200,7 @@ img {
 .dates{
   pointer-events: none;
   margin-bottom: 10px;
-  line-height: 4vh;
+  /* line-height: 4vh; */
   height: 4vh;
   width: 80%;
 }
