@@ -87,7 +87,7 @@ const getListPages = async () => {
     const query = gql`
       {
         pages {
-                list(orderBy:UPDATED) {
+                list(orderBy:CREATED) {
                     id
                     title
                     createdAt
