@@ -14,9 +14,6 @@ import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'url'
 
 
-import interact from 'interactjs'
-
-
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 dotenv.config()
