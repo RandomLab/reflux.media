@@ -30,7 +30,8 @@ body {
 
 .signature{
   width: 100%;
-  padding-top: 10px;
+  padding-top: 4vh;
+  padding-bottom: 4vh;
   border-top: 2px solid black;
   display: block;
   text-align: center;
