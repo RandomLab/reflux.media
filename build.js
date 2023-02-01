@@ -39,6 +39,7 @@ const graphQLClient = new GraphQLClient(endpoint, {
 ----------------------*/ 
 
 const getSinglePageContent = async (obj, tags) => {
+    console.log(obj)
     const query = gql`
             query getArticle($id: Int!){
             pages {
@@ -59,7 +60,7 @@ const getSinglePageContent = async (obj, tags) => {
 `---
 id: ${obj.id}
 title: ${obj.title.trim()}
-date: ${obj.updatedAt}
+date: ${obj.createdAt}
 tags: ${tags.join('')}
 ---
 
@@ -86,7 +87,7 @@ const getListPages = async () => {
     const query = gql`
       {
         pages {
-                list(orderBy:UPDATED) {
+                list(orderBy:CREATED) {
                     id
                     title
                     createdAt
