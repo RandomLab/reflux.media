@@ -1,3 +1,13 @@
+/* /!\/!\/!\/!\/!\/!\/!\/!\/!\
+
+/!\ Si on modifie le nom des rubriques dans le wiki, il faut le modifier dans:
+
+  generate.js
+  main.js
+  style.css
+
+/!\/!\/!\/!\/!\/!\/!\/!\/!\ */
+
 
 //----------------------------- Stockage des variables externes ici
 var compteurZindex = 3; // Sert à passer les articles au premier plan
