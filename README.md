@@ -6,6 +6,7 @@
 - installer les dépendances avec `npm install`
 
 # lancement
+- npm run clean : supprimer les fichiers générés
 - npm run build : enregistre les articles depuis wiki.reflux.media en markdown
 - npm run generate : génère les fichiers statiques html  
 - npm run serve pour lancer le serveur

@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import { marked } from 'marked'
 import fm from 'front-matter'
-import { format } from 'date-fns'
+// import { format } from 'date-fns'
 
 import { config } from './config.js'
 
@@ -45,7 +45,7 @@ const articlesHtml = (data) => {
   <div class ="croix">x</div>
   <div class ="agrandir">⧉</div>
   <div class="titres ${ data.attributes.tags }" id="Titre${ data.attributes.id }">${ data.attributes.title }</div>
-  <div class="dates">${ format(data.attributes.date, 'MM/dd/yyyy')} <div class="titre_article">${ data.attributes.title }</div></div>
+  <div class="dates">${ data.attributes.date} <div class="titre_article">${ data.attributes.title }</div></div>
   <div class="textes" id="Texte-${ data.attributes.id }">${ marked(data.body) }</div>
   </div>`)
 }
