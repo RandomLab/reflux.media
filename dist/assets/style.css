@@ -104,7 +104,9 @@ img {
   height: 30vw;
   font-size: 13pt;
   overflow: hidden;
-  padding : 1vw;
+  padding-bottom: 1vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
 }
 
 .titres{
@@ -122,6 +124,9 @@ img {
   -ms-hyphens: auto;
   -o-hyphens: auto;
   hyphens: auto;
+  padding: 1vw;
+  top: 60px;
+  position: relative;
 }
 .croix{
   width: 20PX;
@@ -148,6 +153,7 @@ img {
   margin-right: 1vw;
   text-align: center;
   cursor: pointer;
+  margin-left: 1vw;
 }
 .agrandir:hover{
   background-color: black;
@@ -194,15 +200,31 @@ img {
 
 .titre_article{
 
-  display: inline;
   font-size: 0.7em;
+  display: inline;
 }
 .dates{
   pointer-events: none;
   margin-bottom: 10px;
   /* line-height: 4vh; */
   height: 4vh;
-  width: 80%;
+  width: 70%;
+}
+
+.barre_fenetre{
+  display: flex;
+  background-color: black;
+  color: white;
+  left: 0px;
+  top: 0px;
+  border: solid white 1px;
+  overflow: hidden;
+  padding: 1%;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  position: absolute;
+  z-index: 20;
+  max-height: 20%;
 }
 #rubriques{
   font-size: 15pt;
