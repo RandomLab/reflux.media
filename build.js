@@ -7,6 +7,8 @@ import { GraphQLClient, gql } from 'graphql-request'
 
 import { config } from './config.js'
 
+import { DateTime } from 'luxon'
+
 
 
 /* ------------------- 
@@ -55,12 +57,13 @@ const getSinglePageContent = async (obj, tags) => {
     const data = await graphQLClient.request(query, variables)
     const { pages } = data
     const { single } = pages
-
+    // obj.createdAt
+    const newDate = DateTime.fromISO(obj.createdAt, { zone: 'UTC' })
     const md = 
 `---
 id: ${obj.id}
 title: ${obj.title.trim()}
-date: ${obj.createdAt}
+date: ${newDate.setLocale('fr').toFormat('MMMM dd yyyy')}
 tags: ${tags.join('')}
 ---
 

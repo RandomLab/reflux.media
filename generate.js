@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import { marked } from 'marked'
 import fm from 'front-matter'
-import { format } from 'date-fns'
+// import { format } from 'date-fns'
 
 import { config } from './config.js'
 

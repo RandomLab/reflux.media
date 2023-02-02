@@ -737,6 +737,11 @@ lru-cache@~5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+luxon@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.npmjs.org/luxon/-/luxon-3.2.1.tgz"
+  integrity sha512-QrwPArQCNLAKGO/C+ZIilgIuDnEnKx5QYODdDtbFaxzsbZcc/a7WFq7MhsVYgRlwawLtvOUESTlfJ+hc/USqPg==
+
 marked@^4.2.3:
   version "4.2.3"
   resolved "https://registry.npmjs.org/marked/-/marked-4.2.3.tgz"
