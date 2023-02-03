@@ -2,9 +2,9 @@
 
 /!\ Si on modifie le nom des rubriques dans le wiki, il faut le modifier dans:
 
-  generate.js
-  main.js
-  style.css
+generate.js
+main.js
+style.css
 
 /!\/!\/!\/!\/!\/!\/!\/!\/!\ */
 
@@ -26,6 +26,8 @@ window.addEventListener("load", setup);
 
 function setup() {
 
+  var say_no_to_post_it = document.getElementById("say_no_to_post_it");
+  flying_NO();
   /* -*-*-*-*-*-*-*-*-*-*-*-*
   Les gifs du titre reflux.media qui apparaissent random
   -*-*-*-*-*-*-*-*-*-*-*-* */
@@ -150,24 +152,24 @@ function setup() {
   correspondant à la rubrique soit:
 
   <article>
-    <div class="titres (politique || ressources || exebition || varia || tools)" id="Titre (identifiant)">
-      (politique || ressources || exebition || varia || tools)
-    </div>
-    <contenu></contenu>
+  <div class="titres (politique || ressources || exebition || varia || tools)" id="Titre (identifiant)">
+  (politique || ressources || exebition || varia || tools)
+  </div>
+  <contenu></contenu>
   </article>
 
   2 - Le menu, lui, à des boites nommées comme les rubriques.
-    <menu>
-      <boite politique></boite politique>
-      <boite ressources></boite ressources>
-      <etc.>
-    </menu>
+  <menu>
+  <boite politique></boite politique>
+  <boite ressources></boite ressources>
+  <etc.>
+  </menu>
 
   3 - On va chercher tout les titres qui contiennent la classe "politique", et on les copie à l'intérieur
   de la boite politique, dans des nouvelles divs.
 
   <boite politique>
-    <div class="titre_article_menu"> copie du titre d'un article</div>
+  <div class="titre_article_menu"> copie du titre d'un article</div>
   </boite politique>
 
   -*-*-*-*-*-*-*-*-*-*-*-* */
@@ -198,7 +200,7 @@ function creationMenu(titre){
   // création de la div copie du titre
   var titre_article_menu = document.createElement("div");
   titre_article_menu.classList = "titre_article_menu";
-  titre_article_menu.innerHTML = titre.innerHTML 
+  titre_article_menu.innerHTML = titre.innerHTML
   // récupération des boites rubrique du menu
   var politique = document.getElementById("politique");
   var culture = document.getElementById("culture");
@@ -278,10 +280,10 @@ function bloquer_titres(e){
 
 function ouvrirArticle(e){
   /* -*-*-*-*-*-*-*-*-*-*-*-*
-   Récuperer le titre de l'article.
-   Si le titre d'un article est égal au titre de la rubrique dans le menu,
-   on récupere l'article correspondant et on l'affiche.
-   Son Zindex devient le plus haut.
+  Récuperer le titre de l'article.
+  Si le titre d'un article est égal au titre de la rubrique dans le menu,
+  on récupere l'article correspondant et on l'affiche.
+  Son Zindex devient le plus haut.
   -*-*-*-*-*-*-*-*-*-*-*-* */
   console.log(e.target.innerHTML)
   var titres = document.getElementsByClassName("titres");
@@ -397,6 +399,41 @@ function zIndexChangement(e){
     }
     articles[active_div.customIndex].style.zIndex = compteurZindex;
   }
+}
+posX=0;
+posY=0;
+velocityX = 0;
+velocityY = 0;
+array_postits = ["this is not POST-IT", "Sur cette page, il y a des FENÊTRES", "Say NO to POSTS-ITS", "ce ne sont pas des POSTS-ITS", "Dites NON aux POSTS-ITS"]
+function flying_NO(){
+
+  posX = posX + velocityX;
+  posY = posY + velocityY;
+
+  // left or right collision
+  if (posX <= 0) {
+    velocityX = getRandomFromTo(0,2);
+    say_no_to_post_it.innerHTML = GetRandomFromArray(array_postits);
+  }
+  if (posX > window.innerWidth - 100) {
+    velocityX -= getRandomFromTo(0,2);
+    say_no_to_post_it.innerHTML = GetRandomFromArray(array_postits);
+  }
+
+  if (posY <= 0) {
+    velocityY = getRandomFromTo(0,2);
+    say_no_to_post_it.innerHTML = GetRandomFromArray(array_postits);
+  }
+  if (posY > window.innerHeight - 50) {
+    velocityY -= getRandomFromTo(0,2);
+    say_no_to_post_it.innerHTML = GetRandomFromArray(array_postits);
+  }
+
+
+  say_no_to_post_it.style.top = posY + "px";
+  say_no_to_post_it.style.left = posX + "px";
+
+  requestAnimationFrame(flying_NO);
 }
 
 // ----------------------------- LES UTILITAIRES ICI !

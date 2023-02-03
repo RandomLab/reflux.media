@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import { marked } from 'marked'
 import fm from 'front-matter'
-// import { format } from 'date-fns'
+import { format } from 'date-fns'
 
 import { config } from './config.js'
 
@@ -48,6 +48,8 @@ const articlesHtml = (data) => {
   <div class ="croix">x</div>
   <div class ="agrandir">⧉</div>
   </div>
+
+
   <div class="textes" id="Texte-${ data.attributes.id }">${ marked(data.body) }</div>
   </div>`)
 }
@@ -69,6 +71,7 @@ const indexHtml = (articles) => {
   <script src="assets/main.js"></script>
   </head>
   <body>
+  <div id="say_no_to_post_it"></div>
   <img src="" id="title_gifs">
   <div id="menu">
   <div id="rubriques">rubriques</div>
