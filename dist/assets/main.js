@@ -33,10 +33,8 @@ function setup() {
   -*-*-*-*-*-*-*-*-*-*-*-* */
   function resizing_function(x) {
     if (x.matches) { // If media query matches
-      document.body.style.backgroundColor = "white";
       var title_gifs = document.getElementById("title_gifs");
-      title_gifs.style.filter = "none";
-      title_gifs.style.width = 50 + "%";
+      title_gifs.style.width = 10 + "vh";
       mobile = true;
       ordinateur = false;
     } else {
@@ -71,69 +69,71 @@ function setup() {
   /* -*-*-*-*-*-*-*-*-*-*-*-*
   Drag n drop avec la librairie interact.js et aussi redimensionnement des articles
   -*-*-*-*-*-*-*-*-*-*-*-* */
+  if(ordinateur){
+    interact('.articles')
+    .resizable({
+      edges: { left: true, right: true, bottom: true, top: true },
 
-  interact('.articles')
-  .resizable({
-    edges: { left: true, right: true, bottom: true, top: true },
+      listeners: {
+        move (event) {
+          var target = event.target
+          var x = (parseFloat(target.getAttribute('data-x')) || 0)
+          var y = (parseFloat(target.getAttribute('data-y')) || 0)
 
-    listeners: {
-      move (event) {
-        var target = event.target
-        var x = (parseFloat(target.getAttribute('data-x')) || 0)
-        var y = (parseFloat(target.getAttribute('data-y')) || 0)
+          target.style.width = event.rect.width + 'px'
+          target.style.height = event.rect.height + 'px'
 
-        target.style.width = event.rect.width + 'px'
-        target.style.height = event.rect.height + 'px'
+          x += event.deltaRect.left
+          y += event.deltaRect.top
 
-        x += event.deltaRect.left
-        y += event.deltaRect.top
+          target.style.transform = 'translate(' + x + 'px,' + y + 'px)'
 
-        target.style.transform = 'translate(' + x + 'px,' + y + 'px)'
+          target.setAttribute('data-x', x)
+          target.setAttribute('data-y', y)
+        }
+      },
+      modifiers: [
+        interact.modifiers.restrictEdges({
+          outer: 'parent'
+        }),
+        interact.modifiers.restrictSize({
+          min: { width: 100, height: 50 }
+        })
+      ],
 
-        target.setAttribute('data-x', x)
-        target.setAttribute('data-y', y)
+      inertia: true
+    })
+    .draggable({
+      inertia: true,
+      modifiers: [
+        interact.modifiers.restrictRect({
+          restriction: 'parent',
+          endOnly: true
+        })
+      ],
+      autoScroll: true,
+
+      listeners: {
+        move: dragMoveListener,
+        end (event) {
+        }
       }
-    },
-    modifiers: [
-      interact.modifiers.restrictEdges({
-        outer: 'parent'
-      }),
-      interact.modifiers.restrictSize({
-        min: { width: 100, height: 50 }
-      })
-    ],
+    })
+    function dragMoveListener (event) {
+      var target = event.target
 
-    inertia: true
-  })
-  .draggable({
-    inertia: true,
-    modifiers: [
-      interact.modifiers.restrictRect({
-        restriction: 'parent',
-        endOnly: true
-      })
-    ],
-    autoScroll: true,
+      var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+      var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
 
-    listeners: {
-      move: dragMoveListener,
-      end (event) {
-      }
+      target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
+
+      target.setAttribute('data-x', x)
+      target.setAttribute('data-y', y)
+
     }
-  })
-  function dragMoveListener (event) {
-    var target = event.target
-
-    var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
-    var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
-
-    target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
-
-    target.setAttribute('data-x', x)
-    target.setAttribute('data-y', y)
-
+    window.dragMoveListener = dragMoveListener
   }
-  window.dragMoveListener = dragMoveListener
+
 
   /* -*-*-*-*-*-*-*-*-*-*-*-*
   Récuperer les titres et les textes dans le HTML
@@ -212,6 +212,14 @@ function setup() {
     titres_rubriques[i].addEventListener("mouseout", cacher_titres);
     titres_rubriques[i].addEventListener("click", bloquer_titres);
   }
+
+  /* -*-*-*-*-*-*-*-*-*-*-*-*
+  Fermer tout le menu MOBILE..
+  -*-*-*-*-*-*-*-*-*-*-*-* */
+  var menu = document.getElementById("menu");
+  menu.addEventListener("click", close_menu);
+  var mobile_menu_button = document.getElementById("mobile_menu_button");
+  mobile_menu_button.addEventListener("click", display_menu);
   /* -*-*-*-*-*-*-*-*-*-*-*-*
   Ouvrir les articles correspondant au titre en cliquant sur les titres du menu
   -*-*-*-*-*-*-*-*-*-*-*-* */
@@ -219,6 +227,17 @@ function setup() {
   for (var i = 0; i < titre_article_menu.length; i++) {
     titre_article_menu[i].addEventListener("click", ouvrirArticle);
     titre_article_menu[i].customIndex=i;
+  }
+}
+
+function display_menu(){
+  menu.style.width =100+"vw";
+}
+function close_menu(evt) {
+  console.log(evt.target.id);
+  if(evt.target.id == "menu"){
+    menu.style.width = 0;
+    menu.style.overflow = hidden;
   }
 }
 
@@ -312,6 +331,9 @@ function ouvrirArticle(e){
   on récupere l'article correspondant et on l'affiche.
   Son Zindex devient le plus haut.
   -*-*-*-*-*-*-*-*-*-*-*-* */
+  if(mobile){
+    menu.style.display = "none";
+  }
 
   var titres = document.getElementsByClassName("titres");
   for (var i = 0; i < titres.length; i++) {
@@ -473,7 +495,7 @@ function flying_NO(){
   say_no_to_post_it.style.top = posY + "px";
   say_no_to_post_it.style.left = posX + "px";
 
-  requestAnimationFrame(flying_NO);
+  // requestAnimationFrame(flying_NO);
 }
 
 // ----------------------------- LES UTILITAIRES ICI !

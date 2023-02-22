@@ -16,11 +16,7 @@
   src: url('fonts/Steps-Mono-Thin.otf');
 }
 
-@media screen and (min-width: 800px) {
 
-
-
-}
 
 
 
@@ -274,4 +270,52 @@ img {
 }
 #ressources{
   color:steelblue;
+}
+#mobile_menu_button{
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+
+  #menu{
+    transition: ease 1000ms;
+    width: 0vw;
+    font-size: 1em;
+    position: absolute;
+    right: 0px;
+    height: 100vh;
+    margin-right: 0;
+    font-family: monospace;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    background-color: gray;
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  #mobile_menu_button{
+    display: flex;
+    position: absolute;
+    background-color: black;
+    right: 0;
+    width: 30vw;
+    height: 10vh;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.3em;
+  }
+
+  .dossier{
+    overflow-y: scroll;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+
 }

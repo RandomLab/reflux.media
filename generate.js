@@ -71,6 +71,7 @@ const indexHtml = (articles) => {
   <script src="assets/main.js"></script>
   </head>
   <body>
+  <div id="mobile_menu_button">Menu</div>
   <div id="say_no_to_post_it"></div>
   <img src="" id="title_gifs">
   <div id="menu">
