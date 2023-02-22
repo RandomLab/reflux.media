@@ -289,7 +289,8 @@ img {
     display: flex;
     align-items: center;
     flex-flow: column;
-    background-color: gray;
+    background: rgb(3,255,0);
+    background: linear-gradient(0deg, rgba(3,255,0,1) 0%, rgba(0,0,0,1) 100%);
     z-index: 10;
     overflow: hidden;
   }

@@ -34,7 +34,9 @@ function setup() {
   function resizing_function(x) {
     if (x.matches) { // If media query matches
       var title_gifs = document.getElementById("title_gifs");
-      title_gifs.style.width = 10 + "vh";
+      title_gifs.style.height = 10 + "vh";
+      title_gifs.style.maxWidth = 65 + "vw";
+      title_gifs.style.margin = 0 + "vh";
       mobile = true;
       ordinateur = false;
     } else {
@@ -51,7 +53,7 @@ function setup() {
 
 
   var say_no_to_post_it = document.getElementById("say_no_to_post_it");
-  flying_NO();
+  // flying_NO();
   /* -*-*-*-*-*-*-*-*-*-*-*-*
   Les gifs du titre reflux.media qui apparaissent random
   -*-*-*-*-*-*-*-*-*-*-*-* */
@@ -241,6 +243,11 @@ function close_menu(evt) {
   }
 }
 
+function close_menu_sans_event_oups() {
+  menu.style.width = 0;
+  menu.style.overflow = hidden;
+}
+
 function creationMenu(titre){
   var menu = document.getElementById("menu");
   // création de la div copie du titre
@@ -332,7 +339,7 @@ function ouvrirArticle(e){
   Son Zindex devient le plus haut.
   -*-*-*-*-*-*-*-*-*-*-*-* */
   if(mobile){
-    menu.style.display = "none";
+    close_menu_sans_event_oups()
   }
 
   var titres = document.getElementsByClassName("titres");
@@ -462,41 +469,42 @@ function zIndexChangement(e){
     articles[active_div.customIndex].style.zIndex = compteurZindex;
   }
 }
-posX=0;
-posY=0;
-velocityX = 0;
-velocityY = 0;
-array_postits = ["this is not POST-IT", "Sur cette page, il y a des FENÊTRES", "Say NO to POSTS-ITS", "ce ne sont pas des POSTS-ITS", "Dites NON aux POSTS-ITS"]
-function flying_NO(){
 
-  posX = posX + velocityX;
-  posY = posY + velocityY;
-
-  // left or right collision
-  if (posX <= 0) {
-    velocityX = getRandomFromTo(0,2);
-    say_no_to_post_it.innerHTML = GetRandomFromArray(array_postits);
-  }
-  if (posX > window.innerWidth - 100) {
-    velocityX -= getRandomFromTo(0,2);
-    say_no_to_post_it.innerHTML = GetRandomFromArray(array_postits);
-  }
-
-  if (posY <= 0) {
-    velocityY = getRandomFromTo(0,2);
-    say_no_to_post_it.innerHTML = GetRandomFromArray(array_postits);
-  }
-  if (posY > window.innerHeight - 50) {
-    velocityY -= getRandomFromTo(0,2);
-    say_no_to_post_it.innerHTML = GetRandomFromArray(array_postits);
-  }
-
-
-  say_no_to_post_it.style.top = posY + "px";
-  say_no_to_post_it.style.left = posX + "px";
-
-  // requestAnimationFrame(flying_NO);
-}
+// posX=0;
+// posY=0;
+// velocityX = 0;
+// velocityY = 0;
+// array_postits = ["this is not POST-IT", "Sur cette page, il y a des FENÊTRES", "Say NO to POSTS-ITS", "ce ne sont pas des POSTS-ITS", "Dites NON aux POSTS-ITS"]
+// function flying_NO(){
+//
+//   posX = posX + velocityX;
+//   posY = posY + velocityY;
+//
+//   // left or right collision
+//   if (posX <= 0) {
+//     velocityX = getRandomFromTo(0,2);
+//     say_no_to_post_it.innerHTML = GetRandomFromArray(array_postits);
+//   }
+//   if (posX > window.innerWidth - 100) {
+//     velocityX -= getRandomFromTo(0,2);
+//     say_no_to_post_it.innerHTML = GetRandomFromArray(array_postits);
+//   }
+//
+//   if (posY <= 0) {
+//     velocityY = getRandomFromTo(0,2);
+//     say_no_to_post_it.innerHTML = GetRandomFromArray(array_postits);
+//   }
+//   if (posY > window.innerHeight - 50) {
+//     velocityY -= getRandomFromTo(0,2);
+//     say_no_to_post_it.innerHTML = GetRandomFromArray(array_postits);
+//   }
+//
+//
+//   say_no_to_post_it.style.top = posY + "px";
+//   say_no_to_post_it.style.left = posX + "px";
+//
+//   requestAnimationFrame(flying_NO);
+// }
 
 // ----------------------------- LES UTILITAIRES ICI !
 
