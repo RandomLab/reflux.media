@@ -21,10 +21,36 @@ var titres_rubriques
 var articles;
 var tableauCouleurs = ["crimson", "magenta", "paleturquoise", "lime", "darkorchid", "steelblue"] // couleurs des articles en fonction de leurs rubriques
 
+var mobile;
+var ordinateur;
 
 window.addEventListener("load", setup);
 
 function setup() {
+
+  /* -*-*-*-*-*-*-*-*-*-*-*-*
+  RESPONSIVE javascript
+  -*-*-*-*-*-*-*-*-*-*-*-* */
+  function resizing_function(x) {
+    if (x.matches) { // If media query matches
+      document.body.style.backgroundColor = "white";
+      var title_gifs = document.getElementById("title_gifs");
+      title_gifs.style.filter = "none";
+      title_gifs.style.width = 50 + "%";
+      mobile = true;
+      ordinateur = false;
+    } else {
+      document.body.style.backgroundColor = "black";
+      mobile = false;
+      ordinateur = true;
+    }
+  }
+
+  var x = window.matchMedia("(max-width: 700px)")
+  resizing_function(x) // Call listener function at run time
+  x.addListener(resizing_function) // Attach listener function on state changes
+
+
 
   var say_no_to_post_it = document.getElementById("say_no_to_post_it");
   flying_NO();
@@ -192,6 +218,7 @@ function setup() {
   var titre_article_menu = document.getElementsByClassName("titre_article_menu");
   for (var i = 0; i < titre_article_menu.length; i++) {
     titre_article_menu[i].addEventListener("click", ouvrirArticle);
+    titre_article_menu[i].customIndex=i;
   }
 }
 
@@ -285,20 +312,21 @@ function ouvrirArticle(e){
   on récupere l'article correspondant et on l'affiche.
   Son Zindex devient le plus haut.
   -*-*-*-*-*-*-*-*-*-*-*-* */
-  console.log(e.target.innerHTML)
+
   var titres = document.getElementsByClassName("titres");
   for (var i = 0; i < titres.length; i++) {
     if(titres[i].innerHTML.includes(e.target.innerHTML)){
-      if(titres[i].style.display != "block"){
-        const div = titres[i].parentNode;
+      var style = window.getComputedStyle(titres[i].parentNode.parentNode, null);
+      if(style.getPropertyValue("display") != "block"){
+        const div = titres[i].parentNode.parentNode;
         for (var i = 0; i < articles.length; i++) {
           articles[i].style.zIndex = articles[i].style.zIndex - 1;
           if(articles[i].style.zIndex < 0){
             articles[i].style.display = "none";
           }
         }
-        div.style.zIndex = 4;
         div.style.display = "block";
+        div.style.zIndex = 4;
       }
     }
   }
@@ -335,11 +363,23 @@ function chargement_et_style_article(){
 
   for (var i = 0; i < articles.length; i++) {
 
-    articles[i].style.width = getRandomFromTo(20, 30)+"vw";
-    articles[i].style.height =  getRandomFromTo(20, 50)+"vw";
+    if(mobile){
+      console.log(mobile)
+      articles[i].style.position = "relative";
+      articles[i].style.width = 100 + "vw";
+      articles[i].style.height = "auto";
+      articles[i].style.top = 10 + "vh";
+      articles[i].style.left = 0 + "vw";
+    }
+    if(ordinateur){
+      document.body.style.overflow = "hidden";
+      articles[i].style.width = getRandomFromTo(20, 30)+"vw";
+      articles[i].style.height =  getRandomFromTo(20, 50)+"vw";
 
-    articles[i].style.top = getRandomFromTo(20, 30)+"vh";
-    articles[i].style.left =  getRandomFromTo(0, 50)+"vw";
+      articles[i].style.top = getRandomFromTo(20, 30)+"vh";
+      articles[i].style.left =  getRandomFromTo(0, 50)+"vw";
+    }
+
 
     articles[i].style.backgroundColor = GetRandomFromArray(tableauCouleurs);
 
