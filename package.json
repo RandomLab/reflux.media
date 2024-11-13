@@ -1,0 +1,14 @@
+{
+  "name": "reflux.media",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "eleventy --serve"
+  },
+  "repository": "git@github.com:RandomLab/reflux.media.git",
+  "author": "Jérémie Nuel <jeremie.nuel@pm.me>",
+  "license": "MIT",
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}
