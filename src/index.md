@@ -1,9 +1,12 @@
 ---
 title: home
-layout: bob
+layout: index
 ---
 
 # hello
 
 - super 
 - génial
+
+[bob](/bob)
+
