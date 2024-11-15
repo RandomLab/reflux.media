@@ -1,6 +1,9 @@
 ---
 title: home
-layout: index
+layout: bob
 ---
 
 # hello
+
+- super 
+- génial
