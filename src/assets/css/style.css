@@ -1,6 +1,50 @@
 
-
-
 .container {
     display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 4% 2% 4% 0;
+}
+
+.container .card {
+    width: 20rem;
+    height: 30rem;
+    background-color: green;
+    border: 2px black solid;
+    padding: 10px;
+    margin: 0 20px 20px 0;
+}
+
+.container .card:last-child {
+    margin: 0;
+}
+
+.angle {
+    position: fixed;
+}
+
+.angle svg {
+    width: 20%;
+    height: 20%;
+}
+
+.right {
+    right: 0;
+    transform: rotate(90deg);
+}
+
+@media only screen and (min-width: 1px) and (max-width: 900px) {
+
+    .container {
+        flex-direction: column;
+        margin: 2%;
+    }
+
+    .container .card {
+        width: 96%;
+        margin: 0 0 10px 0;
+    }
+
 }

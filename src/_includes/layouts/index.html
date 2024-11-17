@@ -2,10 +2,31 @@
 
 {% block content %}
 
+<div class="angle">
+{% include "partials/angle.html" %}
+</div>
+
+<div class="angle right">
+    {% include "partials/angle.html" %}
+</div>
+
 <main class="container">
 
-    {{ content | safe }}
+    <article class="card">
+        <h1>mon titre</h1>
+    </article>
 
+    <article class="card">
+        <h1>mon titre 2</h1>
+    </article>
+
+    <article class="card">
+        <h1>mon titre 3 </h1>
+    </article>
+
+    <article class="card">
+        <h1>mon titre 4</h1>
+    </article>
 </main>
 
 {% endblock %}
