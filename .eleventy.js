@@ -5,6 +5,13 @@ module.exports = (config) => {
 
     // on ajoute la template index à l'objet global config
     config.addLayoutAlias('index', 'layouts/index.html');
+    config.addLayoutAlias('card', 'layouts/card.html');
+
+    config.addCollection("type", function(collectionApi) {
+        return collectionApi.getAll().filter(function(item) {
+            return "type" in item.data
+        })
+    })
 
     // configuration moteur de template / input-output
     return {

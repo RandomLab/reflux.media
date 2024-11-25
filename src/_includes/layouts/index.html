@@ -1,32 +1,41 @@
 {% extends "base.html" %}
 
+
+
+
 {% block content %}
 
 <div class="angle">
-{% include "partials/angle.html" %}
+    {% include "partials/angle.html" %}
 </div>
 
-<div class="angle right">
+<div class="angle right rotate">
     {% include "partials/angle.html" %}
 </div>
 
 <main class="container">
 
-    <article class="card">
-        <h1>mon titre</h1>
-    </article>
+    <section class="content">
+    {% for article in collections.type %}
 
-    <article class="card">
-        <h1>mon titre 2</h1>
-    </article>
+        {% if article.data.type == "card" %}
+        <article class="card">
+            <h1>{{ article.data.title }}</h1>
+            {{ article.content | safe }}
+        </article>
+        {% endif %}
 
-    <article class="card">
-        <h1>mon titre 3 </h1>
-    </article>
+    {% endfor %}
+    </section>
 
-    <article class="card">
-        <h1>mon titre 4</h1>
-    </article>
 </main>
 
-{% endblock %}
+<div class="angle bottom rotate-reverse">
+    {% include "partials/angle.html" %}
+</div>
+
+<div class="angle right bottom rotate-full">
+    {% include "partials/angle.html" %}
+</div>
+
+{% endblock content %}
