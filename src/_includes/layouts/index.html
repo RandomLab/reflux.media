@@ -20,7 +20,7 @@
 
         {% if article.data.type == "card" %}
         <article class="card">
-            <h1>{{ article.data.title }}</h1>
+            <h1><a href="{{ article.url }}">{{ article.data.title }}</a></h1>
             {{ article.content | safe }}
         </article>
         {% endif %}
