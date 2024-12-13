@@ -21,6 +21,7 @@
     width: calc(100%/4 - 30px);
     /*flex: 1 0 34%;*/
     z-index:1;
+    text-decoration: none;
     height: calc(100%/4 - 30px);
     background-color: rgb(240, 255, 240);
     border: 2px rgb(135, 135, 135) solid;
