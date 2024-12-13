@@ -3,17 +3,21 @@
 
 
 
-{% block content %}
+{% block page %}
 
-<div class="angle">
-    {% include "partials/angle.html" %}
-</div>
 
-<div class="angle right rotate">
-    {% include "partials/angle.html" %}
-</div>
 
 <main class="container">
+
+    <header class="header">
+        <div class="angle">
+            {% include "partials/angle.html" %}
+        </div>
+
+        <div class="angle right rotate">
+            {% include "partials/angle.html" %}
+        </div>
+    </header>
 
     <section class="content">
     {% for article in collections.type %}
@@ -30,12 +34,12 @@
 
 </main>
 
-<div class="angle bottom rotate-reverse">
+{# <div class="angle bottom rotate-reverse">
     {% include "partials/angle.html" %}
 </div>
 
 <div class="angle right bottom rotate-full">
     {% include "partials/angle.html" %}
-</div>
+</div> #}
 
-{% endblock content %}
+{% endblock page %}

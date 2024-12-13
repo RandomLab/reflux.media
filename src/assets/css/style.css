@@ -13,6 +13,10 @@
     padding: 20px 0 0 20px;
 }
 
+.container .content .header {
+    
+}
+
 .container .content .card {
     width: calc((100% / 3) - 20px);
     /*flex: 1 0 34%;*/
