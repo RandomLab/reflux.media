@@ -10,5 +10,10 @@
   "license": "MIT",
   "dependencies": {
     "@11ty/eleventy": "^3.0.0"
+  },
+  "devDependencies": {
+    "@11ty/eleventy-img": "^5.0.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-eleventy-img": "^0.10.2"
   }
 }
