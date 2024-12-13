@@ -1,7 +1,7 @@
 ---
-title: card 2
+title: Mage
 layout: card
 type: card
 ---
 
-## titre de ma carte 2
+![image](./assets/image/archere.png)

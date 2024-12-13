@@ -4,7 +4,7 @@ module.exports = (config) => {
 
     // on copie les fichiers de style css
     config.addPassthroughCopy("./src/assets/css/");
-    config.addPassthroughCopy("./src/image");
+    config.addPassthroughCopy("./src/assets/image");
 
     // on ajoute la template index à l'objet global config
     config.addLayoutAlias('index', 'layouts/index.html');
