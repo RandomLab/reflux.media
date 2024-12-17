@@ -11,7 +11,7 @@
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 6% 12% 3% 12%;
+    padding: 3% 12% 3% 12%;
 }
 
 .container .content .header {
@@ -71,8 +71,18 @@
 
 } */
 
-.angle {
+.head {
     position: fixed;
+
+}
+
+.face {
+    /* display: flex; */
+    z-index: 3;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0%;
+
 }
 
 .rotate {

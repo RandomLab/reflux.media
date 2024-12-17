@@ -9,15 +9,19 @@
 
 <main class="container">
 
-    {# <header class="header">
-        <div class="angle">
-            {% include "partials/angle.html" %}
+     <header class="header">
+        <div class="head">
+            {% include "partials/headangle.html" %}
         </div>
 
-        <div class="angle right rotate">
-            {% include "partials/angle.html" %}
+        <div class="head right rotate">
+            {% include "partials/headangle.html" %}
         </div>
-    </header> #}
+
+        <div class="head face">
+            {% include "partials/headface.html" %}
+        </div>
+    </header> 
 
     <section class="content">
     {% for article in collections.type %}
