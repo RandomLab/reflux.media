@@ -9,23 +9,31 @@
 
 <main class="container">
 
-    <header class="header">
-        <div class="angle">
-            {% include "partials/angle.html" %}
+     <header class="header">
+        <div class="head left">
+            {% include "partials/headangle.html" %}
         </div>
 
-        <div class="angle right rotate">
-            {% include "partials/angle.html" %}
+        <div class="head right rotate">
+            {% include "partials/headangle.html" %}
         </div>
-    </header>
+
+        <div class="head face">
+            {% include "partials/headface.html" %}
+        </div>
+    </header> 
 
     <section class="content">
     {% for article in collections.type %}
 
         {% if article.data.type == "card" %}
         <article class="card">
-            <h1><a href="{{ article.url }}">{{ article.data.title }}</a></h1>
+            <div class="cadre">
+                <img src="./assets/image/CadreSVG3.svg" alt="">
+            </div>
+            <a href="{{ article.url }}">
             {{ article.content | safe }}
+            </a>
         </article>
         {% endif %}
 

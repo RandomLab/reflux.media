@@ -1,7 +1,10 @@
+
 module.exports = (config) => {
+
 
     // on copie les fichiers de style css
     config.addPassthroughCopy("./src/assets/css/");
+    config.addPassthroughCopy("./src/assets/image");
 
     // on ajoute la template index à l'objet global config
     config.addLayoutAlias('index', 'layouts/index.html');
@@ -12,6 +15,7 @@ module.exports = (config) => {
             return "type" in item.data
         })
     })
+
 
     // configuration moteur de template / input-output
     return {
