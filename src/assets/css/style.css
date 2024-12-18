@@ -4,6 +4,9 @@
     height: 100%;
     font-family: 'DuctusRegular', sans-serif;
     font-size: 14px;
+    background-color: #272324;
+
+    
 }
 
 .container .content {
@@ -13,7 +16,19 @@
     flex-wrap: wrap;
     padding: 12% 12% 3% 12%;
     /* transform: translateY(20%); */
-    background-color: #272324;
+    
+}
+
+ .paragraph{
+
+    font-family: 'DuctusRegular', sans-serif;
+    font-size: 14px;
+    padding: 70% 12% 3% 12%;
+    width: 60%;
+    color :white;
+
+
+    
 }
 
 .container .content .header {
