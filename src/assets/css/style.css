@@ -1,4 +1,3 @@
-
 .container {
     width: 100%;
     height: 100%;
@@ -14,10 +13,6 @@
     padding: 12% 12% 3% 12%;
     /* transform: translateY(20%); */
     background-color: #272324;
-}
-
-.container .content .header {
-    
 }
 
 .container .content .card {
@@ -46,7 +41,6 @@
     bottom: 32%;
 }
 
-
 .container .content .card img {
     display: block;
     width: 100%;
@@ -64,7 +58,6 @@
     color: black;
 }
 
-
 /* .container .content .card:last-child {
     margin: 0;
 }
@@ -73,27 +66,25 @@
 
 } */
 
-.head {
-    position: fixed;
-    z-index: 0;
-    scale: 100%;
-
-    /* display: flex; //// pour un futur header relatif (non fixed)
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: -0% 0 0 0; */
+.container .header {
+    position: relative;
+    /* z-index: 2; */
 }
 
-.angle {
-    top: 1%;
+.container .header .angle {
+    position: absolute;
+    width:400px;
+    top:10px;
 }
 
 .face {
-    left: 50%;
-    top:5%;
-    z-index: 2;
-    transform: translateX(-50%); 
-    /* justify-content: center; */
+    position: absolute;
+    width:100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    top:50px;
 }
 
 .rotate {
@@ -109,11 +100,11 @@
 }
 
 .right {
-    right: 0.7%;
+    right: 10px;
 }
 
 .left {
-    left: 0.7%;
+    left: 10px;
 }
 
 .bottom {
