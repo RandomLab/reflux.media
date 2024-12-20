@@ -7,44 +7,46 @@
 
 .container .content {
     display: flex;
-    flex-direction: row;
+    flex-direction:row ;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     padding: 12% 12% 3% 12%;
-    /* transform: translateY(20%); */
     background-color: #272324;
 }
 
 .container .content .card {
+    position: relative;
     width: calc(75%/4 - 20px);
-    /*flex: 1 0 34%;*/
-    /*z-index:1;*/
-    /*height: calc(100%/4 - 30px);*/
-    background-color: rgb(252, 255, 251);
-    border: 2px rgb(236, 179, 80) solid;
+    /* flex: 1 0 20%; */
+    background-color: #fbf6d822;
+    border: 2px #ffca606e solid;
     padding: 0.5% 0.8% 0.5% 0.8%;
     margin: 0% 1.2% 1.2% 0;
-    position: relative;
-    /*background-image: image("CadreSVG2.svg#xywh=0,20,40,60");*/
-
 }
 
-.container .content .card:hover .cadre {
-    display: block;
+.container .content .card:hover {
+    background-color: #FBF6D8;
+    border: 2px #ffca60 solid;
 }
 
 .container .content .card .cadre {
     position: absolute;
+    pointer-events: none;
     width: 75%;
     display: none;
     left: -16%;
     bottom: 32%;
 }
 
+.container .content .card:hover .cadre {
+    display: block;
+}
+
 .container .content .card img {
     display: block;
     width: 100%;
-    height: auto;
+    /* height: auto; */
 }
 
 .container .content .card h1 {
@@ -55,7 +57,12 @@
 
 .container .content .card a {
     text-decoration: none;
-    color: black;
+    color: #FBF6D8;
+}
+
+.container .content .card:hover a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
 }
 
 /* .container .content .card:last-child {
@@ -68,7 +75,8 @@
 
 .container .header {
     position: relative;
-    /* z-index: 2; */
+    pointer-events: none;
+    z-index: 2;
 }
 
 .container .header .angle {
@@ -79,6 +87,7 @@
 
 .face {
     position: absolute;
+    /* pointer-events:fill; QUE QUAND ON TOUCHE LA TÊTE, et non sa zone carré ? (non) */
     width:100%;
     height: auto;
     display: flex;

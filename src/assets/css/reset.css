@@ -7,13 +7,21 @@
 * {
     margin: 0;
     padding: 0;
+    
 }
+
+body::-webkit-scrollbar {
+    display: none; /* Masque la scrollbar */
+  }
 
 body {
     /* 3. Add accessible line-height */
     line-height: 1.5;
     /* 4. Improve text rendering */
     -webkit-font-smoothing: antialiased;
+    /* scrollbar-width: none; */
+    /* overflow: hidden; */
+    /* scrollbar-gutter: stable; */
 }
 
 /* 5. Improve media defaults */
