@@ -7,6 +7,7 @@ module.exports = (config) => {
     config.addPassthroughCopy("./src/assets/image");
 
     // on ajoute la template index à l'objet global config
+    config.addLayoutAlias('enter', 'layouts/enter.html');
     config.addLayoutAlias('index', 'layouts/index.html');
     config.addLayoutAlias('card', 'layouts/card.html');
 

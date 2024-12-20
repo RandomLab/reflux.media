@@ -1,5 +1,5 @@
 ---
-title: home
+title: Card Index
 layout: index
 ---
 
