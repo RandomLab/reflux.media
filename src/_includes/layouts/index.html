@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
+
+
+
 {% block page %}
+
+
+
 <main class="container">
 
      <header class="header">
@@ -18,19 +24,19 @@
     </header> 
 
     <section class="content">
+
     {% for article in collections.type %}
 
         {% if article.data.type == "card" %}
+
         <article class="card">
             <div class="cadre">
                 <img src="./assets/image/CadreSVG3.svg" alt="">
             </div>
             <a href="{{ article.url }}">
-
-                <img src="{{ article.data.cover }}" alt="">
-                <h1>{{ article.data.title }}</h1>
+            <img src="{{article.data.cover }}" alt="">
+            <h1>{{ article.data.title }}</h1>
             </a>
-
         </article>
         {% endif %}
 

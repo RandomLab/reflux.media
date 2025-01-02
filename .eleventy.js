@@ -1,17 +1,23 @@
 
+
 const markdownIt = require("markdown-it");
-const markdownItAttrs = require('markdown-it-attrs');
+const markdownItAttrs = require("markdown-it-attrs");
+
 
 module.exports = (config) => {
 
-    let options = {
+
+    let options ={
         html: true,
         breaks: true,
         linkify: true
+
+
     };
 
     let markdownLib = markdownIt(options).use(markdownItAttrs);
     config.setLibrary("md", markdownLib);
+
 
     // on copie les fichiers de style css
     config.addPassthroughCopy("./src/assets/css/");

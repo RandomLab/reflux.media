@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 
+
+
+
 {% block page %}
+
+
     <main class = "container">
+
         <header class="header">
             <div class="head left">
                 {% include "partials/headangle.html" %}
@@ -17,7 +23,9 @@
         </header> 
 
         <section class = "paragraph">
-            {{ content | safe }}
+            
+           {{content | safe}}
+           
         </section>
 
 
