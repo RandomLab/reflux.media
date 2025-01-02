@@ -9,11 +9,11 @@
   "author": "Jérémie Nuel <jeremie.nuel@pm.me>",
   "license": "MIT",
   "dependencies": {
-    "@11ty/eleventy": "^3.0.0"
+    "@11ty/eleventy": "^3.0.0",
+    "eleventy": "^1.0.7"
   },
   "devDependencies": {
-    "@11ty/eleventy-img": "^5.0.0",
     "markdown-it": "^14.1.0",
-    "markdown-it-eleventy-img": "^0.10.2"
+    "markdown-it-attrs": "^4.3.0"
   }
 }

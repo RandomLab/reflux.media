@@ -1,5 +1,22 @@
 
+
+const markdownIt = require("markdown-it");
+const markdownItAttrs = require("markdown-it-attrs");
+
+
 module.exports = (config) => {
+
+
+    let options ={
+        html: true,
+        breaks: true,
+        linkify: true
+
+
+    };
+
+    let markdownLib = markdownIt(options).use(markdownItAttrs);
+    config.setLibrary("md", markdownLib);
 
 
     // on copie les fichiers de style css
@@ -20,6 +37,7 @@ module.exports = (config) => {
 
     // configuration moteur de template / input-output
     return {
+        passthroughFileCopy: true,
         markdownTemplateEngine: "njk",
         dataTemplateEngine: "njk",
         htmlTemplateEngine: "njk",

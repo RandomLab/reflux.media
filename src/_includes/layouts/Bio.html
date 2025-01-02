@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+
+
+{% block page %}
+
+
+    <main class = "container">
+
+        <header class="header">
+            <div class="head left">
+                {% include "partials/headangle.html" %}
+            </div>
+
+            <div class="head right rotate">
+                {% include "partials/headangle.html" %}
+            </div>
+
+            <div class="head face">
+                {% include "partials/headface.html" %}
+            </div>
+        </header> 
+
+        <section class = "paragraph">
+            
+           {{content | safe}}
+           
+        </section>
+
+
+
+
+    </main>
+    
+
+
+{% endblock page %}
