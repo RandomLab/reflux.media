@@ -1,12 +1,6 @@
 {% extends "base.html" %}
 
-
-
-
 {% block page %}
-
-
-
 <main class="container">
 
      <header class="header">
@@ -32,8 +26,11 @@
                 <img src="./assets/image/CadreSVG3.svg" alt="">
             </div>
             <a href="{{ article.url }}">
-            {{ article.content | safe }}
+
+                <img src="{{ article.data.cover }}" alt="">
+                <h1>{{ article.data.title }}</h1>
             </a>
+
         </article>
         {% endif %}
 
