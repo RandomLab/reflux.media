@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block page %}
+
+<main class="container">
+
+    <section class="content">
+
+        <div class="cards-list">
+
+        {% for article in collections.type %}
+
+        {% if article.data.type == "card" %}
+
+        <article class="card-item">
+            <a href="{{ article.url }}">
+            <div class="cadre">
+                <img src="{{ svg }}" alt="">
+            </div>
+                <img src="{{article.data.cover }}" alt="">
+                <h1>{{ article.data.title }}</h1>
+            </a>
+        </article>
+
+        {% endif %}
+
+        {% endfor %}
+        </div>
+    </section>
+
+</main>
+
+
+{% endblock page %}

@@ -4,48 +4,17 @@
 
 <main class="container">
 
-     <header class="header">
-        <div class="angle left">
-            {% include "partials/headangle.html" %}
-        </div>
+    <section class="index">
+        <a href="cards/">
 
-        <div class="angle right rotate">
-            {% include "partials/headangle.html" %}
-        </div>
-
-        <div class="face">
-            {% include "partials/headface.html" %}
-        </div>
-    </header> 
-
-    <section class="content">
-
-    {% for article in collections.type %}
-
-        {% if article.data.type == "card" %}
-
-        <article class="card">
-            <div class="cadre">
-                <img src="./assets/image/CadreSVG3.svg" alt="">
+            <div class="text">
+                {{ content | safe }}
             </div>
-            <a href="{{ article.url }}">
-            <img src="{{article.data.cover }}" alt="">
-            <h1>{{ article.data.title }}</h1>
-            </a>
-        </article>
-        {% endif %}
 
-    {% endfor %}
+            <img src="{{ cover }}" alt="{{ cover }}">
+        </a>
     </section>
-
 </main>
 
-{# <div class="angle bottom rotate-reverse">
-    {% include "partials/angle.html" %}
-</div>
-
-<div class="angle right bottom rotate-full">
-    {% include "partials/angle.html" %}
-</div> #}
 
 {% endblock page %}

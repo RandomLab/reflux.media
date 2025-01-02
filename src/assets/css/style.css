@@ -1,12 +1,21 @@
+/* général */
+
+body {
+    background-color: #272324;
+    font-family: 'DuctusRegular', sans-serif;
+    font-size: 14px;
+    color: #FBF6D8;
+}
+
+a {
+    color: #FBF6D8;
+}
+
+/* global */
 
 .container {
     width: 100%;
     height: 100%;
-    font-family: 'DuctusRegular', sans-serif;
-    font-size: 14px;
-    background-color: #272324;
-
-    
 }
 
 .container .content {
@@ -14,45 +23,62 @@
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 12% 12% 3% 12%;
-    /* transform: translateY(20%); */
-    
 }
 
- .paragraph{
+/* header */
 
-    font-family: 'DuctusRegular', sans-serif;
-    font-size: 14px;
-    padding: 70% 12% 3% 12%;
-    width: 60%;
-    color :white;
-
-
-    
+.header {
+    display: flex;
+    position: fixed;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.img {
+.header .face {
+    margin: 15px 0 0 0;
 }
 
-.container .content .card {
+.header .rotate {
+    transform: rotate(90deg);
+}
+
+/* home */
+
+.container .index .text {
+    position: fixed;
+    margin: 150px 0 0 160px;
+    width: 100%;
+}
+
+.container .index img {
+    display: block;
+}
+
+    /* cards */
+
+.container .content .cards-list {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 180px 0 0 180px;
+}
+
+.container .content .cards-list .card-item {
     width: calc(75%/4 - 20px);
-    /*flex: 1 0 34%;*/
-    /*z-index:1;*/
-    /*height: calc(100%/4 - 30px);*/
     background-color: rgb(252, 255, 251);
     border: 2px rgb(236, 179, 80) solid;
     padding: 0.5% 0.8% 0.5% 0.8%;
     margin: 0% 1% 1% 0;
     position: relative;
-    /*background-image: image("CadreSVG2.svg#xywh=0,20,40,60");*/
-
 }
 
-.container .content .card:hover .cadre {
+.container .content .cards-list .card-item:hover .cadre {
     display: block;
 }
 
-.container .content .card .cadre {
+.container .content .cards-list .card-item .cadre {
     position: absolute;
     width: 75%;
     display: none;
@@ -60,87 +86,84 @@
     bottom: 32%;
 }
 
-
-.container .content .card img {
+.container .content .cards-list .card-item img {
     display: block;
     width: 100%;
     height: auto;
 }
 
-.container .content .card h1 {
+.container .content .cards-list .card-item h1 {
     position: absolute;
     right: 14px;
     bottom: 7px;
 }
 
-.container .content .card a {
+.container .content .cards-list .card-item a {
     text-decoration: none;
     color: black;
 }
 
+/* card detail */
 
-/* .container .content .card:last-child {
-    margin: 0;
-}
-
-.container .content .card:nth-child(n + 3) {
-
-} */
-
-.head {
-    position: fixed;
-    z-index: 10;
-    scale: 100%;
-
-    /* display: flex; //// pour un futur header relatif (non fixed)
+.container .content .card-detail {
+    display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    margin: -0% 0 0 0; */
-
+    margin: 150px 0 0 150px;
 }
 
-.face {
-    left: 50%;
-    top:5%;
-    transform: translateX(-50%); 
-    /* justify-content: center; */
+.container .content .card-detail .left {
+    width: 50%;
+    padding: 20px 20px 0 0;
 }
 
-.rotate {
-    transform: rotate(90deg);
+.container .content .card-detail .right {
+    padding: 0 0 0 50px;
 }
 
-.rotate-reverse {
-    transform: rotate(-90deg);
+.container .content .card-detail .right .card-header {
+    position: relative;
+    background-color: white;
+    border: 2px rgb(236, 179, 80) solid;
+    width: 300px;
 }
 
-.rotate-full {
-    transform: rotate(180deg);
+.container .content .card-detail .right .card-header .image img {
+    padding: 20px;
 }
 
-.right {
-    right: 0;
-}
-
-.left {
-    left: 0;
-}
-
-.bottom {
-    bottom: 0;
+.container .content .card-detail .right .card-header .deco {
+    position: absolute;
+    width: 200px;
+    transform: translate(-50px, -50px);
 }
 
 @media only screen and (min-width: 1px) and (max-width: 900px) {
 
-    .container .content{
-        flex-direction: column;
-        padding: 6% 6% 3% 6%;
+    /* header */
+
+    .header {
+        position: unset;
+        align-items: center;
+        justify-content: center;
     }
 
-    .container .content .card {
-        width: 100%;
-        padding: 0.5% 0.8% 0.5% 0.8%;
-        margin: 0% 2% 2% 0;
+    .header .angle {
+        display: none;
+    }
+
+    /* global */
+    .container .content {
+        flex-direction: column;
+    }
+
+    /* index */
+    .container .index .text {
+        margin: 20px 0 0 20px;
+        width: 80%;
+    }
+
+    .container .index img {
+        display: none;
     }
 
 }
