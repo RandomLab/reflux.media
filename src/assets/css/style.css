@@ -67,8 +67,8 @@ a {
 
 .container .content .cards-list .card-item {
     width: calc(75%/4 - 20px);
-    background-color: rgb(252, 255, 251);
-    border: 2px rgb(236, 179, 80) solid;
+    background-color: #fbf6d822;
+    border: 2px #ffca606e solid;
     padding: 0.5% 0.8% 0.5% 0.8%;
     margin: 0% 1% 1% 0;
     position: relative;
@@ -76,6 +76,11 @@ a {
 
 .container .content .cards-list .card-item:hover .cadre {
     display: block;
+}
+
+.container .content .cards-list .card-item:hover {
+    background-color: #FBF6D8;
+    border: 2px #ffca60 solid;   
 }
 
 .container .content .cards-list .card-item .cadre {
@@ -99,6 +104,11 @@ a {
 }
 
 .container .content .cards-list .card-item a {
+    text-decoration: none;
+    color: #FBF6D8;
+}
+
+.container .content .cards-list .card-item:hover a {
     text-decoration: none;
     color: black;
 }
