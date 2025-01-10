@@ -47,13 +47,22 @@ a {
 /* home */
 
 .container .index .text {
-    position: fixed;
+    position: absolute;
     margin: 150px 0 0 160px;
     width: 100%;
+    z-index: 1;
 }
 
 .container .index img {
-    display: block;
+    position: relative;
+    display:block;
+    z-index: 0;
+}
+
+.container .index .scribe img {
+    position: absolute;
+    display:block;
+    z-index: 2;
 }
 
     /* cards */

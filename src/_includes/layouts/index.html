@@ -3,18 +3,21 @@
 {% block page %}
 
 <main class="container">
+    <a href="cards/">
+        <article class="index">
 
-    <section class="index">
-        <a href="cards/">
-
+            <div class="scribe">
+                <img src="{{ scribe }}" alt="{{ scribe }}">
+            </div>
+            
             <div class="text">
                 {{ content | safe }}
             </div>
 
             <img src="{{ cover }}" alt="{{ cover }}">
-        </a>
-    </section>
+                
+        </article>
+    </a>
 </main>
-
 
 {% endblock page %}
