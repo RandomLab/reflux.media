@@ -4,7 +4,6 @@ layout: layouts/detail
 type: card
 cover: '/assets/image/sorcier.png'
 svg: '/assets/image/cadre.svg'
-
 ---
 
 # The Sorcerer
