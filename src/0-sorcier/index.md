@@ -2,12 +2,12 @@
 title: Sorcier
 layout: layouts/detail
 type: card
-cover: '/assets/image/sorcier.png'
+cover: '/assets/image/sorcier.webp'
 svg: '/assets/image/cadre.svg'
 
 ---
 
-# The Sorcerer
+# Le Sorcier
 
 The sorcerer stood in the dimly lit chamber, his fingers weaving intricate patterns through the air, as if manipulating the very fabric of reality itself. 
 Cloaked in robes of deep midnight blue, embroidered with symbols that shimmered faintly in the light of the flickering candles, he exuded an aura of ancient power. His eyes, glowing with a subtle, otherworldly light, 
