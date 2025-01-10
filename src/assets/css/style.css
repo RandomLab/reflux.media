@@ -63,7 +63,20 @@ a {
     position: absolute;
     display:block;
     z-index: 2;
+    animation: infinite running alternate ease-in-out 3s slidein;
 }
+
+.container .index .scribe {
+   
+    
+}
+
+@keyframes slidein {
+    from { margin: 0px 0px 0% 0%; }
+    to   { margin: 40px 0px 0% 0%; }
+    /* to   { margin: 0px 0px 0% 0%; } */
+}
+
 
     /* cards */
 
