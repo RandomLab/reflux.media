@@ -1,7 +1,8 @@
 ---
 title: Home
 layout: index
-cover: '/assets/image/enter.webp'
+cover: '/assets/image/enterFONDS.webp'
+scribe: '/assets/image/enterSCRIBE.webp'
 ---
 
 # Le scribe parlant

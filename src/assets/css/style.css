@@ -47,13 +47,43 @@ a {
 /* home */
 
 .container .index .text {
-    position: fixed;
+    position: absolute;
     margin: 150px 0 0 160px;
     width: 100%;
+    z-index: 1;
 }
 
 .container .index img {
-    display: block;
+    position: relative;
+    display:block;
+    z-index: 0;
+    -webkit-mask-image: linear-gradient(black 70%, transparent 100%);
+    mask-image: linear-gradient(black 70%, transparent 100%);
+}
+
+.container .index .scribe img {
+    position: absolute;
+    -webkit-mask-image:none;
+    mask-image:none;
+    z-index: 2;
+    animation: infinite running alternate ease-in-out 3s updown;
+}
+
+/* OMBRE PORTEE - NE FONCTIONNE QU'A 100% (pas ouf) */
+.container .index .scribe .shadow img {
+    animation: none;
+    animation: infinite running alternate ease-in-out 3s updownshadow;
+    filter: drop-shadow(140px 4600px 45px rgba(0, 0, 0, 0.409));
+}
+
+@keyframes updown {
+    from { transform: translate(0px, 0px)scale(0.98); }
+    to   { transform: translate(0px, 20px)scale(1); }
+}
+
+@keyframes updownshadow {
+    from { transform: translate(10px, 0px)scale(0.7,0.1); }
+    to   { transform: translate(15px, 0px)scale(0.8,0.101); }
 }
 
     /* cards */
