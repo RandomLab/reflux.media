@@ -1,8 +1,7 @@
-
-
 const markdownIt = require("markdown-it");
 const markdownItAttrs = require("markdown-it-attrs");
 
+const eleventyNavigationPlugin = require("@11ty/eleventy-navigation");
 
 module.exports = (config) => {
 
@@ -23,6 +22,8 @@ module.exports = (config) => {
         console.log(...args)
         debugger;
     });
+
+    config.addPlugin(eleventyNavigationPlugin);
 
     // on copie les fichiers de style css
     config.addPassthroughCopy("./src/assets/css/");

@@ -4,6 +4,9 @@ layout: layouts/detail
 type: card
 cover: '/assets/image/sorcier.webp'
 svg: '/assets/image/cadre.svg'
+eleventyNavigation:
+    key: card
+    order: 0
 ---
 
 # Le Sorcier

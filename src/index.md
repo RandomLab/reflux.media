@@ -3,6 +3,9 @@ title: Home
 layout: index
 cover: '/assets/image/enterFONDS.webp'
 scribe: '/assets/image/enterSCRIBE.webp'
+eleventyNavigation:
+    key: home
+    order: 0
 ---
 
 # Le scribe parlant

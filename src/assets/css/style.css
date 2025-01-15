@@ -25,6 +25,34 @@ a {
     flex-wrap: wrap;
 }
 
+/* navigation */
+
+.container .navigation {
+    position: fixed;
+    z-index: 5;
+    right: 5px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.container .navigation .dot {
+    height: 25px;
+    width: 25px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.container .navigation .dot:hover {
+    background-color: white;
+}
+
 /* header */
 
 .header {

@@ -4,6 +4,14 @@
 {% include "partials/header.html" %}
 <main class="container">
 
+    <nav class="navigation">
+
+        {% for entry in collections.all | eleventyNavigation | reverse %}
+            <a href="{{ entry.url }}"><div class="dot"></div></a>
+        {% endfor %}
+
+    </nav>
+
     <section class="content">
 
         <div class="cards-list">
