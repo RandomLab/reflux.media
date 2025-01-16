@@ -1,0 +1,7 @@
+<nav class="navigation">
+
+    {% for entry in collections.all | eleventyNavigation %}
+        <a href="{{ entry.url }}"><div class="dot"></div></a>
+    {% endfor %}
+
+</nav>

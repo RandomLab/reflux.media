@@ -6,7 +6,7 @@ cover: '/assets/image/archere.webp'
 svg: '/assets/image/cadre.svg'
 eleventyNavigation:
     key: card
-    order: 0
+    order: 4
 ---
 
 # L'Archère

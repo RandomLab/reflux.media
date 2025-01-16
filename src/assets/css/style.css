@@ -42,7 +42,7 @@ a {
 .container .navigation .dot {
     height: 25px;
     width: 25px;
-    background-color: red;
+    background-color: #FBF6D8;
     border-radius: 50%;
     display: inline-block;
     margin: 5px;
@@ -50,7 +50,8 @@ a {
 }
 
 .container .navigation .dot:hover {
-    background-color: white;
+    background-color: #272324;
+    border: 1px solid #FBF6D8;
 }
 
 /* header */
@@ -114,7 +115,48 @@ a {
     to   { transform: translate(15px, 0px)scale(0.8,0.101); }
 }
 
-    /* cards */
+/* guide */
+
+.container .content .guide {
+    display: flex;
+    flex-direction: row;
+    margin: 150px 0 0 150px;
+}
+
+.container .content .guide .left {
+    width: 50%;
+    padding: 20px 20px 0 0;
+}
+
+.container .content .guide .left p {
+    margin: 0 0 20px 0;
+    width: 80%;
+}
+
+.container .content .guide .right {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .content .guide .right .information {
+    padding: 10px 0 20px 20px;
+    border: 1px solid #FBF6D8;
+    width: 100%;
+}
+
+.container .content .guide .right .information p {
+    line-height: 2;
+}
+
+.container .content .guide .right .livre {
+    width: 150px;
+    padding: 20px;
+}
+
+/* cards */
 
 .container .content .cards-list {
     display: flex;
@@ -185,6 +227,7 @@ a {
 }
 
 .container .content .card-detail .right {
+    width: 50%;
     padding: 0 0 0 50px;
 }
 

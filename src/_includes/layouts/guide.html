@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block page %}
+{% include "partials/header.html" %}
+
+<main class="container">
+
+    {% include "partials/navigation.html" %}
+
+    <section class="content">
+        
+        <article class="guide">
+            
+            <div class="left">
+                {{ content | safe}}
+            </div>
+
+            <div class="right">
+                <div class="information">
+                    <p>Nom, prénom, titre</p>
+                    <p>Statut social, rang, travail</p>
+                    <p>Tranche d'âge</p>
+                    <p>Quête spirituelle</p>
+                    <p>Alignement</p>
+                    <p>Liens</p>
+                </div>
+                <div class="livre">
+                    <img src="{{ livre }}" alt="">
+                </div>
+            </div>
+
+           
+
+        </article>
+     
+    </section>
+
+</main>
+
+
+{% endblock page %}
