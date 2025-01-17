@@ -1,5 +1,5 @@
 ---
-title: Archère
+title: Angharad
 layout: layouts/detail
 type: card
 cover: '/assets/image/archere.webp'
