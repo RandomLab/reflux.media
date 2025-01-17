@@ -3,15 +3,17 @@
 {% block page %}
 
 <main class="container">
-    <a href="guide/">
+    <!-- <button id="playButton">Lancer la musique</button> -->
+    <!-- <a href="guide/"> -->
         <article class="index">
 
             <div class="scribe">
-                
                 <!-- <div class="shadow">
                     <img src="{{ scribe }}" alt="{{ scribe }}">
                 </div> -->
-                <img src="{{ scribe }}" alt="{{ scribe }}">
+                <!-- <img src="{{ scribe }}" alt="{{ scribe }}"> -->
+                <img id="sonClick" src="assets/image/enterSCRIBE.webp" alt="" style="cursor: pointer;">
+
             </div>
 
             <div class="text">
@@ -23,7 +25,7 @@
              
             
         </article>
-    </a>
+    <!-- </a> -->
 </main>
 
 {% endblock page %}
