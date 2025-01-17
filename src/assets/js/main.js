@@ -1,24 +1,23 @@
 
-
-function loadSound() {
-
-    const audio = document.getElementById('audio');
-
-    if (!audio) return;
-
-    
-
-}
-
+const sound = new Howl({
+    src: ['BardcoreSP.wav'],
+    autoplay: true,
+    loop: true,
+    volume: 0.5,
+    onend: function() {
+      console.log('Finished!');
+    }
+  });
 
 
 
-function init() {
-    loadSound();
-}
 
+// function init() {
+//     loadSound();
+// }
 
+// init()
 
-window.addEventListener('load', () => {
-    init();
-});
+// window.addEventListener('load', () => {
+//     init();
+// });
