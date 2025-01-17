@@ -1,6 +1,6 @@
 
 const sound = new Howl({
-    src: ['BardcoreSP.wav'],
+    src: ['BardcoreSP.mp3'],
     autoplay: true,
     loop: true,
     volume: 0.5,
