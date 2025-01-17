@@ -36,6 +36,7 @@ Miauler innocemment pour tenter de gagner sa sympathie et l'amadouer.
 Faire une démonstration de puissance en montrant tes griffes acérées et ton miaulement infernal.
 Ignorer le garde et essayer de trouver un autre moyen d'entrer discrètement.
 Autre action ?
+
 À toi de jouer, et lance ton dé !
 
 4 je ronronne pour l'ensorceler score 6
